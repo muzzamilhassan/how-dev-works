@@ -40,7 +40,7 @@ how dev works, programming explained, software engineering explained, javascript
 
 ## Visual identity
 - Banner: `How Dev Works` big + tagline `Software, explained.` — dark bg (#0D1117), one teal/cyan accent, NO heavy text borders (house rule: soft shadow only)
-- Logo: minimal glyph — `{ }` or terminal caret on dark square, one accent line
+- Logo: minimal glyph — `{ }` or terminal caret on dark square, one accent line → generated: [branding/logo-120.png](branding/logo-120.png) (regenerate with `node tools/make-logo.mjs`)
 - Watermark: same glyph
 
 ## Video defaults
