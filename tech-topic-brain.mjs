@@ -93,10 +93,16 @@ async function main() {
   }));
   bank.topics.push(...added);
 
-  // Prune: used topics leave the bank at once; open ideas capped at BANK_CAP (oldest dropped)
-  const open = bank.topics.filter(t => t.status !== 'used');
+  // Prune: used + rejected stay in the bank forever (dedupe tombstones); curated topics
+  // are never pruned; open ideas capped at BANK_CAP (oldest dropped)
+  const open = bank.topics.filter(t => t.status === 'new');
   const used = bank.topics.filter(t => t.status === 'used');
-  bank.topics = open.sort((a, b) => (b.score - a.score) || (b.addedAt > a.addedAt ? 1 : -1)).slice(0, BANK_CAP).concat(used);
+  const rejected = bank.topics.filter(t => t.status === 'rejected');
+  const curated = open.filter(t => t.curated);
+  const regular = open.filter(t => !t.curated)
+    .sort((a, b) => (b.score - a.score) || (b.addedAt > a.addedAt ? 1 : -1))
+    .slice(0, Math.max(0, BANK_CAP - curated.length));
+  bank.topics = curated.concat(regular).concat(used).concat(rejected);
   bank.updated = new Date().toISOString();
 
   fs.mkdirSync('state', { recursive: true });

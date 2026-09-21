@@ -1,0 +1,4 @@
+{
+  "_note": "Idempotency ledger keyed by artifactId — publish.mjs appends one entry per YouTube upload. Ledger starts 2026-09-21; uploads made before this pipeline (e.g. the Event Loop trailer) are intentionally not listed — their renders age out of the 5-run scan window and expire in 14 days.",
+  "uploads": []
+}

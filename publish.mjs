@@ -164,8 +164,10 @@ async function main() {
   // topic travels via INPUT_TOPIC env (shell-safe); --topic argv kept for local runs
   let topicArg = arg('topic', '');
   if (typeof topicArg !== 'string' || !topicArg.trim()) topicArg = (process.env.INPUT_TOPIC || '').trim();
-  const minutes = arg('minutes', '10');
-  const fallback = arg('fallback', 'true');
+  // scheduled runs pass empty inputs -> arg() returns booleans; normalize before dispatch
+  const minutesArg = arg('minutes', '10');
+  const minutes = (typeof minutesArg === 'string' && /^\d+$/.test(minutesArg.trim())) ? minutesArg.trim() : '10';
+  const fallback = arg('fallback', 'true') === 'false' ? 'false' : 'true';
 
   const published = loadJson(PUBLISHED_FILE, { uploads: [] });
   const pending = loadJson(PENDING_FILE, { renders: [] });
@@ -188,6 +190,7 @@ async function main() {
       }
       if (!t) {
         log('GAP: waiting run ' + r.databaseId + ' has no topic name — name it via Publish input `topic`.');
+        notify('How Dev Works - GAP', 'Run ' + r.databaseId + ' rendered but has no topic name — publish skipped it. Name it via Publish inputs topic + name_waiting.');
         continue;
       }
       chosen = { run: r, art, topic: t };
@@ -200,8 +203,13 @@ async function main() {
     let topic = typeof topicArg === 'string' && topicArg.trim() ? topicArg.trim() : '';
     if (!topic) {
       const bank = loadJson(BANK_FILE, { topics: [] });
-      const idea = bank.topics.filter(t => t.status === 'new').sort((a, b) => b.score - a.score)[0];
-      if (!idea) { log('Nothing waiting and no open ideas in the bank — done.'); return; }
+      const idea = bank.topics.filter(t => t.status === 'new')
+        .sort((a, b) => (b.curated ? 1 : 0) - (a.curated ? 1 : 0) || b.score - a.score)[0];
+      if (!idea) {
+        log('Nothing waiting and no open ideas in the bank — done.');
+        notify('How Dev Works - GAP', 'Nothing to publish: no waiting render, no open ideas in the topic bank.');
+        return;
+      }
       topic = idea.title;
       log('Auto-picked from bank [' + idea.score + ']: ' + topic);
     }
@@ -223,7 +231,11 @@ async function main() {
   const dur = durationSec(videoFile);
   log('Video: ' + chosen.topic + ' — ' + dur + 's, ' + Math.round(fs.statSync(videoFile).size / 1048576) + ' MB');
   if (isTest) { log('TEST mode — skipping YouTube upload. Chain OK.'); return; }
-  if (dur < MIN_DURATION_SEC) { log('GAP: render is ' + dur + 's (< ' + MIN_DURATION_SEC + ') — treating as test render, NOT publishing.'); return; }
+  if (dur < MIN_DURATION_SEC) {
+    log('GAP: render is ' + dur + 's (< ' + MIN_DURATION_SEC + ') — treating as test render, NOT publishing.');
+    notify('How Dev Works - GAP', chosen.topic + ' rendered only ' + dur + 's — not published. Re-render with fallback=true.');
+    return;
+  }
 
   // 4. upload
   const bank = loadJson(BANK_FILE, { topics: [] });

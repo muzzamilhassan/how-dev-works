@@ -71,10 +71,22 @@ jobs:
           node publish.mjs $ARGS
 
       - name: 💾 Commit state
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
         run: |
           git config user.name "publish-bot"
           git config user.email "bot@howdevworks"
           git add state/ || true
           git diff --cached --quiet || git commit -m "publish state [skip ci]"
           git pull --rebase || true
-          git push || true
+          if ! git push; then
+            [ -n "$NTFY_TOPIC" ] && curl -s -H "Title: How Dev Works - STATE PUSH FAILED" -d "publish ledger not saved — next run may re-upload a video" "https://ntfy.sh/$NTFY_TOPIC" || true
+            exit 1
+          fi
+
+      - name: 📢 Alert on failure
+        if: failure()
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: |
+          [ -n "$NTFY_TOPIC" ] && curl -s -H "Title: How Dev Works - PUBLISH FAILED" -d "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" "https://ntfy.sh/$NTFY_TOPIC" || true
