@@ -1,11 +1,11 @@
-// Data-driven thumbnail generator (dependency-free, same engine as make-branding.mjs).
+// Data-driven thumbnail generator — premium typography edition.
+// Renders SVG (Archivo Black headline + JetBrains Mono tags on the brand dark
+// gradient) and rasterizes with sharp. Fonts ship in assets/fonts (OFL).
 //   node tools/make-thumbnail.mjs --title "How Git Actually Works" --out branding/t.png
 //   node tools/make-thumbnail.mjs --title "..." --out ... --vertical   (1080x1920 Short card)
-// Long: 1280x720, auto-wrapped pixel headline (<=3 lines), accent bar, ">_" glyph, decor.
-// Vertical: 1080x1920 brand card — used as the FIRST FRAME of a Short so YouTube's
-// auto-thumbnail and the in-app frame picker land on the branded card.
-import zlib from 'zlib';
 import fs from 'fs';
+import path from 'path';
+import sharp from 'sharp';
 
 function argv(name, def) {
   const i = process.argv.indexOf('--' + name);
@@ -17,160 +17,90 @@ const TITLE = String(argv('title', 'How Dev Works'));
 const OUT = String(argv('out', 'branding/thumbnail-out.png'));
 const VERTICAL = argv('vertical') === true || argv('vertical') === 'true';
 
-const BG = [13, 17, 23], CYAN = [34, 211, 238], WHITE = [230, 237, 243], GRAY = [139, 148, 158], DIM = [26, 33, 43];
-// accent picked deterministically from the title so every video gets a stable color
-const ACCENTS = [[34, 211, 238], [253, 224, 71], [248, 113, 113], [52, 211, 153], [192, 132, 252]];
-const ACCENT = ACCENTS[[...TITLE].reduce((a, c) => a + c.charCodeAt(0), 0) % ACCENTS.length];
+const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
-function crc32(buf) {
-  const table = [];
-  for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; table[n] = c >>> 0; }
-  let crc = 0xFFFFFFFF;
-  for (const b of buf) crc = table[(crc ^ b) & 0xFF] ^ (crc >>> 8);
-  return (crc ^ 0xFFFFFFFF) >>> 0;
-}
-function chunk(type, data) {
-  const len = Buffer.alloc(4); len.writeUInt32BE(data.length);
-  const body = Buffer.concat([Buffer.from(type), data]);
-  const crc = Buffer.alloc(4); crc.writeUInt32BE(crc32(body));
-  return Buffer.concat([len, body, crc]);
-}
-class Canvas {
-  constructor(w, h) { this.w = w; this.h = h; this.raw = Buffer.alloc(h * (1 + w * 4)); }
-  set(x, y, [r, g, b], a = 255) {
-    x = Math.round(x); y = Math.round(y);
-    if (x < 0 || y < 0 || x >= this.w || y >= this.h) return;
-    const o = y * (1 + this.w * 4) + 1 + x * 4;
-    this.raw[o] = r; this.raw[o + 1] = g; this.raw[o + 2] = b; this.raw[o + 3] = a;
-  }
-  fill(x0, y0, x1, y1, c) {
-    for (let y = Math.round(y0); y <= Math.round(y1); y++)
-      for (let x = Math.round(x0); x <= Math.round(x1); x++) this.set(x, y, c);
-  }
-  rounded(x0, y0, x1, y1, rad, c) {
-    for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) {
-      const cx = Math.min(Math.max(x, x0 + rad), x1 - rad);
-      const cy = Math.min(Math.max(y, y0 + rad), y1 - rad);
-      if ((x - cx) ** 2 + (y - cy) ** 2 <= rad * rad) this.set(x, y, c);
-    }
-  }
-  seg([x1, y1], [x2, y2], t, c) {
-    const dx = x2 - x1, dy = y2 - y1, L2 = dx * dx + dy * dy || 1;
-    const r = t / 2;
-    for (let y = Math.min(y1, y2) - r; y <= Math.max(y1, y2) + r; y++)
-      for (let x = Math.min(x1, x2) - r; x <= Math.max(x1, x2) + r; x++) {
-        let u = ((x - x1) * dx + (y - y1) * dy) / L2;
-        u = Math.max(0, Math.min(1, u));
-        if ((x - (x1 + u * dx)) ** 2 + (y - (y1 + u * dy)) ** 2 <= r * r) this.set(x, y, c);
-      }
-  }
-  write(file) {
-    const ihdr = Buffer.alloc(13);
-    ihdr.writeUInt32BE(this.w, 0); ihdr.writeUInt32BE(this.h, 4);
-    ihdr[8] = 8; ihdr[9] = 6;
-    const png = Buffer.concat([
-      Buffer.from([0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A]),
-      chunk('IHDR', ihdr),
-      chunk('IDAT', zlib.deflateSync(this.raw, { level: 9 })),
-      chunk('IEND', Buffer.alloc(0))
-    ]);
-    fs.writeFileSync(file, png);
-    console.log('wrote', file, '(' + png.length + ' bytes)');
-  }
-}
+// The brand pattern is "How X ACTUALLY Works" — the keyword line gets the accent color.
+const words = TITLE.toUpperCase().split(/\s+/).filter(Boolean);
+const KW = words.includes('ACTUALLY') ? 'ACTUALLY' : (words.includes('WORKS') ? 'WORKS' : words[words.length - 1]);
 
-const F = {
-  A: '01110 10001 10001 11111 10001 10001 10001', B: '11110 10001 10001 11110 10001 10001 11110',
-  C: '01110 10001 10000 10000 10000 10001 01110', D: '11100 10010 10001 10001 10001 10010 11100',
-  E: '11111 10000 10000 11110 10000 10000 11111', F: '11111 10000 10000 11110 10000 10000 10000',
-  G: '01110 10001 10000 10111 10001 10001 01111', H: '10001 10001 10001 11111 10001 10001 10001',
-  I: '11111 00100 00100 00100 00100 00100 11111', J: '00111 00010 00010 00010 00010 10010 01100',
-  K: '10001 10010 10100 11000 10100 10010 10001', L: '10000 10000 10000 10000 10000 10000 11111',
-  M: '10001 11011 10101 10101 10001 10001 10001', N: '10001 11001 10101 10011 10001 10001 10001',
-  O: '01110 10001 10001 10001 10001 10001 01110', P: '11110 10001 10001 11110 10000 10000 10000',
-  Q: '01110 10001 10001 10001 10101 10010 01101', R: '11110 10001 10001 11110 10100 10010 10001',
-  S: '01111 10000 10000 01110 00001 00001 11110', T: '11111 00100 00100 00100 00100 00100 00100',
-  U: '10001 10001 10001 10001 10001 10001 01110', V: '10001 10001 10001 10001 10001 01010 00100',
-  W: '10001 10001 10001 10101 10101 11011 10001', X: '10001 10001 01010 00100 01010 10001 10001',
-  Y: '10001 10001 01010 00100 00100 00100 00100', Z: '11111 00001 00010 00100 01000 10000 11111',
-  '0': '01110 10001 10011 10101 11001 10001 01110', '1': '00100 01100 00100 00100 00100 00100 01110',
-  '2': '01110 10001 00001 00010 00100 01000 11111', '3': '11111 00010 00100 00010 00001 10001 01110',
-  '4': '00010 00110 01010 10010 11111 00010 00010', '5': '11111 10000 11110 00001 00001 10001 01110',
-  '6': '00110 01000 10000 11110 10001 10001 01110', '7': '11111 00001 00010 00100 01000 01000 01000',
-  '8': '01110 10001 10001 01110 10001 10001 01110', '9': '01110 10001 10001 01111 00001 00010 01100',
-  '.': '00000 00000 00000 00000 00000 01100 01100', ',': '00000 00000 00000 00000 01100 01100 00100',
-  '!': '00100 00100 00100 00100 00100 00000 00100', '?': '01110 10001 00001 00010 00100 00000 00100',
-  '-': '00000 00000 00000 11111 00000 00000 00000', ':': '00000 01100 01100 00000 01100 01100 00000',
-  '>': '01000 00100 00010 00001 00010 00100 01000', '_': '00000 00000 00000 00000 00000 00000 11111',
-  '[': '01110 01000 01000 01000 01000 01000 01110', ']': '01110 00010 00010 00010 00010 00010 01110',
-  '@': '01110 10001 10111 10101 10110 10000 01111',
-  ' ': '00000 00000 00000 00000 00000 00000 00000'
-};
-for (const k in F) F[k] = F[k].split(' ');
-function text(cv, str, x, y, s, c) {
-  for (const ch of str.toUpperCase()) {
-    const g = F[ch] || F['?'];
-    for (let ry = 0; ry < 7; ry++) for (let rx = 0; rx < 5; rx++)
-      if (g[ry][rx] === '1') cv.fill(x + rx * s, y + ry * s, x + rx * s + s - 1, y + ry * s + s - 1, c);
-    x += 6 * s;
-  }
-}
-const lineWidth = (str, s) => str.length * 6 * s - s;
-
-// wrap the title into <=3 lines whose width fits maxW at the largest possible scale
-function layout(title, maxW, maxLines) {
-  for (let s = 20; s >= 6; s--) {
-    const words = title.toUpperCase().split(/\s+/);
-    const lines = [];
+// wrap into <=maxLines lines estimated to fit maxW at the largest size that works
+function layout(titleUpper, maxW, maxLines) {
+  const CHAR = 0.68; // Archivo Black caps average advance in em — conservative
+  for (let size = 150; size >= 64; size -= 4) {
+    const wl = [];
     let cur = '';
-    for (const w of words) {
+    for (const w of titleUpper.split(' ')) {
       const cand = cur ? cur + ' ' + w : w;
-      if (lineWidth(cand, s) <= maxW) cur = cand;
-      else { if (cur) lines.push(cur); cur = w; }
+      if (cand.length * CHAR * size <= maxW) cur = cand;
+      else { if (cur) wl.push(cur); cur = w; }
     }
-    if (cur) lines.push(cur);
-    if (lines.length <= maxLines && lines.every(l => lineWidth(l, s) <= maxW)) return { lines, s };
+    if (cur) wl.push(cur);
+    if (wl.length <= maxLines && wl.every(l => l.length * CHAR * size <= maxW)) return { lines: wl, size };
   }
-  return { lines: [title.toUpperCase().slice(0, 20)], s: 6 };
+  return { lines: [titleUpper.slice(0, 18)], size: 64 };
 }
 
-function glyph(cv, x, y, s, c) {
-  const A = [x + 32 * s, y + 28 * s], M = [x + 64 * s, y + 60 * s], B = [x + 32 * s, y + 92 * s];
-  cv.seg(A, M, 11 * s, c); cv.seg(M, B, 11 * s, c);
-  cv.fill(x + 74 * s, y + 80 * s, x + 96 * s, y + 92 * s, c);
+// the channel glyph ">_" as an SVG fragment (chevron + underscore), brand mark
+function glyph(cx, cy, scale, color) {
+  const A = [cx - 32 * scale, cy - 32 * scale], M = [cx, cy], B = [cx - 32 * scale, cy + 32 * scale];
+  const t = 11 * scale;
+  return `<path d="M ${A[0]} ${A[1]} L ${M[0]} ${M[1]} L ${B[0]} ${B[1]}" fill="none" stroke="${color}" stroke-width="${t}" stroke-linecap="round" stroke-linejoin="round"/>` +
+    `<rect x="${cx + 10 * scale}" y="${cy + 20 * scale}" width="${22 * scale}" height="${12 * scale}" rx="${3 * scale}" fill="${color}"/>`;
 }
 
-if (VERTICAL) {
-  // 1080x1920 Short card: logo glyph, big title, accent bar, handle
-  const cv = new Canvas(1080, 1920);
-  cv.fill(0, 0, 1079, 1919, BG);
-  text(cv, '[', 60, 80, 16, DIM);
-  text(cv, ']', 1080 - 60 - lineWidth(']', 16), 80, 16, DIM);
-  text(cv, ']', 60, 1920 - 80 - 7 * 16, 16, DIM);
-  text(cv, '[', 1080 - 60 - lineWidth('[', 16), 1920 - 80 - 7 * 16, 16, DIM);
-  glyph(cv, 1080 / 2 - 45, 380, 0.75, CYAN);
-  const { lines, s } = layout(TITLE, 940, 4);
-  const lh = 7 * s + Math.round(s * 0.9);
+function buildSvg() {
+  const W = VERTICAL ? 1080 : 1280, H = VERTICAL ? 1920 : 720;
+  const maxW = VERTICAL ? 950 : 1130, maxLines = VERTICAL ? 4 : 3;
+  const { lines, size } = layout(words.join(' '), maxW, maxLines);
+  const lh = Math.round(size * 1.08);
   const blockH = lines.length * lh;
-  let y = (1920 - blockH) / 2 - 40;
-  for (const ln of lines) { text(cv, ln, (1080 - lineWidth(ln, s)) / 2, y, s, WHITE); y += lh; }
-  cv.rounded(1080 / 2 - 170, y + 20, 1080 / 2 + 170, y + 32, 6, CYAN);
-  text(cv, '@HOWDEVWORKS', (1080 - lineWidth('@HOWDEVWORKS', 4)) / 2, 1770, 4, GRAY);
-  cv.write(OUT);
-} else {
-  // 1280x720 long-form thumbnail
-  const cv = new Canvas(1280, 720);
-  cv.fill(0, 0, 1279, 719, BG);
-  text(cv, '[', 50, 50, 12, DIM);
-  text(cv, ']', 1280 - 50 - lineWidth(']', 12), 50, 12, DIM);
-  text(cv, ']', 50, 720 - 50 - 7 * 12, 12, DIM);
-  text(cv, '[', 1280 - 50 - lineWidth('[', 12), 720 - 50 - 7 * 12, 12, DIM);
-  glyph(cv, 1050, 60, 1.4, CYAN);
-  const { lines, s } = layout(TITLE, 860, 3);
-  const lh = 7 * s + Math.round(s * 0.8);
-  let y = (720 - lines.length * lh - 60) / 2;
-  for (const ln of lines) { text(cv, ln, 80, y, s, WHITE); y += lh; }
-  cv.rounded(80, y + 8, 80 + 240, y + 20, 6, ACCENT);
-  text(cv, 'DEEP DIVE', 80, y + 44, 5, GRAY);
-  cv.write(OUT);
+  // long thumbnails reserve ~190px below the headline for the accent bar + tag row
+  const top = VERTICAL ? (H - blockH) / 2 - 60 : Math.max(34, (H - blockH - 190) / 2);
+  const x0 = VERTICAL ? W / 2 : 70;
+
+  const headLines = lines.map((ln, i) => {
+    const y = top + lh * i + size * 0.82;
+    const fill = ln.includes(KW) ? '#22D3EE' : '#F1F5F9';
+    const anchor = VERTICAL ? 'text-anchor="middle"' : '';
+    return `<text x="${x0}" y="${y}" ${anchor} font-family="Archivo Black" font-size="${size}" fill="${fill}">${esc(ln)}</text>`;
+  }).join('\n');
+
+  const barY = top + blockH + Math.round(size * 0.35);
+  const bar = VERTICAL
+    ? `<rect x="${W / 2 - 170}" y="${barY}" width="340" height="12" rx="6" fill="#22D3EE"/>`
+    : `<rect x="72" y="${barY}" width="240" height="12" rx="6" fill="#22D3EE"/>`;
+
+  const tag = VERTICAL
+    ? `<text x="${W / 2}" y="1790" text-anchor="middle" font-family="JetBrains Mono" font-size="34" fill="#8B949E" letter-spacing="6">@HOWDEVWORKS</text>`
+    : `<text x="72" y="${barY + 78}" font-family="JetBrains Mono" font-size="34" fill="#8B949E" letter-spacing="6">DEEP DIVE · HOWDEVWORKS</text>`;
+
+  const mark = VERTICAL
+    ? glyph(W / 2, top - 130, 0.72, '#22D3EE')
+    : glyph(1140, 130, 0.85, '#22D3EE');
+
+  const brackets = VERTICAL
+    ? `<path d="M 70 90 h 56 M 70 90 v 110 M ${W - 70} 90 h -56 M ${W - 70} 90 v 110 M 70 ${H - 90} h 56 M 70 ${H - 90} v -110 M ${W - 70} ${H - 90} h -56 M ${W - 70} ${H - 90} v -110" stroke="#1C2531" stroke-width="12" fill="none"/>`
+    : `<path d="M 46 40 h 52 M 46 40 v 86 M ${W - 46} 40 h -52 M ${W - 46} 40 v 86 M 46 ${H - 40} h 52 M 46 ${H - 40} v -86 M ${W - 46} ${H - 40} h -52 M ${W - 46} ${H - 40} v -86" stroke="#1C2531" stroke-width="10" fill="none"/>`;
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#131B26"/><stop offset="1" stop-color="#0D1117"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="${VERTICAL ? 0.5 : 0.82}" cy="${VERTICAL ? 0.18 : 0.2}" r="${VERTICAL ? 0.75 : 0.85}">
+      <stop offset="0" stop-color="#22D3EE" stop-opacity="0.13"/><stop offset="1" stop-color="#22D3EE" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="${W}" height="${H}" fill="url(#bg)"/>
+  <rect width="${W}" height="${H}" fill="url(#glow)"/>
+  ${brackets}
+  ${mark}
+  ${headLines}
+  ${bar}
+  ${tag}
+</svg>`;
 }
+
+const svg = Buffer.from(buildSvg());
+await sharp(svg).png({ compressionLevel: 9 }).toFile(OUT);
+console.log('wrote', OUT, '(' + fs.statSync(OUT).size + ' bytes)');

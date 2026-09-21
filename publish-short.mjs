@@ -86,15 +86,15 @@ function durationSec(file) {
 // that's what the auto-thumbnail and the in-app frame picker land on.
 function makeVertical(inFile, outFile, cardPng) {
   const wm = path.join('branding', 'watermark-150.png');
-  const font = '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf';
+  const font = path.join(process.env.HOME || '/root', '.fonts', 'ArchivoBlack-Regular.ttf'); // installed by the workflow
   const filter = [
     '[0:v]scale=1080:-2,setsar=1[vid]',
     `color=c=${BRAND_BG}:s=1080x1920:r=30[bg]`,
     '[bg][vid]overlay=0:656[base]',
     '[1:v]scale=110:110[wm]',
     '[base][wm]overlay=(W-w)/2:110[v1]',
-    `[v1]drawtext=fontfile=${font}:text='HOW DEV WORKS':fontcolor=${BRAND_CYAN}:fontsize=44:x=(w-text_w)/2:y=250[v2]`,
-    `[v2]drawtext=fontfile=${font}:text='@HowDevWorks':fontcolor=0x8B949E:fontsize=34:x=(w-text_w)/2:y=1810[v3]`,
+    `[v1]drawtext=fontfile=${font}:text='HOW DEV WORKS':fontcolor=${BRAND_CYAN}:fontsize=46:x=(w-text_w)/2:y=250[v2]`,
+    `[v2]drawtext=fontfile=${font}:text='@HowDevWorks':fontcolor=0x8B949E:fontsize=32:x=(w-text_w)/2:y=1810[v3]`,
     '[2:v]scale=1080:1920[card]',
     "[v3][card]overlay=0:0:enable='lte(t,0.8)'"
   ].join(';');

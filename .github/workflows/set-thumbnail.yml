@@ -27,8 +27,10 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install googleapis
-        run: npm install googleapis --no-save
+      - name: Install googleapis + sharp + fonts
+        run: |
+          npm install googleapis sharp --no-save
+          mkdir -p ~/.fonts && cp assets/fonts/*.ttf ~/.fonts/ && fc-cache -f >/dev/null
 
       - name: Generate thumbnail if a title was given
         if: ${{ inputs.title != '' }}

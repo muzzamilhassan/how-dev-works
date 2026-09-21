@@ -34,9 +34,10 @@ jobs:
         with:
           node-version: 20
 
-      - name: 📦 Install googleapis + ffmpeg
+      - name: 📦 Install googleapis + sharp + fonts (thumbnail generator)
         run: |
-          npm install googleapis --no-save
+          npm install googleapis sharp --no-save
+          mkdir -p ~/.fonts && cp assets/fonts/*.ttf ~/.fonts/ && fc-cache -f >/dev/null
           sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
 
       - name: 🎬 Render + repack + upload
