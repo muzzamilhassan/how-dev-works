@@ -50,8 +50,10 @@ jobs:
         with:
           node-version: 20
 
-      - name: 📦 Install googleapis
-        run: npm install googleapis --no-save
+      - name: 📦 Install googleapis + ffmpeg (ffprobe for duration guard)
+        run: |
+          npm install googleapis --no-save
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
 
       - name: 🎬 Render + upload
         env:

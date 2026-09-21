@@ -107,7 +107,9 @@ function downloadArtifact(runId, artId) {
 function durationSec(file) {
   const r = spawnSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration',
     '-of', 'csv=p=0', file], { encoding: 'utf8' });
-  return Math.round(parseFloat((r.stdout || '0').trim()));
+  const d = parseFloat((r.stdout || '').trim());
+  if (!isFinite(d) || d <= 0) log('WARN: ffprobe said "' + (r.stdout || '').trim() + '" stderr: ' + (r.stderr || r.error || 'none').slice(0, 120));
+  return isFinite(d) ? Math.round(d) : 0;
 }
 
 function buildDescription(topic) {
