@@ -46,7 +46,7 @@ Actions → **Publish** → Run workflow:
 |---|---|---|
 | `DAILY_DEV_TOKEN` | topic brain (free tier 5 req/day) | ✅ set |
 | `NTFY_TOPIC` | phone notifications | ✅ set |
-| `GITHUB_PAT` | cross-repo render dispatch + artifact download + state commits | ✅ set |
+| `SECRET_WRITER_PAT` | cross-repo render dispatch + artifact download + state commits | ✅ set |
 | `YOUTUBE_CLIENT_ID/SECRET` | Google OAuth app (same as other channels) | ✅ set |
 | `TECH_YT_REFRESH_TOKEN` | THIS channel's upload token | ⏳ needs one-time browser OAuth |
 
