@@ -7,19 +7,29 @@
       "title": "How Git Actually Works",
       "url": "",
       "source": "BRANDING.md first-12",
-      "tags": ["git", "version control", "how it works"],
+      "tags": [
+        "git",
+        "version control",
+        "how it works"
+      ],
       "score": 501,
       "addedAt": "2026-09-21",
-      "status": "rendering",
+      "status": "used",
       "curated": true,
-      "note": "already rendered — run 35585098737 in state/pending-renders.json, uploads on next publish"
+      "note": "already rendered — run 35585098737 in state/pending-renders.json, uploads on next publish",
+      "videoId": "7_FBiOslvUE"
     },
     {
       "id": "curated-02",
       "title": "What Really Happens When You Type a URL and Press Enter",
       "url": "",
       "source": "BRANDING.md first-12",
-      "tags": ["networking", "dns", "http", "browser"],
+      "tags": [
+        "networking",
+        "dns",
+        "http",
+        "browser"
+      ],
       "score": 500,
       "addedAt": "2026-09-21",
       "status": "new",
@@ -30,7 +40,12 @@
       "title": "How HTTPS Actually Works",
       "url": "",
       "source": "BRANDING.md first-12",
-      "tags": ["https", "tls", "security", "networking"],
+      "tags": [
+        "https",
+        "tls",
+        "security",
+        "networking"
+      ],
       "score": 499,
       "addedAt": "2026-09-21",
       "status": "new",
@@ -41,7 +56,11 @@
       "title": "How DNS Finds a Website in Milliseconds",
       "url": "",
       "source": "BRANDING.md first-12",
-      "tags": ["dns", "networking", "infrastructure"],
+      "tags": [
+        "dns",
+        "networking",
+        "infrastructure"
+      ],
       "score": 498,
       "addedAt": "2026-09-21",
       "status": "new",
@@ -52,7 +71,11 @@
       "title": "Inside the V8 Engine: How JavaScript Gets Fast",
       "url": "",
       "source": "BRANDING.md first-12",
-      "tags": ["v8", "javascript", "performance"],
+      "tags": [
+        "v8",
+        "javascript",
+        "performance"
+      ],
       "score": 497,
       "addedAt": "2026-09-21",
       "status": "new",
@@ -63,7 +86,11 @@
       "title": "How Database Indexes Work",
       "url": "",
       "source": "BRANDING.md first-12",
-      "tags": ["databases", "indexes", "backend"],
+      "tags": [
+        "databases",
+        "indexes",
+        "backend"
+      ],
       "score": 496,
       "addedAt": "2026-09-21",
       "status": "new",
@@ -74,7 +101,11 @@
       "title": "Promises vs Async/Await: What Actually Happens",
       "url": "",
       "source": "BRANDING.md first-12",
-      "tags": ["javascript", "async", "event loop"],
+      "tags": [
+        "javascript",
+        "async",
+        "event loop"
+      ],
       "score": 495,
       "addedAt": "2026-09-21",
       "status": "new",
@@ -85,7 +116,11 @@
       "title": "How Docker Containers Actually Work",
       "url": "",
       "source": "BRANDING.md first-12",
-      "tags": ["docker", "containers", "devops"],
+      "tags": [
+        "docker",
+        "containers",
+        "devops"
+      ],
       "score": 494,
       "addedAt": "2026-09-21",
       "status": "new",
@@ -96,7 +131,11 @@
       "title": "Garbage Collection Explained",
       "url": "",
       "source": "BRANDING.md first-12",
-      "tags": ["memory", "garbage collection", "runtimes"],
+      "tags": [
+        "memory",
+        "garbage collection",
+        "runtimes"
+      ],
       "score": 493,
       "addedAt": "2026-09-21",
       "status": "new",
@@ -107,7 +146,12 @@
       "title": "REST vs GraphQL: What Each One Really Costs You",
       "url": "",
       "source": "BRANDING.md first-12",
-      "tags": ["api", "rest", "graphql", "backend"],
+      "tags": [
+        "api",
+        "rest",
+        "graphql",
+        "backend"
+      ],
       "score": 492,
       "addedAt": "2026-09-21",
       "status": "new",
@@ -118,7 +162,11 @@
       "title": "How React Re-Renders (and Why Your App Gets Slow)",
       "url": "",
       "source": "BRANDING.md first-12",
-      "tags": ["react", "rendering", "frontend"],
+      "tags": [
+        "react",
+        "rendering",
+        "frontend"
+      ],
       "score": 491,
       "addedAt": "2026-09-21",
       "status": "new",
@@ -129,7 +177,13 @@
       "title": "AI Is Already Better at Coding Than Most Software Developers",
       "url": "https://dev.to/sylwia-lask/ai-is-already-better-at-coding-than-most-software-developers-4hno",
       "source": "DEV",
-      "tags": ["ai", "webdev", "career", "ai-coding", "vibe-coding"],
+      "tags": [
+        "ai",
+        "webdev",
+        "career",
+        "ai-coding",
+        "vibe-coding"
+      ],
       "score": 339,
       "addedAt": "2026-09-21",
       "status": "rejected",
