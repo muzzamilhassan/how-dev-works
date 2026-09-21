@@ -100,8 +100,9 @@ function makeVertical(inFile, outFile, cardPng) {
   ].join(';');
   const r = spawnSync('ffmpeg', ['-y', '-i', inFile, '-i', wm, '-i', cardPng,
     '-filter_complex', filter,
-    '-c:v', 'libx264', '-preset', 'medium', '-crf', '20', '-c:a', 'aac', '-b:a', '160k', outFile], { encoding: 'utf8' });
-  if (r.status !== 0) throw new Error('ffmpeg vertical repack failed: ' + (r.stderr || '').slice(-300));
+    '-c:v', 'libx264', '-preset', 'medium', '-crf', '20', '-c:a', 'aac', '-b:a', '160k', outFile],
+    { encoding: 'utf8', timeout: 8 * 60 * 1000, killSignal: 'SIGKILL' });
+  if (r.error || r.status !== 0) throw new Error('ffmpeg vertical repack failed: ' + String(r.error || r.stderr || '').slice(-300));
 }
 
 function pickTopic(bank, explicit) {
@@ -188,7 +189,7 @@ async function main() {
   const outDir = path.dirname(inFile);
   const verticalFile = path.join(outDir, 'vertical.mp4');
   const cardPng = path.join(outDir, 'card.png');
-  const g = spawnSync('node', [path.join('tools', 'make-thumbnail.mjs'), '--title', topic, '--out', cardPng, '--vertical'], { encoding: 'utf8' });
+  const g = spawnSync('node', [path.join('tools', 'make-thumbnail.mjs'), '--title', topic, '--out', cardPng, '--vertical'], { encoding: 'utf8', timeout: 60 * 1000, killSignal: 'SIGKILL' });
   if (g.status !== 0) throw new Error('title-card generator failed: ' + (g.stderr || '').slice(-140));
   log('Repacking to vertical 1080x1920 (branded first frame)...');
   makeVertical(inFile, verticalFile, cardPng);
