@@ -31,6 +31,9 @@ state/tech-topic-bank.json ── top 'new' idea ──▶ publish.yml (Tue/Fri 
 |---|---|---|
 | `Topic Bank` | daily 00:45 UTC | scores daily.dev trends → `state/tech-topic-bank.json` (committed back) + phone push of top 3 new ideas |
 | `Publish` | Tue/Fri 23:30 UTC + manual | picks topic (input, or top idea from bank) → renders in quarry-render → uploads to YouTube, scheduled at next Tue/Fri 19:30 ET slot → marks topic used → ntfy |
+| `Publish Short` | Mon/Wed/Sat 15:00 UTC + manual | renders the 60-100s script mode (minutes=1) → repacks to branded vertical 1080×1920 (ffmpeg) → uploads PUBLIC immediately. Topic: input, else the latest published long video (promo short — bank is never consumed) |
+
+Shorts never touch the render repo: the vertical repack happens in this repo with ffmpeg.
 
 ## Manual run
 
