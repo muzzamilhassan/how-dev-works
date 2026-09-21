@@ -158,7 +158,10 @@ function notify(title, body) {
 async function main() {
   const isTest = arg('test') === true || arg('test') === 'true';
   const skipWaiting = arg('skip-waiting') === true || arg('skip-waiting') === 'true';
-  const topicArg = arg('topic', '');
+  const nameWaiting = arg('name-waiting') === true || arg('name-waiting') === 'true';
+  // topic travels via INPUT_TOPIC env (shell-safe); --topic argv kept for local runs
+  let topicArg = arg('topic', '');
+  if (typeof topicArg !== 'string' || !topicArg.trim()) topicArg = (process.env.INPUT_TOPIC || '').trim();
   const minutes = arg('minutes', '10');
   const fallback = arg('fallback', 'true');
 
@@ -177,8 +180,8 @@ async function main() {
       if (publishedIds.includes(String(art.id))) continue;
       const pend = pending.renders.find(p => String(p.runId) === String(r.databaseId));
       let t = (pend && pend.topic) || '';
-      if (!t && typeof topicArg === 'string' && topicArg.trim()) {
-        t = topicArg.trim(); // naming flow: --topic names an orphaned render
+      if (!t && nameWaiting && topicArg) {
+        t = topicArg; // explicit naming flow: name_waiting=true names the newest waiting render
         log('Naming waiting run ' + r.databaseId + ' as "' + t + '"');
       }
       if (!t) {

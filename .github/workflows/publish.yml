@@ -26,6 +26,10 @@ on:
         description: "true = ignore waiting renders, force a fresh render (chain tests)"
         required: false
         default: "false"
+      name_waiting:
+        description: "true = topic names the newest waiting render instead of rendering fresh"
+        required: false
+        default: "false"
 
 concurrency:
   group: publish
@@ -52,15 +56,16 @@ jobs:
       - name: 🎬 Render + upload
         env:
           GH_TOKEN: ${{ secrets.SECRET_WRITER_PAT }}   # cross-repo dispatch + artifact download
+          INPUT_TOPIC: ${{ inputs.topic }}             # env, not shell args: topics keep spaces safely
           YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
           YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
           TECH_YT_REFRESH_TOKEN: ${{ secrets.TECH_YT_REFRESH_TOKEN }}
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
         run: |
           ARGS="--minutes ${{ inputs.minutes }} --fallback ${{ inputs.fallback }}"
-          if [ -n "${{ inputs.topic }}" ]; then ARGS="$ARGS --topic ${{ inputs.topic }}"; fi
           if [ "${{ inputs.test }}" = "true" ]; then ARGS="$ARGS --test"; fi
           if [ "${{ inputs.skip_waiting }}" = "true" ]; then ARGS="$ARGS --skip-waiting"; fi
+          if [ "${{ inputs.name_waiting }}" = "true" ]; then ARGS="$ARGS --name-waiting"; fi
           node publish.mjs $ARGS
 
       - name: 💾 Commit state
