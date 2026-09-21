@@ -22,6 +22,10 @@ on:
         description: "true = render + download ONLY, no upload (safe chain test)"
         required: false
         default: "false"
+      skip_waiting:
+        description: "true = ignore waiting renders, force a fresh render (chain tests)"
+        required: false
+        default: "false"
 
 concurrency:
   group: publish
@@ -35,7 +39,7 @@ jobs:
       - name: 📥 Checkout (push-capable — state files get committed)
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_PAT || github.token }}
+          token: ${{ secrets.SECRET_WRITER_PAT || github.token }}
 
       - name: ⚙️ Setup Node.js 20
         uses: actions/setup-node@v4
@@ -56,6 +60,7 @@ jobs:
           ARGS="--minutes ${{ inputs.minutes }} --fallback ${{ inputs.fallback }}"
           if [ -n "${{ inputs.topic }}" ]; then ARGS="$ARGS --topic ${{ inputs.topic }}"; fi
           if [ "${{ inputs.test }}" = "true" ]; then ARGS="$ARGS --test"; fi
+          if [ "${{ inputs.skip_waiting }}" = "true" ]; then ARGS="$ARGS --skip-waiting"; fi
           node publish.mjs $ARGS
 
       - name: 💾 Commit state

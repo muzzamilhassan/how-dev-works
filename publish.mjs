@@ -157,6 +157,7 @@ function notify(title, body) {
 
 async function main() {
   const isTest = arg('test') === true || arg('test') === 'true';
+  const skipWaiting = arg('skip-waiting') === true || arg('skip-waiting') === 'true';
   const topicArg = arg('topic', '');
   const minutes = arg('minutes', '10');
   const fallback = arg('fallback', 'true');
@@ -167,7 +168,7 @@ async function main() {
 
   // 1. already-rendered video waiting? upload it first (self-heal for failed upload runs)
   let chosen = null;
-  {
+  if (!skipWaiting) {
     const runs = ghJson(['run', 'list', '-R', RENDER_REPO, '-w', RENDER_WORKFLOW,
       '--status', 'success', '--limit', '5', '--json', 'databaseId,createdAt']) || [];
     for (const r of runs) {
@@ -175,7 +176,16 @@ async function main() {
       if (!art) continue;
       if (publishedIds.includes(String(art.id))) continue;
       const pend = pending.renders.find(p => String(p.runId) === String(r.databaseId));
-      chosen = { run: r, art, topic: (pend && pend.topic) || '' };
+      let t = (pend && pend.topic) || '';
+      if (!t && typeof topicArg === 'string' && topicArg.trim()) {
+        t = topicArg.trim(); // naming flow: --topic names an orphaned render
+        log('Naming waiting run ' + r.databaseId + ' as "' + t + '"');
+      }
+      if (!t) {
+        log('GAP: waiting run ' + r.databaseId + ' has no topic name — name it via Publish input `topic`.');
+        continue;
+      }
+      chosen = { run: r, art, topic: t };
       break;
     }
   }
@@ -197,11 +207,7 @@ async function main() {
     saveJson(PENDING_FILE, pending);
     chosen = { run, art, topic };
   } else {
-    log('Found waiting render: run ' + chosen.run.databaseId + ' → "' + (chosen.topic || 'UNKNOWN TOPIC') + '"');
-    if (!chosen.topic) {
-      log('GAP: no topic mapping for this run — dispatch Publish with --topic "<title>" to name it.');
-      return;
-    }
+    log('Found waiting render: run ' + chosen.run.databaseId + ' → "' + chosen.topic + '"');
   }
 
   if (publishedIds.includes(String(chosen.art.id))) { log('Artifact already published — done.'); return; }
