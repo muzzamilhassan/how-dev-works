@@ -38,6 +38,17 @@ how dev works, programming explained, software engineering explained, javascript
 
 ## Country: **US** (US-primetime CPM strategy, same as other channels)
 
+## Generated assets (branding/)
+
+Regenerate any time: `node tools/make-branding.mjs` (plus `node tools/make-logo.mjs` for the 120px OAuth logo).
+
+| File | Size | Upload to |
+|---|---|---|
+| [profile-800.png](branding/profile-800.png) | 800×800 | YouTube Studio → Customization → Branding → **Picture** |
+| [banner-2560x1440.png](branding/banner-2560x1440.png) | 2560×1440 (safe area 1546×423 centered) | Customization → Branding → **Banner image** |
+| [watermark-150.png](branding/watermark-150.png) | 150×150, transparent | Customization → Branding → **Video watermark** |
+| [thumbnail-git.png](branding/thumbnail-git.png) | 1280×720 | Content → hover video → Details → **Thumbnail** (needs phone-verified account) |
+
 ## Visual identity
 - Banner: `How Dev Works` big + tagline `Software, explained.` — dark bg (#0D1117), one teal/cyan accent, NO heavy text borders (house rule: soft shadow only)
 - Logo: minimal glyph — `{ }` or terminal caret on dark square, one accent line → generated: [branding/logo-120.png](branding/logo-120.png) (regenerate with `node tools/make-logo.mjs`)
