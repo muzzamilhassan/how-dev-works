@@ -174,7 +174,6 @@ async function main() {
   const inFile = downloadArtifact(run.databaseId);
   const dur = durationSec(inFile);
   log('Rendered: ' + dur + 's, ' + Math.round(fs.statSync(inFile).size / 1048576) + ' MB');
-  if (isTest) { log('TEST mode — skipping upload (render + download verified).'); return; }
   if (dur < MIN_DUR || dur > MAX_DUR) {
     log('GAP: render is ' + dur + 's (window ' + MIN_DUR + '-' + MAX_DUR + 's) — likely fell back to long script. NOT publishing.');
     notify('How Dev Works - GAP', 'Short "' + topic + '" came out ' + dur + 's — outside Shorts window, not published.');
@@ -188,6 +187,7 @@ async function main() {
   const vDur = durationSec(verticalFile);
   log('Vertical ready: ' + vDur + 's, ' + Math.round(fs.statSync(verticalFile).size / 1048576) + ' MB');
   if (vDur < MIN_DUR || vDur > MAX_DUR) throw new Error('vertical repack changed duration to ' + vDur + 's — refusing upload');
+  if (isTest) { log('TEST mode — render + guard + vertical repack verified, upload skipped.'); return; }
 
   const videoId = await uploadYouTube(verticalFile, topic);
   log('SHORT LIVE: https://youtube.com/shorts/' + videoId);
