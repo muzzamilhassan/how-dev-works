@@ -48,7 +48,7 @@ Actions → **Publish** → Run workflow:
 | `NTFY_TOPIC` | phone notifications | ✅ set |
 | `SECRET_WRITER_PAT` | cross-repo render dispatch + artifact download + state commits | ✅ set |
 | `YOUTUBE_CLIENT_ID/SECRET` | Google OAuth app (same as other channels) | ✅ set |
-| `TECH_YT_REFRESH_TOKEN` | THIS channel's upload token | ⏳ one-time setup — see below |
+| `TECH_YT_REFRESH_TOKEN` | THIS channel's upload token | ✅ set (verified via Verify YouTube token workflow) |
 
 ### One-time YouTube token (browser-only — nothing runs locally)
 
