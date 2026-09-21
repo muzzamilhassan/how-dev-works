@@ -88,9 +88,9 @@ function makeVertical(inFile, outFile, cardPng) {
   const wm = path.join('branding', 'watermark-150.png');
   const font = path.join(process.env.HOME || '/root', '.fonts', 'ArchivoBlack-Regular.ttf'); // installed by the workflow
   const filter = [
-    '[0:v]scale=1080:-2,setsar=1[vid]',
-    `color=c=${BRAND_BG}:s=1080x1920:r=30[bg]`,
-    '[bg][vid]overlay=0:656[base]',
+    // pad (finite) instead of a color source: an infinite `color=` input hangs the
+    // encode on runner ffmpeg 6.x — output would never reach end-of-input
+    '[0:v]scale=1080:-2,setsar=1,pad=1080:1920:0:656:0x0D1117[base]',
     '[1:v]scale=110:110[wm]',
     '[base][wm]overlay=(W-w)/2:110[v1]',
     `[v1]drawtext=fontfile=${font}:text='HOW DEV WORKS':fontcolor=${BRAND_CYAN}:fontsize=46:x=(w-text_w)/2:y=250[v2]`,
