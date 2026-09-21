@@ -1,0 +1,41 @@
+name: Topic Bank (daily)
+
+on:
+  schedule:
+    # 00:45 UTC = 05:45 PKT — before the Tue/Fri publish slots pick from the bank
+    - cron: '45 0 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: topic-bank
+  cancel-in-progress: false
+
+jobs:
+  bank:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: 📥 Checkout (push-capable)
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_PAT || github.token }}
+
+      - name: ⚙️ Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 🧠 Score daily.dev trends → topic bank
+        env:
+          DAILY_DEV_TOKEN: ${{ secrets.DAILY_DEV_TOKEN }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: node tech-topic-brain.mjs
+
+      - name: 💾 Commit topic bank
+        run: |
+          git config user.name "topic-brain"
+          git config user.email "brain@howdevworks"
+          git add state/tech-topic-bank.json || true
+          git diff --cached --quiet || git commit -m "topic bank update [skip ci]"
+          git pull --rebase || true
+          git push || true

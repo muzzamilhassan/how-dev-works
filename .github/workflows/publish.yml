@@ -1,0 +1,68 @@
+name: Publish (render → YouTube)
+
+on:
+  schedule:
+    # Tue + Fri 23:30 UTC = 19:30 ET — video lands scheduled for the NEXT slot
+    - cron: '30 23 * * 2,5'
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: "Topic (blank = auto-pick top idea from topic bank)"
+        required: false
+        default: ""
+      minutes:
+        description: "target minutes"
+        required: false
+        default: "10"
+      fallback:
+        description: "true = curated deep-dive script (guaranteed length)"
+        required: false
+        default: "true"
+      test:
+        description: "true = render + download ONLY, no upload (safe chain test)"
+        required: false
+        default: "false"
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 100
+    steps:
+      - name: 📥 Checkout (push-capable — state files get committed)
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_PAT || github.token }}
+
+      - name: ⚙️ Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 📦 Install googleapis
+        run: npm install googleapis --no-save
+
+      - name: 🎬 Render + upload
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_PAT }}   # cross-repo dispatch + artifact download
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          TECH_YT_REFRESH_TOKEN: ${{ secrets.TECH_YT_REFRESH_TOKEN }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: |
+          ARGS="--minutes ${{ inputs.minutes }} --fallback ${{ inputs.fallback }}"
+          if [ -n "${{ inputs.topic }}" ]; then ARGS="$ARGS --topic ${{ inputs.topic }}"; fi
+          if [ "${{ inputs.test }}" = "true" ]; then ARGS="$ARGS --test"; fi
+          node publish.mjs $ARGS
+
+      - name: 💾 Commit state
+        run: |
+          git config user.name "publish-bot"
+          git config user.email "bot@howdevworks"
+          git add state/ || true
+          git diff --cached --quiet || git commit -m "publish state [skip ci]"
+          git pull --rebase || true
+          git push || true
