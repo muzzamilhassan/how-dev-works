@@ -80,21 +80,26 @@ function durationSec(file) {
 }
 
 // Landscape 1920x1080 -> vertical 1080x1920: explainer strip centered on the brand
-// background, logo + channel name up top, handle at the bottom. Video content sits
-// on pure black anyway, so the layout reads as a native vertical Short.
-function makeVertical(inFile, outFile) {
+// background, logo + channel name up top, handle at the bottom. cardPng (a generated
+// 1080x1920 title card) is overlaid on the FIRST ~0.8s: YouTube Shorts can't take
+// custom thumbnail uploads, so the branded card becomes the video's first frame —
+// that's what the auto-thumbnail and the in-app frame picker land on.
+function makeVertical(inFile, outFile, cardPng) {
   const wm = path.join('branding', 'watermark-150.png');
   const font = '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf';
-  const fc = [
+  const filter = [
     '[0:v]scale=1080:-2,setsar=1[vid]',
     `color=c=${BRAND_BG}:s=1080x1920:r=30[bg]`,
     '[bg][vid]overlay=0:656[base]',
     '[1:v]scale=110:110[wm]',
     '[base][wm]overlay=(W-w)/2:110[v1]',
-    `[v1]drawtext=fontfile=${font}:text='HOW DEV WORKS':fontcolor=${BRAND_CYAN}:fontsize=44:x=(w-text_w)/2:y=250`,
-    `[v1]drawtext=fontfile=${font}:text='@HowDevWorks':fontcolor=0x8B949E:fontsize=34:x=(w-text_w)/2:y=1810`
+    `[v1]drawtext=fontfile=${font}:text='HOW DEV WORKS':fontcolor=${BRAND_CYAN}:fontsize=44:x=(w-text_w)/2:y=250[v2]`,
+    `[v2]drawtext=fontfile=${font}:text='@HowDevWorks':fontcolor=0x8B949E:fontsize=34:x=(w-text_w)/2:y=1810[v3]`,
+    '[2:v]scale=1080:1920[card]',
+    "[v3][card]overlay=0:0:enable='lte(t,0.8)'"
   ].join(';');
-  const r = spawnSync('ffmpeg', ['-y', '-i', inFile, '-i', wm, '-filter_complex', fc,
+  const r = spawnSync('ffmpeg', ['-y', '-i', inFile, '-i', wm, '-i', cardPng,
+    '-filter_complex', filter,
     '-c:v', 'libx264', '-preset', 'medium', '-crf', '20', '-c:a', 'aac', '-b:a', '160k', outFile], { encoding: 'utf8' });
   if (r.status !== 0) throw new Error('ffmpeg vertical repack failed: ' + (r.stderr || '').slice(-300));
 }
@@ -182,8 +187,11 @@ async function main() {
 
   const outDir = path.dirname(inFile);
   const verticalFile = path.join(outDir, 'vertical.mp4');
-  log('Repacking to vertical 1080x1920...');
-  makeVertical(inFile, verticalFile);
+  const cardPng = path.join(outDir, 'card.png');
+  const g = spawnSync('node', [path.join('tools', 'make-thumbnail.mjs'), '--title', topic, '--out', cardPng, '--vertical'], { encoding: 'utf8' });
+  if (g.status !== 0) throw new Error('title-card generator failed: ' + (g.stderr || '').slice(-140));
+  log('Repacking to vertical 1080x1920 (branded first frame)...');
+  makeVertical(inFile, verticalFile, cardPng);
   const vDur = durationSec(verticalFile);
   log('Vertical ready: ' + vDur + 's, ' + Math.round(fs.statSync(verticalFile).size / 1048576) + ' MB');
   if (vDur < MIN_DUR || vDur > MAX_DUR) throw new Error('vertical repack changed duration to ' + vDur + 's — refusing upload');

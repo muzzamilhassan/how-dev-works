@@ -144,7 +144,7 @@ async function uploadYouTube(videoFile, topic, tags) {
     },
     media: { body: fs.createReadStream(videoFile) }
   });
-  return { videoId: res.data.id, publishAt };
+  return { videoId, publishAt, youtube };
 }
 
 function notify(title, body) {
@@ -240,8 +240,21 @@ async function main() {
   // 4. upload
   const bank = loadJson(BANK_FILE, { topics: [] });
   const matched = bank.topics.find(t => t.title === chosen.topic);
-  const { videoId, publishAt } = await uploadYouTube(videoFile, chosen.topic, matched ? matched.tags : null);
+  const { videoId, publishAt, youtube } = await uploadYouTube(videoFile, chosen.topic, matched ? matched.tags : null);
   log('UPLOADED: https://youtube.com/watch?v=' + videoId + ' (goes public ' + publishAt + ')');
+
+  // 4b. thumbnail — generated from the title, attached via API (non-fatal:
+  // fails cleanly if the channel is not phone-verified at youtube.com/verify)
+  try {
+    const thumbPng = path.join('inbox', 'thumb-' + videoId + '.png');
+    const g = spawnSync('node', [path.join('tools', 'make-thumbnail.mjs'), '--title', chosen.topic, '--out', thumbPng], { encoding: 'utf8' });
+    if (g.status !== 0) throw new Error('generator failed: ' + (g.stderr || '').slice(-140));
+    await youtube.thumbnails.set({ videoId, media: { body: fs.createReadStream(thumbPng) } });
+    log('Thumbnail attached.');
+  } catch (e) {
+    log('WARN: thumbnail not attached: ' + String(e.message || e).slice(0, 140));
+    notify('How Dev Works - thumbnail', 'Thumbnail failed for "' + chosen.topic + '" — verify the channel at youtube.com/verify, then run the Set thumbnail workflow.');
+  }
 
   // 5. state + notify
   published.uploads.push({
