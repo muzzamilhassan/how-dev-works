@@ -48,7 +48,18 @@ Actions → **Publish** → Run workflow:
 | `NTFY_TOPIC` | phone notifications | ✅ set |
 | `SECRET_WRITER_PAT` | cross-repo render dispatch + artifact download + state commits | ✅ set |
 | `YOUTUBE_CLIENT_ID/SECRET` | Google OAuth app (same as other channels) | ✅ set |
-| `TECH_YT_REFRESH_TOKEN` | THIS channel's upload token | ⏳ needs one-time browser OAuth |
+| `TECH_YT_REFRESH_TOKEN` | THIS channel's upload token | ⏳ one-time setup — see below |
+
+### One-time YouTube token (browser-only — nothing runs locally)
+
+1. Google Cloud Console → **APIs & Services → Credentials** → your OAuth client → Authorized redirect URIs: add `https://developers.google.com/oauthplayground` → Save.
+2. Open https://developers.google.com/oauthplayground → ⚙️ gear (top right) → tick **Use your own OAuth credentials** → paste this project's client ID + secret. Keep **Force approval prompt** + access type **offline** ticked.
+3. Step 1 → paste scope `https://www.googleapis.com/auth/youtube` → **Authorize APIs** → sign in as the Google account owning @HowDevWorks → unverified-app warning: *Advanced → continue → Allow*.
+4. Step 2 → **Exchange authorization code for tokens** → copy the `refresh_token`.
+5. GitHub → repo **Settings → Secrets and variables → Actions** → New secret `TECH_YT_REFRESH_TOKEN`.
+6. Actions → **Verify YouTube token** → Run workflow — it prints the channel the token belongs to (costs 1 quota unit, uploads nothing).
+
+(Local alternative: `tools/get-refresh-token.mjs`.)
 
 ## State (committed by CI with `[skip ci]`)
 
