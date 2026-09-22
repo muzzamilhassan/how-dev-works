@@ -1,24 +1,7 @@
 {
-  "updated": "2026-09-21T15:30:00.000Z",
+  "updated": "2026-09-22T05:24:29.020Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
-    {
-      "id": "curated-01",
-      "title": "How Git Actually Works",
-      "url": "",
-      "source": "BRANDING.md first-12",
-      "tags": [
-        "git",
-        "version control",
-        "how it works"
-      ],
-      "score": 501,
-      "addedAt": "2026-09-21",
-      "status": "used",
-      "curated": true,
-      "note": "already rendered — run 35585098737 in state/pending-renders.json, uploads on next publish",
-      "videoId": "7_FBiOslvUE"
-    },
     {
       "id": "curated-02",
       "title": "What Really Happens When You Type a URL and Press Enter",
@@ -171,6 +154,23 @@
       "addedAt": "2026-09-21",
       "status": "new",
       "curated": true
+    },
+    {
+      "id": "curated-01",
+      "title": "How Git Actually Works",
+      "url": "",
+      "source": "BRANDING.md first-12",
+      "tags": [
+        "git",
+        "version control",
+        "how it works"
+      ],
+      "score": 501,
+      "addedAt": "2026-09-21",
+      "status": "used",
+      "curated": true,
+      "note": "already rendered — run 35585098737 in state/pending-renders.json, uploads on next publish",
+      "videoId": "7_FBiOslvUE"
     },
     {
       "id": "VIVynMBNG",
