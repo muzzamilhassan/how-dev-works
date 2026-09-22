@@ -11,6 +11,7 @@ import fs from 'fs';
 import path from 'path';
 import { spawnSync } from 'child_process';
 import { google } from 'googleapis';
+import { research } from './tools/yt-research.mjs';
 
 const RENDER_REPO = 'muzzamilhassan/quarry-render';
 const RENDER_WORKFLOW = 'tech-video.yml';           // same workflow — minutes=1 switches it to short scripts
@@ -117,14 +118,14 @@ function pickTopic(bank, explicit) {
   return idea ? idea.title : null;
 }
 
-function buildDescription(topic) {
-  return topic + ' — the whole idea in under two minutes. No hype, no fluff: just the machine, opened up.\n\n'
+function buildDescription(topic, phrase) {
+  return (phrase || topic) + ' — the whole idea in under two minutes. No hype, no fluff: just the machine, opened up.\n\n'
     + 'New deep-dive every week, shorts in between. Subscribe and finally see the whole machine.\n\n'
     + '#shorts #programming #softwareengineering #explained\n'
     + '📧 Business: muzzamilhassan302@gmail.com\n';
 }
 
-async function uploadYouTube(videoFile, topic) {
+async function uploadYouTube(videoFile, topic, meta) {
   const clientId = (process.env.YOUTUBE_CLIENT_ID || '').trim();
   const clientSecret = (process.env.YOUTUBE_CLIENT_SECRET || '').trim();
   const refresh = (process.env.TECH_YT_REFRESH_TOKEN || '').trim();
@@ -132,20 +133,22 @@ async function uploadYouTube(videoFile, topic) {
   const oauth = new google.auth.OAuth2(clientId, clientSecret);
   oauth.setCredentials({ refresh_token: refresh });
   const youtube = google.youtube({ version: 'v3', auth: oauth });
+  const title = (meta?.title || topic).slice(0, 100);
+  const tags = (meta?.tags?.length ? meta.tags : ['shorts', 'programming', 'software engineering', 'explained', 'how it works']).slice(0, 15);
   const res = await youtube.videos.insert({
     part: ['snippet', 'status'],
     requestBody: {
       snippet: {
-        title: topic.slice(0, 100),
-        description: buildDescription(topic),
-        tags: ['shorts', 'programming', 'software engineering', 'explained', 'how it works'].slice(0, 15),
+        title,
+        description: buildDescription(topic, meta?.searchPhrase),
+        tags,
         categoryId: '27'
       },
       status: { privacyStatus: 'public', selfDeclaredMadeForKids: false }  // Shorts go live immediately
     },
     media: { body: fs.createReadStream(videoFile) }
   });
-  return res.data.id;
+  return { videoId: res.data.id, title };
 }
 
 function notify(title, body) {
@@ -198,12 +201,20 @@ async function main() {
   if (vDur < MIN_DUR || vDur > MAX_DUR) throw new Error('vertical repack changed duration to ' + vDur + 's — refusing upload');
   if (isTest) { log('TEST mode — render + guard + vertical repack verified, upload skipped.'); return; }
 
-  const videoId = await uploadYouTube(verticalFile, topic);
+  let meta = null;
+  try {
+    meta = await research(topic);
+    log('research: title="' + meta.title + '" · phrase="' + meta.searchPhrase + '" · ' + meta.tags.length + ' tags');
+  } catch (e) {
+    log('WARN research failed (using topic as-is): ' + String(e.message || e).slice(0, 100));
+  }
+  const { videoId, title: usedTitle } = await uploadYouTube(verticalFile, topic, meta);
   log('SHORT LIVE: https://youtube.com/shorts/' + videoId);
 
   shorts.uploads.push({
     date: new Date().toISOString().slice(0, 10),
-    title: topic, videoId, artifactId: art.id, runId: run.databaseId
+    title: usedTitle, topic, videoId, searchPhrase: meta?.searchPhrase || '',
+    artifactId: art.id, runId: run.databaseId
   });
   saveJson(SHORTS_FILE, shorts);
   notify('How Dev Works - SHORT live', topic + '\nhttps://youtube.com/shorts/' + videoId);

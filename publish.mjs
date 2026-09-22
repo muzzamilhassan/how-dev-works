@@ -9,6 +9,7 @@ import fs from 'fs';
 import path from 'path';
 import { spawnSync } from 'child_process';
 import { google } from 'googleapis';
+import { research } from './tools/yt-research.mjs';
 
 const RENDER_REPO = 'muzzamilhassan/quarry-render';
 const RENDER_WORKFLOW = 'tech-video.yml';
@@ -112,8 +113,8 @@ function durationSec(file) {
   return isFinite(d) ? Math.round(d) : 0;
 }
 
-function buildDescription(topic) {
-  return topic + ' — explained in one calm, visual deep-dive. No hype, no fluff: just the machine, opened up.\n\n'
+function buildDescription(topic, phrase) {
+  return (phrase || topic) + ' — explained in one calm, visual deep-dive. No hype, no fluff: just the machine, opened up.\n\n'
     + 'WHAT YOU GET\n'
     + '• One system explained end to end — what really happens, step by step\n'
     + '• Clean dark-mode animations of the parts you never see\n'
@@ -122,7 +123,7 @@ function buildDescription(topic) {
     + '📧 Business: muzzamilhassan302@gmail.com\n';
 }
 
-async function uploadYouTube(videoFile, topic, tags) {
+async function uploadYouTube(videoFile, topic, bankTags, meta) {
   const clientId = (process.env.YOUTUBE_CLIENT_ID || '').trim();
   const clientSecret = (process.env.YOUTUBE_CLIENT_SECRET || '').trim();
   const refresh = (process.env.TECH_YT_REFRESH_TOKEN || '').trim();
@@ -131,20 +132,24 @@ async function uploadYouTube(videoFile, topic, tags) {
   oauth.setCredentials({ refresh_token: refresh });
   const youtube = google.youtube({ version: 'v3', auth: oauth });
   const publishAt = nextSlotUTC();
+  // metadata SEO: title/description/tags come from autocomplete research when it ran,
+  // falling back to the topic + bank tags + defaults
+  const title = (meta?.title || topic).slice(0, 100);
+  const tags = (meta?.tags?.length ? meta.tags : (bankTags && bankTags.length ? bankTags : ['programming', 'software engineering', 'explained', 'how it works'])).slice(0, 15);
   const res = await youtube.videos.insert({
     part: ['snippet', 'status'],
     requestBody: {
       snippet: {
-        title: topic.slice(0, 100),
-        description: buildDescription(topic),
-        tags: (tags && tags.length ? tags : ['programming', 'software engineering', 'explained', 'how it works']).slice(0, 15),
+        title,
+        description: buildDescription(topic, meta?.searchPhrase),
+        tags,
         categoryId: '27'
       },
       status: { privacyStatus: 'private', publishAt, selfDeclaredMadeForKids: false }
     },
     media: { body: fs.createReadStream(videoFile) }
   });
-  return { videoId, publishAt, youtube };
+  return { videoId: res.data.id, publishAt, title, youtube };
 }
 
 function notify(title, body) {
@@ -237,10 +242,17 @@ async function main() {
     return;
   }
 
-  // 4. upload
+  // 4. metadata research (real YouTube search phrasing) + upload
   const bank = loadJson(BANK_FILE, { topics: [] });
   const matched = bank.topics.find(t => t.title === chosen.topic);
-  const { videoId, publishAt, youtube } = await uploadYouTube(videoFile, chosen.topic, matched ? matched.tags : null);
+  let meta = null;
+  try {
+    meta = await research(chosen.topic);
+    log('research: title="' + meta.title + '" · phrase="' + meta.searchPhrase + '" · ' + meta.tags.length + ' tags');
+  } catch (e) {
+    log('WARN research failed (using topic as-is): ' + String(e.message || e).slice(0, 100));
+  }
+  const { videoId, publishAt, title: usedTitle, youtube } = await uploadYouTube(videoFile, chosen.topic, matched ? matched.tags : null, meta);
   log('UPLOADED: https://youtube.com/watch?v=' + videoId + ' (goes public ' + publishAt + ')');
 
   // 4b. thumbnail — generated from the title, attached via API (non-fatal:
@@ -259,7 +271,8 @@ async function main() {
   // 5. state + notify
   published.uploads.push({
     date: new Date().toISOString().slice(0, 10),
-    title: chosen.topic, videoId, publishAt,
+    title: usedTitle, topic: chosen.topic, videoId, publishAt,
+    searchPhrase: meta?.searchPhrase || '', tags: (meta?.tags || []).slice(0, 10),
     artifactId: chosen.art.id, runId: chosen.run.databaseId
   });
   saveJson(PUBLISHED_FILE, published);
