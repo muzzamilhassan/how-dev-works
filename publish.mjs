@@ -208,8 +208,13 @@ async function main() {
     let topic = typeof topicArg === 'string' && topicArg.trim() ? topicArg.trim() : '';
     if (!topic) {
       const bank = loadJson(BANK_FILE, { topics: [] });
+      // waves (fresh, unexpired) outrank curated outrank regular — trend windows are short
+      const now = Date.now();
+      const waveRank = (t) => (t.wave && (!t.expires || new Date(t.expires) > now) ? 1 : 0);
       const idea = bank.topics.filter(t => t.status === 'new')
-        .sort((a, b) => (b.curated ? 1 : 0) - (a.curated ? 1 : 0) || b.score - a.score)[0];
+        .sort((a, b) => waveRank(b) - waveRank(a)
+          || (b.curated ? 1 : 0) - (a.curated ? 1 : 0)
+          || b.score - a.score)[0];
       if (!idea) {
         log('Nothing waiting and no open ideas in the bank — done.');
         notify('How Dev Works - GAP', 'Nothing to publish: no waiting render, no open ideas in the topic bank.');

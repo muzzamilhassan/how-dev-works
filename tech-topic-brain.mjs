@@ -94,8 +94,9 @@ async function main() {
   bank.topics.push(...added);
 
   // Prune: used + rejected stay in the bank forever (dedupe tombstones); curated topics
-  // are never pruned; open ideas capped at BANK_CAP (oldest dropped)
-  const open = bank.topics.filter(t => t.status === 'new');
+  // are never pruned; expired waves drop; open ideas capped at BANK_CAP (oldest dropped)
+  const now = Date.now();
+  const open = bank.topics.filter(t => t.status === 'new' && !(t.wave && t.expires && new Date(t.expires).getTime() < now));
   const used = bank.topics.filter(t => t.status === 'used');
   const rejected = bank.topics.filter(t => t.status === 'rejected');
   const curated = open.filter(t => t.curated);

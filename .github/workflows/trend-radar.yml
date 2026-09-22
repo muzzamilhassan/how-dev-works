@@ -1,0 +1,58 @@
+name: Trend radar (daily)
+
+on:
+  schedule:
+    # 06:30 UTC — after the morning topic bank, before anyone wakes up
+    - cron: '30 6 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: trend-radar
+  cancel-in-progress: false
+
+jobs:
+  radar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: 📥 Checkout (push-capable — wave topics get committed)
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.SECRET_WRITER_PAT || github.token }}
+
+      - name: ⚙️ Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 📦 Install googleapis
+        run: npm install googleapis --no-save
+
+      - name: 📡 Scan HN + YouTube trending for dev waves
+        env:
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          TECH_YT_REFRESH_TOKEN: ${{ secrets.TECH_YT_REFRESH_TOKEN }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: node tools/trend-radar.mjs
+
+      - name: 💾 Commit topic bank
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: |
+          git config user.name "trend-radar"
+          git config user.email "radar@howdevworks"
+          git add state/tech-topic-bank.json || true
+          git diff --cached --quiet || git commit -m "trend radar update [skip ci]"
+          git pull --rebase || true
+          if ! git push; then
+            [ -n "$NTFY_TOPIC" ] && curl -s -H "Title: How Dev Works - RADAR PUSH FAILED" -d "trend scan not saved" "https://ntfy.sh/$NTFY_TOPIC" || true
+            exit 1
+          fi
+
+      - name: 📢 Alert on failure
+        if: failure()
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: |
+          [ -n "$NTFY_TOPIC" ] && curl -s -H "Title: How Dev Works - TREND RADAR FAILED" -d "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" "https://ntfy.sh/$NTFY_TOPIC" || true
