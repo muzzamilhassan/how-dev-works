@@ -8,6 +8,23 @@
       "publishAt": "2026-09-22T23:30:00.000Z",
       "artifactId": 10653138649,
       "runId": 35629297469
+    },
+    {
+      "date": "2026-09-23",
+      "title": "What Really Happens When You Type a URL and Press Enter",
+      "topic": "What Really Happens When You Type a URL and Press Enter",
+      "videoId": "4-rCTS2TyNM",
+      "publishAt": "2026-09-25T23:30:00.000Z",
+      "searchPhrase": "what happens when you type a url in the browser and press enter",
+      "tags": [
+        "what happens when you type a url in the browser",
+        "how dev works",
+        "What Really Happens When You Type a URL and Press Enter",
+        "programming explained",
+        "software engineering"
+      ],
+      "artifactId": 10728611083,
+      "runId": 35807136176
     }
   ]
 }
