@@ -260,11 +260,11 @@ async function main() {
   const { videoId, publishAt, title: usedTitle, youtube } = await uploadYouTube(videoFile, chosen.topic, matched ? matched.tags : null, meta);
   log('UPLOADED: https://youtube.com/watch?v=' + videoId + ' (goes public ' + publishAt + ')');
 
-  // 4b. thumbnail — generated from the title, attached via API (non-fatal:
+  // 4b. thumbnail — photo-poster factory (tools/thumbnail-factory.mjs), attached via API (non-fatal:
   // fails cleanly if the channel is not phone-verified at youtube.com/verify)
   try {
     const thumbPng = path.join('inbox', 'thumb-' + videoId + '.png');
-    const g = spawnSync('node', [path.join('tools', 'make-thumbnail.mjs'), '--title', chosen.topic, '--out', thumbPng], { encoding: 'utf8' });
+    const g = spawnSync('node', [path.join('tools', 'thumbnail-factory.mjs'), '--title', (meta?.title || chosen.topic), '--out', thumbPng], { encoding: 'utf8' });
     if (g.status !== 0) throw new Error('generator failed: ' + (g.stderr || '').slice(-140));
     await youtube.thumbnails.set({ videoId, media: { body: fs.createReadStream(thumbPng) } });
     log('Thumbnail attached.');
