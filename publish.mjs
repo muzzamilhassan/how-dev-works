@@ -235,6 +235,20 @@ async function main() {
 
   if (publishedIds.includes(String(chosen.art.id))) { log('Artifact already published — done.'); return; }
 
+  // 2.5 Never-Forget metaphor brief — MANDATORY hook + analogy map + beats, saved to
+  // state/scripts/ (committed with state) and the hook pushed to the phone. Non-fatal.
+  try {
+    const slug = chosen.topic.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60);
+    const briefPath = path.join('state', 'scripts', `${new Date().toISOString().slice(0, 10)}-${slug}.md`);
+    const g = spawnSync('node', ['tools/metaphor-script.mjs', '--topic', chosen.topic, '--out', briefPath], { encoding: 'utf8' });
+    if (g.status !== 0) throw new Error((g.stderr || '').slice(-120));
+    const hook = (g.stdout || '').split('\n').find(l => l.startsWith('- PRIMARY:'));
+    if (hook) notify('How Dev Works - hook ready', chosen.topic + '\n' + hook.replace('- PRIMARY: ', ''));
+    log('Metaphor brief: ' + briefPath);
+  } catch (e) {
+    log('WARN metaphor brief failed (non-fatal): ' + String(e.message || e).slice(0, 120));
+  }
+
   // 3. download + validate
   log('Downloading artifact ' + chosen.art.id + ' (run ' + chosen.run.databaseId + ')...');
   const videoFile = downloadArtifact(chosen.run.databaseId, chosen.art.id);
