@@ -140,7 +140,7 @@ const paperTexture = `
   <rect width="1280" height="720" filter="url(#p)"/>
 </svg>`;
 
-function urduTemplate({ img, eng, word, hook, wordSize = 148 }) {
+function urduTemplate({ img, eng, word, hook, wordSize = 148, badge = 'اردو دستاویزی سلسلہ' }) {
   return `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
 ${FONT_CSS}
 .stage{background:#E8DCC3;}
@@ -171,7 +171,7 @@ ${FONT_CSS}
   <div class="orn"><div class="l"></div><div class="d"></div><div class="l"></div></div>
   <div class="hook">${hook}</div>
 </div>
-<div class="badge">اردو دستاویزی سلسلہ</div>
+<div class="badge">${badge}</div>
 </div></body></html>`;
 }
 
@@ -186,6 +186,7 @@ if (NICHE === 'urdu') {
     word: String(arg('word', TITLE.split(/[|—]/)[0].trim().toUpperCase().split(/\s+/).slice(-1)[0] || 'HISTORY')),
     hook: String(arg('hook', TITLE)),
     wordSize: parseInt(arg('size', '148'), 10) || 148,
+    badge: String(arg('badge', 'اردو دستاویزی سلسلہ')),
   });
 } else {
   const pool = fs.existsSync(PHOTOS) ? fs.readdirSync(PHOTOS).filter(f => f.startsWith('tech-') && /\.jpe?g$/i.test(f)) : [];
