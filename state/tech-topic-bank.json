@@ -1,24 +1,7 @@
 {
-  "updated": "2026-09-25T05:25:31.698Z",
+  "updated": "2026-09-26T05:30:49.398Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
-    {
-      "id": "curated-03",
-      "title": "How HTTPS Actually Works",
-      "url": "",
-      "source": "BRANDING.md first-12",
-      "tags": [
-        "https",
-        "tls",
-        "security",
-        "networking"
-      ],
-      "score": 499,
-      "addedAt": "2026-09-21",
-      "status": "used",
-      "curated": true,
-      "videoId": "-vnkAF_T3Ww"
-    },
     {
       "id": "curated-04",
       "title": "How DNS Finds a Website in Milliseconds",
@@ -141,6 +124,22 @@
       "curated": true
     },
     {
+      "id": "AzxnBHN3V",
+      "title": "Stop building side projects. Nobody cares — and here's the uncomfortable math.",
+      "url": "https://dev.to/infoinlet1/stop-building-side-projects-nobody-cares-and-heres-the-uncomfortable-math-1eoc",
+      "source": "DEV",
+      "tags": [
+        "ai",
+        "webdev",
+        "career",
+        "productivity",
+        "ai-coding"
+      ],
+      "score": 38,
+      "addedAt": "2026-09-26",
+      "status": "new"
+    },
+    {
       "id": "6lmauEkPV",
       "title": "Clean Code Is Not the Same as Clear Code: Comments Were Never the Problem",
       "url": "https://dev.to/georgekobaidze/clean-code-is-not-the-same-as-clear-code-comments-were-never-the-problem-42n",
@@ -167,6 +166,38 @@
       "score": 20,
       "addedAt": "2026-09-23",
       "status": "new"
+    },
+    {
+      "id": "BkbDbNDuV",
+      "title": "Tailwind has a huge problem...",
+      "url": "https://www.youtube.com/watch?v=tHBbNNh1-OE",
+      "source": "Awesome",
+      "tags": [
+        "webdev",
+        "open-source",
+        "tailwind-css",
+        "shopify"
+      ],
+      "score": 17,
+      "addedAt": "2026-09-26",
+      "status": "new"
+    },
+    {
+      "id": "curated-03",
+      "title": "How HTTPS Actually Works",
+      "url": "",
+      "source": "BRANDING.md first-12",
+      "tags": [
+        "https",
+        "tls",
+        "security",
+        "networking"
+      ],
+      "score": 499,
+      "addedAt": "2026-09-21",
+      "status": "used",
+      "curated": true,
+      "videoId": "-vnkAF_T3Ww"
     },
     {
       "id": "curated-02",
