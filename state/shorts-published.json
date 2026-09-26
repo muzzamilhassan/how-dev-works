@@ -15,6 +15,15 @@
       "searchPhrase": "what happens when you type a url in the browser and press enter",
       "artifactId": 10770437203,
       "runId": 35904315834
+    },
+    {
+      "date": "2026-09-26",
+      "title": "How HTTPS Actually Works",
+      "topic": "How HTTPS Actually Works",
+      "videoId": "R0m_zagbxZs",
+      "searchPhrase": "how do https certificates work",
+      "artifactId": 10912496564,
+      "runId": 36261370546
     }
   ]
 }
