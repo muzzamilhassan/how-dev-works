@@ -231,8 +231,19 @@ const FALLBACK = {
 };
 
 // ---------- assemble brief ----------
+function entryFor(topic) {
+  return BOARD.find(b => b.match.test(topic)) ?? { ...FALLBACK, id: 'generic' };
+}
+
+// One-line creative directive for the render AI (quarry-render feeds the topic string
+// verbatim into its script prompt, so the hook/analogy must ride inside the topic).
+function oneline(topic) {
+  const e = entryFor(topic);
+  return `Analogy: ${e.object}. Hook: ${e.hooks[0]} Weld: ${e.weld}`;
+}
+
 function brief(topic) {
-  const e = BOARD.find(b => b.match.test(topic)) ?? { ...FALLBACK, id: 'generic' };
+  const e = entryFor(topic);
   const thumb = e.thumb;
   return `# ${topic} — Never-Forget brief
 Generated ${new Date().toISOString().slice(0, 10)} · format: docs/scripts/2026-09-24-never-forget-metaphor-format.md
@@ -293,6 +304,7 @@ if (out && typeof out === 'string' && topic) {
   const hook = md.split('\n').find(l => l.startsWith('- PRIMARY:'));
   console.log('OK: wrote', out);
   console.log(hook || 'WARN: no hook line');
+  if (arg('oneline') === true) console.log('ONELINE:' + oneline(String(topic)));
 } else if (bank && outdir) {
   const j = JSON.parse(fs.readFileSync(String(bank), 'utf8'));
   const open = (j.topics || []).filter(t => t.status === 'new');

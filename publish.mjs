@@ -57,6 +57,34 @@ function nextSlotUTC() {
   return new Date(Date.now() + 7 * 24 * 3600 * 1000).toISOString();
 }
 
+function topicSlug(s) {
+  return String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60);
+}
+
+// quarry-render's tech-video.yml accepts topic/minutes/fallback only and interpolates the
+// topic into a shell command — so the brief must ride inside the topic string as ONE line
+// with no quotes / dollars / backticks (shell-safe), or it never reaches the script AI.
+function sanitizeBriefLine(s) {
+  return String(s).replace(/["'`$<>|;\\*!]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 620);
+}
+
+// Never-Forget metaphor brief → { briefPath, hook, renderTopic }. The brief file is the
+// shooting brief of record (state/scripts/, committed with state); renderTopic is the
+// topic string with the hook + analogy welded on, which shapes the AI-written script.
+function buildBrief(topic) {
+  const briefPath = path.join('state', 'scripts', `${new Date().toISOString().slice(0, 10)}-${topicSlug(topic)}.md`);
+  const g = spawnSync('node', ['tools/metaphor-script.mjs', '--topic', topic, '--out', briefPath, '--oneline'], { encoding: 'utf8' });
+  if (g.status !== 0) throw new Error((g.stderr || '').slice(-120));
+  const md = fs.existsSync(briefPath) ? fs.readFileSync(briefPath, 'utf8') : '';
+  const hook = md.split('\n').find(l => l.startsWith('- PRIMARY:'));
+  const one = (g.stdout || '').split('\n').map(l => l.trim()).find(l => l.startsWith('ONELINE:'));
+  const directive = one ? sanitizeBriefLine(one.slice(8)) : '';
+  const renderTopic = directive
+    ? `${topic} || Creative direction: ${directive.replace(/[.\s]+$/, '')}. Open cold on that hook; carry the analogy through the scenes; every scene stays on ${topic}.`
+    : topic;
+  return { briefPath, hook: hook ? hook.replace('- PRIMARY: ', '') : '', renderTopic };
+}
+
 function dispatchRender(topic, minutes, fallback) {
   gh(['workflow', 'run', RENDER_WORKFLOW, '-R', RENDER_REPO,
     '-f', 'topic=' + topic, '-f', 'minutes=' + minutes,
@@ -172,7 +200,11 @@ async function main() {
   // scheduled runs pass empty inputs -> arg() returns booleans; normalize before dispatch
   const minutesArg = arg('minutes', '10');
   const minutes = (typeof minutesArg === 'string' && /^\d+$/.test(minutesArg.trim())) ? minutesArg.trim() : '10';
-  const fallback = arg('fallback', 'true') === 'false' ? 'false' : 'true';
+  // fallback: false = the render AI writes a fresh per-topic script. Bare `--fallback`
+  // (scheduled runs pass empty inputs) means "use the default" — it must NOT flip to true,
+  // or every scheduled video silently becomes the hardcoded event-loop fallback again.
+  const fbRaw = arg('fallback', 'false');
+  const fallback = (fbRaw === true || String(fbRaw) !== 'true') ? 'false' : 'true';
 
   const published = loadJson(PUBLISHED_FILE, { uploads: [] });
   const pending = loadJson(PENDING_FILE, { renders: [] });
@@ -224,27 +256,36 @@ async function main() {
       log('Auto-picked from bank [' + idea.score + ']: ' + topic);
     }
     const startedMs = Date.now();
+    const chosenTopic = topic; // clean title for bank/ledger — the brief rides on the dispatch string only
+    // brief BEFORE dispatch — it is the only channel through which the design law reaches
+    // the script (the render has not happened yet, unlike the old post-render brief)
+    let briefState = null;
+    try {
+      briefState = buildBrief(chosenTopic);
+      if (briefState.renderTopic !== chosenTopic) topic = briefState.renderTopic;
+      log('Creative brief wired into render topic');
+    } catch (e) {
+      log('WARN brief generation failed (dispatching plain topic): ' + String(e.message || e).slice(0, 120));
+    }
     dispatchRender(topic, minutes, fallback);
     const { run, art } = waitForRender(startedMs, 55);
-    pending.renders.push({ runId: run.databaseId, topic, dispatchedAt: new Date().toISOString() });
+    pending.renders.push({ runId: run.databaseId, topic: chosenTopic, dispatchedAt: new Date().toISOString() });
     saveJson(PENDING_FILE, pending);
-    chosen = { run, art, topic };
+    chosen = { run, art, topic: chosenTopic, brief: briefState };
   } else {
     log('Found waiting render: run ' + chosen.run.databaseId + ' → "' + chosen.topic + '"');
   }
 
   if (publishedIds.includes(String(chosen.art.id))) { log('Artifact already published — done.'); return; }
 
-  // 2.5 Never-Forget metaphor brief — MANDATORY hook + analogy map + beats, saved to
-  // state/scripts/ (committed with state) and the hook pushed to the phone. Non-fatal.
+  // 2.5 Never-Forget metaphor brief — generated BEFORE dispatch for fresh renders (it
+  // shapes the script via the topic string); for a waiting render it is generated here,
+  // too late to shape that video but still the brief of record. Saved to state/scripts/
+  // (committed with state) and the hook pushed to the phone. Non-fatal.
   try {
-    const slug = chosen.topic.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60);
-    const briefPath = path.join('state', 'scripts', `${new Date().toISOString().slice(0, 10)}-${slug}.md`);
-    const g = spawnSync('node', ['tools/metaphor-script.mjs', '--topic', chosen.topic, '--out', briefPath], { encoding: 'utf8' });
-    if (g.status !== 0) throw new Error((g.stderr || '').slice(-120));
-    const hook = (g.stdout || '').split('\n').find(l => l.startsWith('- PRIMARY:'));
-    if (hook) notify('How Dev Works - hook ready', chosen.topic + '\n' + hook.replace('- PRIMARY: ', ''));
-    log('Metaphor brief: ' + briefPath);
+    const briefState = chosen.brief || buildBrief(chosen.topic);
+    if (briefState.hook) notify('How Dev Works - hook ready', chosen.topic + '\n' + briefState.hook);
+    log('Metaphor brief: ' + briefState.briefPath);
   } catch (e) {
     log('WARN metaphor brief failed (non-fatal): ' + String(e.message || e).slice(0, 120));
   }

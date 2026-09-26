@@ -27,14 +27,14 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install googleapis + sharp + fonts
+      - name: Install googleapis + sharp + puppeteer-core + fonts (thumbnail factory)
         run: |
-          npm install googleapis sharp --no-save
+          npm install googleapis sharp puppeteer-core --no-save
           mkdir -p ~/.fonts && cp assets/fonts/*.ttf ~/.fonts/ && fc-cache -f >/dev/null
 
       - name: Generate thumbnail if a title was given
         if: ${{ inputs.title != '' }}
-        run: node tools/make-thumbnail.mjs --title "${{ inputs.title }}" --out branding/thumb-generated.png
+        run: node tools/thumbnail-factory.mjs --title "${{ inputs.title }}" --out branding/thumb-generated.png
 
       - name: Attach thumbnail
         env:

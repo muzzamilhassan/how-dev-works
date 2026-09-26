@@ -15,9 +15,9 @@ on:
         required: false
         default: "10"
       fallback:
-        description: "true = curated deep-dive script (guaranteed length)"
+        description: "false = AI writes a fresh per-topic script (default). true = legacy hardcoded Event Loop fallback"
         required: false
-        default: "true"
+        default: "false"
       test:
         description: "true = render + download ONLY, no upload (safe chain test)"
         required: false
