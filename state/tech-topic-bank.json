@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-27T05:48:02.242Z",
+  "updated": "2026-09-28T05:54:07.036Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
     {
@@ -122,6 +122,22 @@
       "addedAt": "2026-09-21",
       "status": "new",
       "curated": true
+    },
+    {
+      "id": "6kIGfavoR",
+      "title": "This is a modern motherfucking website",
+      "url": "https://modernmotherfuckingwebsite.dreamstation.systems/",
+      "source": "Lobsters",
+      "tags": [
+        "webdev",
+        "css",
+        "html",
+        "accessibility",
+        "seo"
+      ],
+      "score": 95,
+      "addedAt": "2026-09-28",
+      "status": "new"
     },
     {
       "id": "AzxnBHN3V",
