@@ -122,7 +122,7 @@ function buildDescription(topic, phrase) {
   return (phrase || topic) + ' — the whole idea in under two minutes. No hype, no fluff: just the machine, opened up.\n\n'
     + 'New deep-dive every week, shorts in between. Subscribe and finally see the whole machine.\n\n'
     + '#shorts #programming #softwareengineering #explained\n'
-    + '📧 Business: muzzamilhassan302@gmail.com\n';
+    + '📧 Business: muzzamilhassandev@gmail.com\n';
 }
 
 async function uploadYouTube(videoFile, topic, meta) {

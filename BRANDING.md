@@ -28,7 +28,7 @@ Whether you're a junior dev filling the gaps or a senior who wants the full pict
 
 Subscribe and finally see the whole machine.
 
-📧 Business: muzzamilhassan302@gmail.com
+📧 Business: muzzamilhassandev@gmail.com
 ```
 
 ## Channel keywords (<500 chars)

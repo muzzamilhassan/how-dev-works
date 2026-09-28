@@ -148,7 +148,7 @@ function buildDescription(topic, phrase) {
     + '• Clean dark-mode animations of the parts you never see\n'
     + '• Evergreen knowledge — this video will not expire\n\n'
     + 'New deep-dive every week. Subscribe and finally see the whole machine.\n\n'
-    + '📧 Business: muzzamilhassan302@gmail.com\n';
+    + '📧 Business: muzzamilhassandev@gmail.com\n';
 }
 
 async function uploadYouTube(videoFile, topic, bankTags, meta) {
