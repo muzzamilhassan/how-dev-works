@@ -28,16 +28,28 @@ if (!clientId || !clientSecret) {
 }
 
 const PORT = 4100;
-const oauth = new google.auth.OAuth2(clientId, clientSecret, 'http://localhost:' + PORT);
+// --name / --label: mint a token for another lane (e.g. the Urdu channel) with the same
+// OAuth client. The account split happens on the consent screen — sign in there with the
+// Google account that owns the target channel and pick that channel's identity.
+//   node tools/get-refresh-token.mjs --name URDU_YT_REFRESH_TOKEN --label "@SealedHistories"
+const argVal = (name, def) => {
+  const i = process.argv.indexOf('--' + name);
+  return (i !== -1 && process.argv[i + 1] && !process.argv[i + 1].startsWith('--')) ? process.argv[i + 1] : def;
+};
+const secretName = argVal('name', 'TECH_YT_REFRESH_TOKEN');
+const channelLabel = argVal('label', '@HowDevWorks');
+const redirectUri = argVal('redirect', 'http://localhost:4100');
+const oauth = new google.auth.OAuth2(clientId, clientSecret, redirectUri);
 const url = oauth.generateAuthUrl({
   access_type: 'offline',
   prompt: 'consent',
   scope: ['https://www.googleapis.com/auth/youtube']   // upload + thumbnails + playlists
 });
 
-console.log('\n1) Open this URL in a browser signed in to the Google account that owns @HowDevWorks:\n');
+console.log('\n1) Open this URL in a browser signed in to the Google account that owns ' + channelLabel + ':\n');
 console.log(url);
-console.log('\n   (redirect_uri_mismatch? add http://localhost:' + PORT + ' to the OAuth client redirect URIs)\n');
+console.log('\n   (redirect_uri_mismatch? in Google Cloud Console → the OAuth client → Redirect URIs,');
+console.log('    add BOTH  http://localhost:4100  and  http://127.0.0.1:4100 , or pass --redirect http://127.0.0.1:4100)\n');
 
 const code = await new Promise((resolve, reject) => {
   const server = http.createServer((req, res) => {
@@ -58,6 +70,7 @@ if (!tokens.refresh_token) {
 }
 console.log('\nREFRESH TOKEN (copy this):\n');
 console.log(tokens.refresh_token);
-console.log('\nSave it as the repo secret TECH_YT_REFRESH_TOKEN:');
-console.log('  gh secret set TECH_YT_REFRESH_TOKEN -R muzzamilhassan/how-dev-works   (paste when prompted)');
+console.log('\nSave it as the repo secret ' + secretName + ':');
+console.log('  gh secret set ' + secretName + ' -R muzzamilhassan/how-dev-works   (paste when prompted)');
 console.log('  or github.com → repo → Settings → Secrets and variables → Actions → New repository secret');
+console.log('  (for the local Urdu lane: put it in .env as ' + secretName + '=...)');

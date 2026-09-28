@@ -4,3 +4,5 @@ inbox/
 .env
 *.log
 thumbnail-lab/
+.music-cache/
+urdu-render/public/clips/

@@ -1,0 +1,351 @@
+{
+  "scenes": [
+    {
+      "video": "clips/tea-3.mp4",
+      "headline": "THE HISTORY OF TEA",
+      "era": "A DOCUMENTARY FILM",
+      "start": 0,
+      "dur": 3.2,
+      "audio": null,
+      "captions": [],
+      "zoomDir": 1
+    },
+    {
+      "video": "clips/p01.mp4",
+      "image": null,
+      "headline": "A LEAF, A LEGEND",
+      "era": "800 AD — CHINA",
+      "start": 3.2,
+      "dur": 15.96,
+      "audio": "audio/audio/beat-01.mp3",
+      "captions": [
+        {
+          "text": "چین میں کہا جاتا ہے کہ شہنشاہ شن نونگ کے ابلتے پانی میں چائے کے پتے گر گئے",
+          "t0": 0,
+          "t1": 15564
+        }
+      ],
+      "zoomDir": 1
+    },
+    {
+      "video": "clips/p02.mp4",
+      "image": null,
+      "start": 19.16,
+      "dur": 19.56,
+      "audio": "audio/audio/beat-02.mp3",
+      "captions": [
+        {
+          "text": "اور ایک خوشگوار خوشبو پھیل گئی",
+          "t0": 0,
+          "t1": 19164
+        }
+      ],
+      "zoomDir": -1
+    },
+    {
+      "video": "clips/p03.mp4",
+      "image": null,
+      "start": 38.73,
+      "dur": 18.29,
+      "audio": "audio/audio/beat-03.mp3",
+      "captions": [
+        {
+          "text": "یوں پانی کے بعد دنیا کا سب سے مقبول مشروب وجود میں آیا",
+          "t0": 0,
+          "t1": 17892
+        }
+      ],
+      "zoomDir": 1
+    },
+    {
+      "video": "clips/p04.mp4",
+      "image": null,
+      "headline": "THE DRINK THAT BUILT EMPIRES",
+      "start": 57.02,
+      "dur": 20.88,
+      "audio": "audio/audio/beat-04.mp3",
+      "captions": [
+        {
+          "text": "جس نے آنے والی صدیوں میں سلطنتوں کی قسمت بدل دی",
+          "t0": 0,
+          "t1": 20484
+        }
+      ],
+      "zoomDir": -1
+    },
+    {
+      "video": "clips/p17.mp4",
+      "image": null,
+      "headline": "THE JOURNEY",
+      "era": "THE SILK ROAD",
+      "start": 77.9,
+      "dur": 9.77,
+      "audio": "audio/audio/beat-05.mp3",
+      "captions": [
+        {
+          "text": "چائے چین کے پہاڑوں سے ریشم راستے ہوتی ہوئی",
+          "t0": 0,
+          "t1": 9372
+        }
+      ],
+      "zoomDir": 1
+    },
+    {
+      "video": "clips/p05.mp4",
+      "image": null,
+      "start": 87.68,
+      "dur": 8.72,
+      "audio": "audio/audio/beat-06.mp3",
+      "captions": [
+        {
+          "text": "تبت اور منگولیا پہنچی",
+          "t0": 0,
+          "t1": 8316
+        }
+      ],
+      "zoomDir": -1
+    },
+    {
+      "video": "clips/p06.mp4",
+      "image": null,
+      "start": 96.39,
+      "dur": 10.44,
+      "audio": "audio/audio/beat-07.mp3",
+      "captions": [
+        {
+          "text": "سترھویں صدی میں یورپی تجارتی جہازوں نے اسے یورپ پہنچایا",
+          "t0": 0,
+          "t1": 10044
+        }
+      ],
+      "zoomDir": 1
+    },
+    {
+      "video": "clips/p07.mp4",
+      "image": null,
+      "start": 106.84,
+      "dur": 7.37,
+      "audio": "audio/audio/beat-08.mp3",
+      "captions": [
+        {
+          "text": "برطانوی ایسٹ انڈیا کمپنی نے اسے اپنی کرنسی بنا لیا",
+          "t0": 0,
+          "t1": 6972
+        }
+      ],
+      "zoomDir": -1
+    },
+    {
+      "video": "clips/p08.mp4",
+      "image": null,
+      "start": 114.21,
+      "dur": 5.93,
+      "audio": "audio/audio/beat-09.mp3",
+      "captions": [
+        {
+          "text": "اور برصغیر میں چائے کے باغات لگا کر",
+          "t0": 0,
+          "t1": 5532
+        }
+      ],
+      "zoomDir": 1
+    },
+    {
+      "video": "clips/p18.mp4",
+      "image": null,
+      "start": 120.14,
+      "dur": 5.07,
+      "audio": "audio/audio/beat-10.mp3",
+      "captions": [
+        {
+          "text": "دنیا کی سب سے بڑی چائے انڈسٹری کھڑی کر دی",
+          "t0": 0,
+          "t1": 4668
+        }
+      ],
+      "zoomDir": -1
+    },
+    {
+      "video": "clips/p09.mp4",
+      "image": null,
+      "headline": "THE WORLD'S #1 DRINK",
+      "era": "TODAY",
+      "start": 125.21,
+      "dur": 4.78,
+      "audio": "audio/audio/beat-11.mp3",
+      "captions": [
+        {
+          "text": "آج پانی کے بعد سب سے زیادہ پینے والی چیز چائے ہے",
+          "t0": 0,
+          "t1": 4380
+        }
+      ],
+      "zoomDir": 1
+    },
+    {
+      "video": "clips/p10.mp4",
+      "image": null,
+      "start": 129.99,
+      "dur": 8.07,
+      "audio": "audio/audio/beat-12.mp3",
+      "captions": [
+        {
+          "text": "روزانہ دنیا بھر میں اربوں کپ چائے پیا جاتا ہے",
+          "t0": 0,
+          "t1": 7668
+        }
+      ],
+      "zoomDir": -1
+    },
+    {
+      "video": "clips/p11.mp4",
+      "image": null,
+      "start": 138.06,
+      "dur": 7.37,
+      "audio": "audio/audio/beat-13.mp3",
+      "captions": [
+        {
+          "text": "چین اور بھارت سب سے بڑے پیداکار ہیں",
+          "t0": 0,
+          "t1": 6972
+        }
+      ],
+      "zoomDir": 1
+    },
+    {
+      "video": "clips/p12.mp4",
+      "image": null,
+      "start": 145.43,
+      "dur": 5.93,
+      "audio": "audio/audio/beat-14.mp3",
+      "captions": [
+        {
+          "text": "جبکہ پاکستانی فی کس استعمال میں دنیا میں سرفہرست ہیں",
+          "t0": 0,
+          "t1": 5532
+        }
+      ],
+      "zoomDir": -1
+    },
+    {
+      "video": "clips/p19.mp4",
+      "image": null,
+      "start": 151.36,
+      "dur": 5.07,
+      "audio": "audio/audio/beat-15.mp3",
+      "captions": [
+        {
+          "text": "اور اربوں ڈالر کی چائے ہر سال درآمد کرتے ہیں",
+          "t0": 0,
+          "t1": 4668
+        }
+      ],
+      "zoomDir": 1
+    },
+    {
+      "video": "clips/p13.mp4",
+      "image": null,
+      "headline": "THE WAR FOR TEA",
+      "era": "1839 — OPIUM WARS",
+      "start": 156.43,
+      "dur": 4.78,
+      "audio": "audio/audio/beat-16.mp3",
+      "captions": [
+        {
+          "text": "چین نے جب برطانوی افیون قبول کرنے سے انکار کیا",
+          "t0": 0,
+          "t1": 4380
+        }
+      ],
+      "zoomDir": -1
+    },
+    {
+      "video": "clips/p20.mp4",
+      "image": null,
+      "start": 161.21,
+      "dur": 4.23,
+      "audio": "audio/audio/beat-17.mp3",
+      "captions": [
+        {
+          "text": "تو چائے کی منڈی پر قبضے کے لیے جنگ چھڑ گئی",
+          "t0": 0,
+          "t1": 3828
+        }
+      ],
+      "zoomDir": 1
+    },
+    {
+      "video": "clips/p14.mp4",
+      "image": null,
+      "start": 165.44,
+      "dur": 4.35,
+      "audio": "audio/audio/beat-18.mp3",
+      "captions": [
+        {
+          "text": "ایسٹ انڈیا کمپنی نے چین میں افیون سمگل کی",
+          "t0": 0,
+          "t1": 3948
+        }
+      ],
+      "zoomDir": -1
+    },
+    {
+      "video": "clips/p13.mp4",
+      "image": null,
+      "start": 169.78,
+      "dur": 3.44,
+      "audio": "audio/audio/beat-19.mp3",
+      "captions": [
+        {
+          "text": "اور افیون کی جنگیں چھڑ گئیں",
+          "t0": 0,
+          "t1": 3036
+        }
+      ],
+      "zoomDir": 1
+    },
+    {
+      "video": "clips/p15.mp4",
+      "image": null,
+      "start": 173.22,
+      "dur": 5.07,
+      "audio": "audio/audio/beat-20.mp3",
+      "captions": [
+        {
+          "text": "رابرٹ فورچن جیسے جاسوس چائے کے پودے چرا کر لے گئے",
+          "t0": 0,
+          "t1": 4668
+        }
+      ],
+      "zoomDir": 1
+    },
+    {
+      "video": "clips/p16.mp4",
+      "image": null,
+      "headline": "THE PRICE OF A LEAF",
+      "start": 178.29,
+      "dur": 4.78,
+      "audio": "audio/audio/beat-21.mp3",
+      "captions": [
+        {
+          "text": "ایک پتے کے لیے جاسوسی، جنگ اور غلامی، سب کچھ ہوا",
+          "t0": 0,
+          "t1": 4380
+        }
+      ],
+      "zoomDir": -1
+    },
+    {
+      "headline": "NOW YOU KNOW",
+      "era": "FOLLOW FOR MORE",
+      "start": 183.07,
+      "dur": 4.4,
+      "audio": null,
+      "captions": [],
+      "zoomDir": -1
+    }
+  ],
+  "totalMs": 187870,
+  "fps": 30,
+  "music": "audio/music.mp3"
+}
