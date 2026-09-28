@@ -9,8 +9,8 @@ import json, os, sys, asyncio
 import edge_tts
 
 work = sys.argv[1]
-voice = os.environ.get('TTS_VOICE', 'ur-PK-AsadNeural')
-rate = os.environ.get('TTS_RATE', '-2%')
+voice = (os.environ.get('TTS_VOICE') or '').strip() or 'ur-PK-AsadNeural'
+rate = (os.environ.get('TTS_RATE') or '').strip() or '-2%'
 beats = json.load(open(os.path.join(work, 'tts-input.json'), encoding='utf-8'))
 
 async def one(b):
