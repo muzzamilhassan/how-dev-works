@@ -16,8 +16,8 @@ export const RemotionRoot: React.FC = () => {
       component={DocShort}
       durationInFrames={10}
       fps={30}
-      width={1920}
-      height={1080}
+      width={1080}
+      height={1920}
       defaultProps={EMPTY}
       calculateMetadata={({ props }) => {
         const last = props.scenes[props.scenes.length - 1];
@@ -25,8 +25,8 @@ export const RemotionRoot: React.FC = () => {
         return {
           durationInFrames: Math.max(Math.ceil((total + 0.5) * 30), 10),
           fps: 30,
-          width: 1920,
-          height: 1080,
+          width: 1080,
+          height: 1920,
           props,
         };
       }}

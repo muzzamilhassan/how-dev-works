@@ -97,24 +97,25 @@ const Gradient: React.FC<{ heavy?: boolean }> = ({ heavy }) => (
 
 const Headline: React.FC<{ text: string; era?: string; delaySec?: number }> = ({ text, era, delaySec = 0.4 }) => {
   const f = useCurrentFrame();
-  const { fps } = useVideoConfig();
+  const { fps, width, height } = useVideoConfig();
+  const vert = height > width;                    // 9:16 — Shorts UI safe zones apply
   const p = interpolate(f, [delaySec * fps, (delaySec + 0.9) * fps], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   return (
     <div style={{
-      position: "absolute", top: 54, left: 0, right: 0, textAlign: "center",
+      position: "absolute", top: vert ? 130 : 54, left: 0, right: 0, textAlign: "center",
       opacity: p, transform: `translateY(${(1 - p) * -26}px)`,
     }}>
       {era ? (
         <div style={{
           display: "inline-block", fontFamily: "Archivo, sans-serif",
-          fontSize: 30, color: "#FDE68A", letterSpacing: 6,
-          background: "rgba(20,24,32,0.72)", borderRadius: 999, padding: "8px 34px", marginBottom: 20,
+          fontSize: vert ? 24 : 30, color: "#FDE68A", letterSpacing: 6,
+          background: "rgba(20,24,32,0.72)", borderRadius: 999, padding: vert ? "6px 26px" : "8px 34px", marginBottom: 20,
           border: "1px solid rgba(253,230,138,0.35)",
         }}>{era}</div>
       ) : null}
       <div style={{
-        fontFamily: "Archivo, sans-serif", fontSize: 110, lineHeight: 1.08,
-        color: "#F8FAFC", textShadow: "0 4px 30px rgba(0,0,0,0.9)", padding: "0 80px",
+        fontFamily: "Archivo, sans-serif", fontSize: vert ? 76 : 110, lineHeight: 1.08,
+        color: "#F8FAFC", textShadow: "0 4px 30px rgba(0,0,0,0.9)", padding: vert ? "0 46px" : "0 80px",
       }}>{text}</div>
     </div>
   );
@@ -122,15 +123,17 @@ const Headline: React.FC<{ text: string; era?: string; delaySec?: number }> = ({
 
 const Captions: React.FC<{ chunks: CaptionChunk[] }> = ({ chunks }) => {
   const f = useCurrentFrame();
-  const { fps } = useVideoConfig();
+  const { fps, width, height } = useVideoConfig();
+  const vert = height > width;
   const ms = (f / fps) * 1000;
   const cur = chunks.find(c => ms >= c.t0 && ms < c.t1 + 250);
   if (!cur) return null;
   return (
     <div style={{
-      position: "absolute", bottom: 58, left: 110, right: 110, textAlign: "center",
+      // vertical: sit above the Shorts UI chrome (bottom ~15% of the frame)
+      position: "absolute", bottom: vert ? 250 : 58, left: vert ? 60 : 110, right: vert ? 60 : 110, textAlign: "center",
       fontFamily: "SansArabic, sans-serif", direction: "rtl", fontWeight: 700,
-      fontSize: 54, lineHeight: 1.8, color: "#FFFFFF",
+      fontSize: vert ? 44 : 54, lineHeight: 1.75, color: "#FFFFFF",
       textShadow: "0 2px 18px rgba(0,0,0,0.98), 0 0 70px rgba(0,0,0,0.65)",
     }}>{cur.text}</div>
   );

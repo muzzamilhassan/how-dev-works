@@ -1,0 +1,93 @@
+name: Urdu publish (render → optional upload)
+
+on:
+  workflow_dispatch:
+    inputs:
+      script:
+        description: "Episode script path inside urdu-render/ (episodes/salt.json)"
+        required: true
+        default: "episodes/salt.json"
+      voice:
+        description: "Override narrator (default: script's voice, e.g. ur-PK-AsadNeural)"
+        required: false
+        default: ""
+      upload:
+        description: "true = upload to YouTube (The Sealed Histories). false = render only, artifact"
+        required: false
+        default: "false"
+      privacy:
+        description: "unlisted | private | public"
+        required: false
+        default: "unlisted"
+
+concurrency:
+  group: urdu-publish
+  cancel-in-progress: false
+
+jobs:
+  episode:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 📦 ffmpeg + edge-tts + remotion deps
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          pip install --quiet edge-tts
+          npm ci --no-audit --no-fund
+        working-directory: urdu-render
+
+      - name: 🎞 Fetch related clips (Pexels/Pixabay)
+        env:
+          PEXELS_KEY: ${{ secrets.PEXELS_KEY }}
+          PIXABAY_KEY: ${{ secrets.PIXABAY_KEY }}
+        run: node fetch-clips.mjs --script "${{ inputs.script }}"
+        working-directory: urdu-render
+
+      - name: 🎬 Build episode (TTS → timeline → Remotion render)
+        env:
+          TTS_VOICE: ${{ inputs.voice }}
+        run: node build-episode.mjs --script "${{ inputs.script }}"
+        working-directory: urdu-render
+
+      - name: ⬆ Upload artifact (the video)
+        uses: actions/upload-artifact@v4
+        with:
+          name: urdu-episode
+          path: out/urdu-episodes/*.mp4
+          retention-days: 14
+          if-no-files-found: error
+
+      - name: 📢 Upload to YouTube (only when requested)
+        if: ${{ inputs.upload == 'true' }}
+        env:
+          URDU_YT_REFRESH_TOKEN: ${{ secrets.URDU_YT_REFRESH_TOKEN }}
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+        run: |
+          MP4=$(ls out/urdu-episodes/*.mp4 | head -1)
+          TITLE=$(node -p "require('./urdu-render/${{ inputs.script }}').yt.title")
+          DESC=$(node -e "console.log(require('./urdu-render/${{ inputs.script }}').yt.desc || '')")
+          TAGS=$(node -e "console.log((require('./urdu-render/${{ inputs.script }}').yt.tags || []).join(','))")
+          THUMB=$(node -e "const y=require('./urdu-render/${{ inputs.script }}').yt; console.log(y.thumb || '')")
+          ARGS="--file $MP4 --title \"$TITLE\" --privacy ${{ inputs.privacy }}"
+          [ -n "$DESC" ] && ARGS="$ARGS --desc \"$DESC\""
+          [ -n "$TAGS" ] && ARGS="$ARGS --tags \"$TAGS\""
+          [ -n "$THUMB" ] && ARGS="$ARGS --thumb $THUMB"
+          eval node ../tools/urdu-channel.mjs upload $ARGS
+
+      - name: 📢 Alert on failure
+        if: failure()
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: |
+          [ -n "$NTFY_TOPIC" ] && curl -s -H "Title: The Sealed Histories - RENDER FAILED" -d "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" "https://ntfy.sh/$NTFY_TOPIC" || true
