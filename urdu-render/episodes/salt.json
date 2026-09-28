@@ -3,31 +3,142 @@
   "voice": "ur-PK-AsadNeural",
   "rate": "-2%",
   "hookLines": 3,
-  "titleCard": { "clip": "clips/salt/p03.mp4", "headline": "THE HISTORY OF SALT", "era": "A DOCUMENTARY FILM" },
-  "endCard": { "headline": "THE SEALED HISTORIES", "era": "نئی مہر بند کہانی ہر ہفتے" },
+  "titleCard": {
+    "clip": "clips/salt/p03.mp4",
+    "headline": "THE HISTORY OF SALT",
+    "era": "A DOCUMENTARY FILM"
+  },
+  "endCard": {
+    "headline": "THE SEALED HISTORIES",
+    "era": "نئی مہر بند کہانی ہر ہفتے"
+  },
   "yt": {
     "title": "History of Salt — وہ سفید دانہ جو سونے سے بھی قیمتی تھا | #history",
     "desc": "نمک کی مکمل تاریخ — وہ سفید دانہ جس پر جنگیں لڑی گئیں، سلطنتیں دیوالیہ ہوئیں اور ایک قوم آزاد ہوئی۔\n\nThe full history of salt: the mineral your body needs, Rome paid salaries over, China built walls with, and Gandhi walked 386 km to defy.\n\nنئی قسط ہر ہفتے — The Sealed Histories\n\n📧 Business: muzzamilhassandev@gmail.com",
-    "tags": ["history of salt", "salt history urdu", "نمک کی تاریخ", "urdu documentary", "history in urdu", "salt march gandhi", "roman empire salt", "gabelle tax", "why salt was expensive", "تاریخ کی کہانیاں", "salt documentary", "namak ki tareekh"],
+    "tags": [
+      "history of salt",
+      "salt history urdu",
+      "نمک کی تاریخ",
+      "urdu documentary",
+      "history in urdu",
+      "salt march gandhi",
+      "roman empire salt",
+      "gabelle tax",
+      "why salt was expensive",
+      "تاریخ کی کہانیاں",
+      "salt documentary",
+      "namak ki tareekh"
+    ],
     "thumb": "urdu-render/episodes/salt-thumb.png"
   },
   "phrases": [
-    { "text": "آپ کی میز پر پڑا یہ سفید دانہ کبھی سونے کے برابر بیچا جاتا تھا۔", "q": "salt crystals macro dark background", "zoom": 1 },
-    { "text": "اور یہ مبالغہ نہیں ہے — اس کے پیچھے جنگیں لڑی گئیں، سلطنتیں دیوالیہ ہوئیں، اور ایک قوم اسی سے آزاد ہوئی۔", "q": "dramatic dark storm clouds desert", "zoom": -1 },
-    { "text": "تو آخر بات کیا ہے؟ ایک عام سا نمک سونے جیسا قیمتی کیوں تھا؟ جواب آپ کی سوچ سے بھی عجیب ہے۔", "q": "mystical white salt flats fog aerial", "zoom": 1 },
-    { "text": "لیکن پہلے یہ سمجھیں: آپ کا جسم نمک کے بغیر صرف چند دن قائم رہ سکتا ہے۔ پانی تو ہے، مگر نمک نہ ہو تو جسم کی بیٹریاں ایک ایک کر کے بند ہونے لگتی ہیں۔", "q": "athlete sweat skin macro dark", "zoom": 1 },
-    { "text": "یہی وجہ ہے کہ جانور پانی چھوڑ کر بھی نمک ڈھونڈتے ہیں — اور دنیا کے پہلے شہر اسی سفید دانے کے ذخائر کے گرد آباد ہوئے۔", "q": "wild buffalo herd nature reserve", "zoom": -1 },
-    { "text": "مگر یہ تو صرف ضرورت تھی۔ اصل کہانی طاقت کی ہے — کیونکہ جلد ہی بادشاہوں نے سمجھ لیا کہ جو نمک قابو کرے، وہ لوگوں کو قابو کرتا ہے۔", "q": "golden king crown throne dark", "zoom": 1 },
-    { "text": "روم میں فوجیوں کی تنخواہ کا نام تھا سالیریئم — اسی لفظ سے آج کی سالری نکلی ہے۔", "q": "roman colosseum rome aerial", "era": "ROME", "zoom": -1 },
-    { "text": "چین کی حکومت نے نمک اپنے ہاتھ میں لیا — اور اسی ٹھیکیداری کی کمائی سے دیوار چین جیسے عظیم منصوبے پورے ہوتے تھے۔", "q": "great wall of china mountains aerial", "era": "CHINA", "zoom": 1 },
-    { "text": "یورپ میں نمک کے راستوں پر شہر بسے — سالزبرگ کا مطلب ہی ہے نمک کا قلعہ۔", "q": "salzburg austria castle aerial view", "era": "EUROPE", "zoom": -1 },
-    { "text": "مگر پھر حکومتوں نے وہ کیا جس سے یہ دانہ محبت نہیں، نفرت بن گیا — انہوں نے نمک پر ٹیکس لگا دیا۔", "q": "antique coins money old dark", "headline": "THE TAX THAT BURNED EMPIRES", "zoom": 1 },
-    { "text": "فرانس میں گابیلیہ ٹیکس اتنا قابلِ نفرت تھا کہ مؤرخین اسے انقلاب کی بھڑکاؤ لکڑی لکھتے ہیں۔", "q": "versailles palace golden interior", "era": "1789 — FRANCE", "zoom": -1 },
-    { "text": "اور برصغیر میں انگریزوں نے نمک پر اتنا ٹیکس لگایا کہ غریب آدمی سمندر کے پانی سے نمک بنانا بھی جرم تھا۔", "q": "old steam train india vintage", "era": "BRITISH RAJ", "zoom": 1 },
-    { "text": "1930 میں گاندھی 386 کلومیٹر پیدل چلے — سمندر کے کنارے پہنچ کر نمک چنا — اور ایک مٹھی نمک پوری سلطنت کو ہلا کر رکھ دیا۔", "q": "salt harvesting worker lake", "era": "1930 — DANDI", "zoom": -1 },
-    { "text": "وہ نمک نہیں تھا — وہ انصاف کا سوال تھا۔ اور جواب میں ایک سلطنت کو کپکپاٹی آئی۔", "q": "indian flag wind sky", "headline": "THE SALT MARCH", "zoom": 1 },
-    { "text": "تو جواب وہی پرانا سا تھا: نمک قیمتی اس لیے تھا کہ جس نے بھی اس ضرورت کو قابو کیا، اس نے لاکھوں انسانوں کی زندگی قابو کر لی۔", "q": "white salt mine walls worker", "zoom": -1 },
-    { "text": "پھر مشینوں نے سب بدل دیا — نمک اتنا سستا ہوا کہ دنیا اس کی اصل قیمت بھول گئی۔", "q": "industrial salt harvesting machinery", "era": "TODAY", "zoom": 1 },
-    { "text": "تو اگلی بار نمک کا ڈبہ کھولیں تو ذرا رکیے — یہی دانہ سلطنتیں گرا چکا ہے۔ اگلی مہر بند کہانی چائے کی ہے — وہ پتہ جس نے جنگ کرائی۔ اور آپ سے سوال: کیا آپ نمک جیسا ٹیکس برداشت کرتے؟ کمنٹ میں بتائیے۔", "q": "tea cup steam dark background", "zoom": 1 }
+    {
+      "text": "آپ کی میز پر پڑا یہ سفید دانہ کبھی سونے کے برابر بیچا جاتا تھا۔",
+      "q": "salt crystals macro dark background",
+      "zoom": 1
+    },
+    {
+      "text": "اور یہ مبالغہ نہیں ہے — اس کے پیچھے جنگیں لڑی گئیں، سلطنتیں دیوالیہ ہوئیں، اور ایک قوم اسی سے آزاد ہوئی۔",
+      "q": "dramatic dark storm clouds desert",
+      "zoom": -1
+    },
+    {
+      "text": "تو آخر بات کیا ہے؟ ایک عام سا نمک سونے جیسا قیمتی کیوں تھا؟ جواب آپ کی سوچ سے بھی عجیب ہے۔",
+      "q": "mystical white salt flats fog aerial",
+      "zoom": 1
+    },
+    {
+      "text": "لیکن پہلے یہ سمجھیں: آپ کا جسم نمک کے بغیر صرف چند دن قائم رہ سکتا ہے۔ پانی تو ہے، مگر نمک نہ ہو تو جسم کی بیٹریاں ایک ایک کر کے بند ہونے لگتی ہیں۔",
+      "q": "athlete sweat skin macro dark",
+      "zoom": 1
+    },
+    {
+      "text": "یہی وجہ ہے کہ جانور پانی چھوڑ کر بھی نمک ڈھونڈتے ہیں — اور دنیا کے پہلے شہر اسی سفید دانے کے ذخائر کے گرد آباد ہوئے۔",
+      "q": "wild buffalo herd nature reserve",
+      "zoom": -1
+    },
+    {
+      "text": "مگر یہ تو صرف ضرورت تھی۔ اصل کہانی طاقت کی ہے — کیونکہ جلد ہی بادشاہوں نے سمجھ لیا کہ جو نمک قابو کرے، وہ لوگوں کو قابو کرتا ہے۔",
+      "q": "golden king crown throne dark",
+      "zoom": 1
+    },
+    {
+      "text": "روم میں فوجیوں کی تنخواہ کا نام تھا سالیریئم — اسی لفظ سے آج کی سالری نکلی ہے۔",
+      "q": "roman colosseum rome aerial",
+      "era": "ROME",
+      "zoom": -1
+    },
+    {
+      "text": "چین کی حکومت نے نمک اپنے ہاتھ میں لیا — اور اسی ٹھیکیداری کی کمائی سے دیوار چین جیسے عظیم منصوبے پورے ہوتے تھے۔",
+      "q": "great wall of china mountains aerial",
+      "era": "CHINA",
+      "zoom": 1
+    },
+    {
+      "text": "یورپ میں نمک کے راستوں پر شہر بسے — سالزبرگ کا مطلب ہی ہے نمک کا قلعہ۔",
+      "q": "salzburg austria castle aerial view",
+      "era": "EUROPE",
+      "zoom": -1
+    },
+    {
+      "text": "مگر پھر حکومتوں نے وہ کیا جس سے یہ دانہ محبت نہیں، نفرت بن گیا — انہوں نے نمک پر ٹیکس لگا دیا۔",
+      "q": "antique coins money old dark",
+      "headline": "THE TAX THAT BURNED EMPIRES",
+      "zoom": 1
+    },
+    {
+      "text": "فرانس میں گابیلیہ ٹیکس اتنا قابلِ نفرت تھا کہ مؤرخین اسے انقلاب کی بھڑکاؤ لکڑی لکھتے ہیں۔",
+      "q": "versailles palace golden interior",
+      "era": "1789 — FRANCE",
+      "zoom": -1
+    },
+    {
+      "text": "اور برصغیر میں انگریزوں نے نمک پر اتنا ٹیکس لگایا کہ غریب آدمی سمندر کے پانی سے نمک بنانا بھی جرم تھا۔",
+      "q": "old steam train india vintage",
+      "era": "BRITISH RAJ",
+      "zoom": 1
+    },
+    {
+      "text": "1930 میں گاندھی 386 کلومیٹر پیدل چلے — سمندر کے کنارے پہنچ کر نمک چنا — اور ایک مٹھی نمک پوری سلطنت کو ہلا کر رکھ دیا۔",
+      "q": "salt harvesting worker lake",
+      "era": "1930 — DANDI",
+      "zoom": -1
+    },
+    {
+      "text": "وہ نمک نہیں تھا — وہ انصاف کا سوال تھا۔ اور جواب میں ایک سلطنت کو کپکپاٹی آئی۔",
+      "q": "indian flag wind sky",
+      "headline": "THE SALT MARCH",
+      "zoom": 1
+    },
+    {
+      "text": "تو جواب وہی پرانا سا تھا: نمک قیمتی اس لیے تھا کہ جس نے بھی اس ضرورت کو قابو کیا، اس نے لاکھوں انسانوں کی زندگی قابو کر لی۔",
+      "q": "white salt mine walls worker",
+      "zoom": -1
+    },
+    {
+      "text": "پھر مشینوں نے سب بدل دیا — نمک اتنا سستا ہوا کہ دنیا اس کی اصل قیمت بھول گئی۔",
+      "q": "industrial salt harvesting machinery",
+      "era": "TODAY",
+      "zoom": 1
+    },
+    {
+      "text": "تو اگلی بار نمک کا ڈبہ کھولیں تو ذرا رکیے — یہی دانہ سلطنتیں گرا چکا ہے۔ اگلی مہر بند کہانی چائے کی ہے — وہ پتہ جس نے جنگ کرائی۔ اور آپ سے سوال: کیا آپ نمک جیسا ٹیکس برداشت کرتے؟ کمنٹ میں بتائیے۔",
+      "q": "tea cup steam dark background",
+      "zoom": 1
+    }
+  ],
+  "shorts": [
+    {
+      "start": 0,
+      "end": 24,
+      "title": "نمک — وہ سفید دانہ جو سونے سے بھی قیمتی تھا | The Sealed Histories",
+      "tags": "history of salt,salt history urdu,urdu documentary,history shorts,namak ki tareekh,تاریخ کی کہانیاں"
+    },
+    {
+      "start": 86.5,
+      "end": 121.5,
+      "title": "Gandhi Ka Namak March — جب ایک مٹھی نمک سلطنت ہلا گیا | The Sealed Histories",
+      "tags": "salt march 1930,gandhi dandi march,history shorts urdu,urdu documentary,salt tax,تاریخ"
+    }
   ]
 }

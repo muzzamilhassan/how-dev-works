@@ -36,6 +36,7 @@ state/tech-topic-bank.json ── top 'new' idea ──▶ publish.yml (Tue/Fri 
 | `Topic Bank` | daily 00:45 UTC | scores daily.dev trends → `state/tech-topic-bank.json` (committed back) + phone push of top 3 new ideas |
 | `Trend Radar` | daily 06:30 UTC | scans HN front page, Reddit top/week (6 subs, optional), Google Trends RSS, Techmeme, GitHub Trending + YouTube charts → explainer-shaped hits become `wave` topics (72h, max 2/day); Google News amplifier promotes an existing bank topic when its keyword spikes vs the previous week; everything else = phone suggestion. Rationale: [docs/research](docs/research/2026-09-23-hot-topics-and-trend-platforms.md) |
 | `Publish` | Tue/Fri 23:30 UTC + manual | picks topic (input, or top idea from bank) → renders in quarry-render → uploads to YouTube, scheduled at next Tue/Fri 19:30 ET slot → marks topic used → ntfy |
+| `Urdu publish` | **Mon + Thu 06:00 PKT** (cron) + manual | The Sealed Histories lane: renders the next queued episode script (`state/urdu-queue.json`) in 9:16 → cuts promo Shorts → publishes episode + Shorts PUBLIC. Manual dispatch can render-only (upload=false). Setup: [docs/urdu-youtube-automation.md](docs/urdu-youtube-automation.md) |
 | `Publish Short` | Mon/Wed/Sat 15:00 UTC + manual | renders the 60-100s script mode (minutes=1) → repacks to branded vertical 1080×1920 (ffmpeg) → uploads PUBLIC immediately. Topic: input, else the latest published long video (promo short — bank is never consumed) |
 
 Shorts never touch the render repo: the vertical repack happens in this repo with ffmpeg.

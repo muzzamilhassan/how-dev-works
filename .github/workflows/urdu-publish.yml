@@ -1,24 +1,27 @@
-name: Urdu publish (render → optional upload)
+name: Urdu publish (render → Shorts → YouTube)
 
 on:
+  schedule:
+    # Mon + Thu 06:00 PKT (= 01:00 UTC, one slot for PK/IST/BST mornings)
+    - cron: '0 1 * * 1,4'
   workflow_dispatch:
     inputs:
       script:
-        description: "Episode script path inside urdu-render/ (episodes/salt.json)"
-        required: true
+        description: "Episode script path inside urdu-render/ (blank on schedule = take next from state/urdu-queue.json)"
+        required: false
         default: "episodes/salt.json"
       voice:
-        description: "Override narrator (default: script's voice, e.g. ur-PK-AsadNeural)"
+        description: "Override narrator (default: script's voice)"
         required: false
         default: ""
       upload:
-        description: "true = upload to YouTube (The Sealed Histories). false = render only, artifact"
+        description: "true = publish to YouTube (scheduled runs ALWAYS publish)"
         required: false
         default: "false"
       privacy:
-        description: "unlisted | private | public"
+        description: "public | unlisted | private"
         required: false
-        default: "unlisted"
+        default: "public"
 
 concurrency:
   group: urdu-publish
@@ -29,7 +32,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
-      - uses: actions/checkout@v4
+      - name: 📥 Checkout (push-capable — queue state gets committed)
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.SECRET_WRITER_PAT || github.token }}
 
       - uses: actions/setup-node@v4
         with:
@@ -39,7 +45,11 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Pick episode (input, else next queued)
+        run: node urdu-render/pick-episode.mjs "${{ inputs.script }}" "${{ inputs.upload }}" "${{ inputs.privacy }}"
+
       - name: 📦 ffmpeg + edge-tts + remotion deps
+        if: ${{ env.SKIP != 'true' }}
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
           pip install --quiet edge-tts
@@ -47,19 +57,29 @@ jobs:
         working-directory: urdu-render
 
       - name: 🎞 Fetch related clips (Pexels/Pixabay)
+        if: ${{ env.SKIP != 'true' }}
         env:
           PEXELS_KEY: ${{ secrets.PEXELS_KEY }}
           PIXABAY_KEY: ${{ secrets.PIXABAY_KEY }}
-        run: node fetch-clips.mjs --script "${{ inputs.script }}"
+        run: node fetch-clips.mjs --script "$SCRIPT"
         working-directory: urdu-render
 
       - name: 🎬 Build episode (TTS → timeline → Remotion render)
+        if: ${{ env.SKIP != 'true' }}
         env:
           TTS_VOICE: ${{ inputs.voice }}
-        run: node build-episode.mjs --script "${{ inputs.script }}"
+        run: node build-episode.mjs --script "$SCRIPT"
         working-directory: urdu-render
 
-      - name: ⬆ Upload artifact (the video)
+      - name: ✂ Cut promo Shorts
+        if: ${{ env.SKIP != 'true' }}
+        env:
+          FFMPEG: ffmpeg
+        run: node cut-shorts.mjs --script "$SCRIPT"
+        working-directory: urdu-render
+
+      - name: ⬆ Upload artifact (episode + shorts)
+        if: ${{ env.SKIP != 'true' }}
         uses: actions/upload-artifact@v4
         with:
           name: urdu-episode
@@ -67,23 +87,36 @@ jobs:
           retention-days: 14
           if-no-files-found: error
 
-      - name: 📢 Upload to YouTube (only when requested)
-        if: ${{ inputs.upload == 'true' }}
+      - name: 📢 Publish to YouTube (The Sealed Histories)
+        if: ${{ env.UPLOAD == 'true' }}
         env:
           URDU_YT_REFRESH_TOKEN: ${{ secrets.URDU_YT_REFRESH_TOKEN }}
           YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
           YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+        run: node urdu-render/publish-episode.mjs --script "$SCRIPT" --privacy "$PRIVACY"
+
+      - name: ✅ Mark episode done + commit queue state
+        if: ${{ env.UPLOAD == 'true' }}
         run: |
-          MP4=$(ls out/urdu-episodes/*.mp4 | head -1)
-          TITLE=$(node -p "require('./urdu-render/${{ inputs.script }}').yt.title")
-          DESC=$(node -e "console.log(require('./urdu-render/${{ inputs.script }}').yt.desc || '')")
-          TAGS=$(node -e "console.log((require('./urdu-render/${{ inputs.script }}').yt.tags || []).join(','))")
-          THUMB=$(node -e "const y=require('./urdu-render/${{ inputs.script }}').yt; console.log(y.thumb || '')")
-          ARGS="--file $MP4 --title \"$TITLE\" --privacy ${{ inputs.privacy }}"
-          [ -n "$DESC" ] && ARGS="$ARGS --desc \"$DESC\""
-          [ -n "$TAGS" ] && ARGS="$ARGS --tags \"$TAGS\""
-          [ -n "$THUMB" ] && ARGS="$ARGS --thumb $THUMB"
-          eval node ../tools/urdu-channel.mjs upload $ARGS
+          node -e "const fs=require('fs');const f='state/urdu-queue.json';const q=JSON.parse(fs.readFileSync(f,'utf8'));q.done=q.done||[];if(!q.done.includes(process.env.SCRIPT))q.done.push(process.env.SCRIPT);fs.writeFileSync(f,JSON.stringify(q,null,2)+'\n');"
+          git config user.name "urdu-bot"
+          git config user.email "bot@thesealedhistories"
+          git add state/urdu-queue.json
+          git diff --cached --quiet || git commit -m "urdu queue: $SCRIPT published [skip ci]"
+          git pull --rebase || true
+          if ! git push; then
+            [ -n "$NTFY_TOPIC" ] && curl -s -H "Title: Sealed Histories - STATE PUSH FAILED" -d "queue done-marker not saved — next cron may re-upload" "https://ntfy.sh/$NTFY_TOPIC" || true
+            exit 1
+          fi
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+
+      - name: 📱 Phone push (links)
+        if: ${{ env.UPLOAD == 'true' }}
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: |
+          [ -f out/urdu-episodes/*-links.txt ] && curl -s -H "Title: The Sealed Histories - PUBLISHED" -d "$(cat out/urdu-episodes/*-links.txt)" "https://ntfy.sh/$NTFY_TOPIC" || true
 
       - name: 📢 Alert on failure
         if: failure()
