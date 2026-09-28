@@ -107,8 +107,9 @@ const Headline: React.FC<{ text: string; era?: string; delaySec?: number }> = ({
     }}>
       {era ? (
         <div style={{
-          display: "inline-block", fontFamily: "Archivo, sans-serif",
-          fontSize: vert ? 24 : 30, color: "#FDE68A", letterSpacing: 6,
+          display: "inline-block",
+          fontFamily: /[\u0600-\u06FF]/.test(era) ? "SansArabic, sans-serif" : "Archivo, sans-serif",
+          fontSize: vert ? 24 : 30, color: "#FDE68A", letterSpacing: /[\u0600-\u06FF]/.test(era) ? 0 : 6,
           background: "rgba(20,24,32,0.72)", borderRadius: 999, padding: vert ? "6px 26px" : "8px 34px", marginBottom: 20,
           border: "1px solid rgba(253,230,138,0.35)",
         }}>{era}</div>

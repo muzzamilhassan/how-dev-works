@@ -46,6 +46,26 @@ S.phrases.forEach((p, i) => {
 if (missing.length) { console.error('FAIL: missing clips for phrases ' + missing.join(',') + ' — run fetch-clips.mjs --script ' + scriptPath); process.exit(1); }
 
 // ---------------- scenes (cold open FIRST — no title card before the hook) ----------------
+// Long narration phrases become sequential caption chunks (≤ ~72 chars each, timed by
+// word boundaries) so nothing renders as a 3-4 line subtitle wall.
+const chunkCaptions = (text, ms, words) => {
+  if (!words || words.length < 3) return [{ text, t0: 0, t1: ms + 300 }];
+  const chunks = [];
+  let line = [], lineStart = 0;
+  for (let i = 0; i < words.length; i++) {
+    line.push(words[i].w);
+    const len = line.join(' ').length;
+    const nextW = words[i + 1] ? words[i + 1].w.length + 1 : 0;
+    if (len + nextW > 72 || i === words.length - 1) {
+      const end = words[i].s + words[i].d;
+      chunks.push({ text: line.join(' '), t0: lineStart, t1: end });
+      line = []; lineStart = end;
+    }
+  }
+  if (chunks.length) chunks[chunks.length - 1].t1 = ms + 300;
+  return chunks;
+};
+
 const scenes = [];
 let cur = 0;
 const push = (s) => { scenes.push({ ...s, start: Math.round(cur * 100) / 100 }); cur += s.dur; };
@@ -57,7 +77,7 @@ S.phrases.forEach((p, i) => {
     headline: p.headline || '', era: p.era || '',
     dur: Math.round(dur * 100) / 100,
     audio: 'audio-' + slug + '/beat-' + String(i + 1).padStart(2, '0') + '.mp3',
-    captions: [{ text: p.text, t0: 0, t1: ms + 300 }],
+    captions: chunkCaptions(p.text, ms, byI.get(i + 1)?.words),
     zoomDir: p.zoom || (i % 2 === 0 ? 1 : -1),
   });
   if (i + 1 === (S.hookLines || 2) && S.titleCard) {   // title sting lands AFTER the hook
