@@ -7,6 +7,10 @@ topic brain → render dispatch → YouTube upload. YouTube-only pipeline (FB/IG
 **Style:** Dark Mode Minimalist Tech — calm animated 8–12 min deep-dives
 **Branding/copy-paste package:** [BRANDING.md](BRANDING.md) · full research: automation repo `research/tech-channel-branding-2026-09.md`
 
+## Second lane — Sealed Histories (Urdu)
+
+Same repo, same Google account (**muzzamilhassandev@gmail.com**), second channel: **Sealed Histories** (`@SealedHistories`), a **Brand Account** for Urdu documentary shorts. Rendered locally by [urdu-render/](urdu-render/) (Remotion, Nastaliq/Naskh fonts, Pexels/Pixabay clips), uploaded via `tools/urdu-channel.mjs` with `URDU_YT_REFRESH_TOKEN` (consent picks the Sealed Histories brand identity — the lane split happens on the consent screen, `whoami` guards against the wrong lane). Setup: [docs/urdu-youtube-automation.md](docs/urdu-youtube-automation.md).
+
 ## Pipeline (weekly, autonomous)
 
 ```
