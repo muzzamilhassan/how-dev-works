@@ -28,12 +28,16 @@ jobs:
       - name: 📦 Install googleapis
         run: npm install googleapis --no-save
 
-      - name: 📡 Scan HN + YouTube trending for dev waves
+      - name: 📡 Scan HN, Reddit, Trends, Techmeme, GitHub + YouTube for dev waves
         env:
           YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
           YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
           TECH_YT_REFRESH_TOKEN: ${{ secrets.TECH_YT_REFRESH_TOKEN }}
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+          REDDIT_USERNAME: ${{ secrets.REDDIT_USERNAME }}
+          REDDIT_PASSWORD: ${{ secrets.REDDIT_PASSWORD }}
         run: node tools/trend-radar.mjs
 
       - name: 💾 Commit topic bank

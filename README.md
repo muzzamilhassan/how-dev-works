@@ -30,6 +30,7 @@ state/tech-topic-bank.json ── top 'new' idea ──▶ publish.yml (Tue/Fri 
 | Workflow | When | What |
 |---|---|---|
 | `Topic Bank` | daily 00:45 UTC | scores daily.dev trends → `state/tech-topic-bank.json` (committed back) + phone push of top 3 new ideas |
+| `Trend Radar` | daily 06:30 UTC | scans HN front page, Reddit top/week (6 subs, optional), Google Trends RSS, Techmeme, GitHub Trending + YouTube charts → explainer-shaped hits become `wave` topics (72h, max 2/day); Google News amplifier promotes an existing bank topic when its keyword spikes vs the previous week; everything else = phone suggestion. Rationale: [docs/research](docs/research/2026-09-23-hot-topics-and-trend-platforms.md) |
 | `Publish` | Tue/Fri 23:30 UTC + manual | picks topic (input, or top idea from bank) → renders in quarry-render → uploads to YouTube, scheduled at next Tue/Fri 19:30 ET slot → marks topic used → ntfy |
 | `Publish Short` | Mon/Wed/Sat 15:00 UTC + manual | renders the 60-100s script mode (minutes=1) → repacks to branded vertical 1080×1920 (ffmpeg) → uploads PUBLIC immediately. Topic: input, else the latest published long video (promo short — bank is never consumed) |
 
@@ -52,6 +53,13 @@ Actions → **Publish** → Run workflow:
 | `SECRET_WRITER_PAT` | cross-repo render dispatch + artifact download + state commits | ✅ set |
 | `YOUTUBE_CLIENT_ID/SECRET` | Google OAuth app (same as other channels) | ✅ set |
 | `TECH_YT_REFRESH_TOKEN` | THIS channel's upload token | ✅ set (verified via Verify YouTube token workflow) |
+| `REDDIT_CLIENT_ID/SECRET` + `REDDIT_USERNAME/PASSWORD` | Reddit "script" app for the radar's r/top week scan (free, ~100 req/min) | ⬜ optional — radar skips Reddit without them |
+
+### One-time Reddit app (optional — enables the radar's Reddit source)
+
+1. Create a dedicated Reddit account (or use yours) → https://reddit.com/prefs/apps → **create another app…** → type **script**, name `how-dev-works-radar`, redirect `http://localhost`.
+2. Client ID = the string under the app name; secret = the **secret** field.
+3. `gh secret set REDDIT_CLIENT_ID / REDDIT_CLIENT_SECRET / REDDIT_USERNAME / REDDIT_PASSWORD` (username/password = the account's login, used for the password grant).
 
 ### One-time YouTube token (browser-only — nothing runs locally)
 
