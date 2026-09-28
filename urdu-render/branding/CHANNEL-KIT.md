@@ -1,6 +1,6 @@
-# Sealed Histories — Channel Creation Kit (English brand · Urdu/Hindi storytelling)
+# The Sealed Histories — Channel Kit (English brand · Urdu/Hindi storytelling)
 
-**Date:** 2026-09-25 · **Status:** ready to create · **Assets:** this folder (regenerate: `node urdu-render/branding/render-branding.mjs`)
+**Created:** 2026-09-28 · **Status:** channel LIVE — youtube.com/@TheSealedHistories · **Assets:** this folder (regenerate: `node urdu-render/branding/render-branding.mjs`)
 
 ## Brand architecture (the Vault-of-History model)
 - **Brand, banner, description: ENGLISH** — readable by everyone, premium, exportable.
@@ -8,16 +8,16 @@
 - **Episode titles: in the episode's language** (Hindi/Urdu/Bangla), led by an English SEO keyword — exactly how Vault of History titles ("The History of Tea - 5000 साल की कहानी").
 
 ## 1. Identity
-- **Name (Basic info → Title):** `Sealed Histories`
-- **Handle — SET THIS FIRST (verified free 2026-09-25):** `@SealedHistories`
+- **Name (Basic info → Title):** `The Sealed Histories` (created 2026-09-28 — YouTube blocked plain "Sealed Histories" because its auto-derived handle was squatted; created under this name)
+- **Handle:** `@TheSealedHistories` (canonical — YouTube also resolves @SealedHistories to this channel)
 - Meaning: every episode opens one sealed story. The red wax seal IS the logo.
-- Checked & taken (do not retry): @HistoryUnsealed, @UnsealedHistory, @TheHistoryVault, @DastanETareekh, @TareekhKiDastan, @DareechaEMazi.
+- Squatted 2026-09-28 by "hellow", do not retry: @SealedHistories, @SealedHistory. Checked & taken: @HistoryUnsealed, @UnsealedHistory, @TheHistoryVault, @DastanETareekh, @TareekhKiDastan, @DareechaEMazi.
 - **Country:** Pakistan (audience: Pakistan, India, Bangladesh + diaspora)
 - **Category:** Education · **Channel language:** leave default; set per-video language on upload.
 
 ## 2. Description (copy-paste)
 ```
-Welcome to Sealed Histories — history you'll never forget, told in Urdu & Hindi.
+Welcome to The Sealed Histories — history you'll never forget, told in Urdu & Hindi.
 
 Every episode opens one sealed story from the past: the salt that was once worth more than gold, the tea that started a war, the watch that conquered time, the company that bought a country. Real history, cinematic visuals, and storytelling that holds you to the last minute.
 
@@ -31,7 +31,7 @@ New episodes every week. Subscribe and open the vault.
 
 ## 3. Channel keywords (<500 chars)
 ```
-sealed histories, history documentary urdu, history in urdu, hindi documentary, history in hindi, تاریخ کی کہانیاں, इतिहास की कहानी, salt history, tea history documentary, east india company, history of gold, urdu kahani, hindi kahani, tareekh, itihas, forgotten history, dark history, everyday things history, history stories, asian history channel
+the sealed histories, sealed histories, history documentary urdu, history in urdu, hindi documentary, history in hindi, تاریخ کی کہانیاں, इतिहास की कहानी, salt history, tea history documentary, east india company, history of gold, urdu kahani, hindi kahani, tareekh, itihas, forgotten history, dark history, everyday things history, history stories, asian history channel
 ```
 
 ## 4. Branding assets (this folder)
@@ -71,7 +71,7 @@ Rotate the language per episode (or double the channel later: one per language).
 - **Monetization:** 1K subs + 4K watch-hours via long-form; Shorts for discovery.
 
 ## 8. Setup checklist
-1. Create channel (same Google account) → name + handle FIRST.
+1. ✅ DONE 2026-09-28 — channel created: The Sealed Histories (@TheSealedHistories), Brand Account on muzzamilhassandev@gmail.com.
 2. Upload avatar → banner → watermark.
 3. Paste description + keywords; country Pakistan; category Education.
 4. Phone-verify at youtube.com/verify (custom thumbnails).

@@ -64,7 +64,7 @@ ${FONT_CSS}
 .frame{position:absolute;inset:56px;border:6px solid rgba(214,184,126,0.5);outline:2px solid rgba(214,184,126,0.28);outline-offset:18px;}
 .safe{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:1546px;height:423px;
   display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
-.name{font-family:'Anton';font-size:148px;line-height:1;color:${CREAM};letter-spacing:4px;
+.name{font-family:'Anton';font-size:128px;line-height:1;color:${CREAM};letter-spacing:4px;
   text-shadow:7px 7px 0 rgba(16,9,2,0.55);}
 .name b{color:#E08A80;font-weight:normal;}
 .tag{font-weight:900;font-size:35px;color:#E7D6B4;margin-top:22px;}
@@ -76,7 +76,7 @@ ${FONT_CSS}
 <div class="frame"></div>
 <div class="sealmark">${seal(84)}</div>
 <div class="safe">
-  <div class="name">SEALED <b>HISTORIES</b></div>
+  <div class="name">THE SEALED <b>HISTORIES</b></div>
   <div class="tag">History you'll never forget — told in Urdu &amp; Hindi</div>
   <div class="langs"><span style="font-family:'Nastaliq'">اردو</span><span class="dot"></span><span style="font-family:'Deva'">हिंदी</span><span class="dot"></span><span style="font-family:'Beng'">বাংলা</span></div>
 </div>

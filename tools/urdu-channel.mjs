@@ -1,4 +1,4 @@
-// Urdu channel lane — YouTube Data API tools for the Sealed Histories channel
+// Urdu channel lane — YouTube Data API tools for The Sealed Histories channel
 // (Google account muzzamilhassandev@gmail.com). Fully separate from the tech lane:
 // reads URDU_YT_REFRESH_TOKEN, never TECH_YT_REFRESH_TOKEN. The OAuth client
 // (YOUTUBE_CLIENT_ID / YOUTUBE_CLIENT_SECRET) is shared with the tech lane — the
@@ -26,7 +26,7 @@ const clientSecret = (process.env.YOUTUBE_CLIENT_SECRET || '').trim();
 const refresh = (process.env.URDU_YT_REFRESH_TOKEN || '').trim();
 if (!clientId || !clientSecret || !refresh) {
   console.error('Missing YOUTUBE_CLIENT_ID / YOUTUBE_CLIENT_SECRET / URDU_YT_REFRESH_TOKEN (env or .env).');
-  console.error('Mint the Urdu token with: node tools/get-refresh-token.mjs --name URDU_YT_REFRESH_TOKEN --label "@SealedHistories"');
+  console.error('Mint the Urdu token with: node tools/get-refresh-token.mjs --name URDU_YT_REFRESH_TOKEN --label "@TheSealedHistories"');
   process.exit(1);
 }
 
@@ -61,7 +61,7 @@ if (cmd === 'whoami') {
   console.log('views   : ' + (ch.statistics.viewCount || '0') + '  videos: ' + (ch.statistics.videoCount || '0'));
   if (ch.snippet.title === 'How Dev Works') {
     console.error('WRONG LANE: this token points at the tech channel. Re-mint it signed in as');
-    console.error('muzzamilhassandev@gmail.com and pick the Sealed Histories identity on the consent screen.');
+    console.error('muzzamilhassandev@gmail.com and pick The Sealed Histories identity on the consent screen.');
     process.exit(1);
   }
 } else if (cmd === 'uploads') {

@@ -1,6 +1,6 @@
 # Urdu channel — YouTube automation (how it works + one-time setup)
 
-Date: 2026-09-26. Goal: run the **Sealed Histories** Urdu channel the same way the tech
+Date: 2026-09-26. Goal: run **The Sealed Histories** Urdu channel the same way the tech
 lane runs @HowDevWorks — programmatic uploads, metadata, thumbnails, scheduling — with no
 browser clicking after setup. Researched how the big open-source "YouTube automation"
 repos actually talk to channels first; we adopt the same mechanism our live tech lane
@@ -30,7 +30,7 @@ directly), so uploads for the Urdu channel through the **same client** behave th
 
 ## 2. Account split (do not mix lanes)
 
-| | Tech lane (How Dev Works) | Urdu lane (Sealed Histories) |
+| | Tech lane (How Dev Works) | Urdu lane (The Sealed Histories) |
 |---|---|---|
 | Google account | **muzzamilhassandev@gmail.com** | **muzzamilhassandev@gmail.com** |
 | Refresh token secret | `TECH_YT_REFRESH_TOKEN` | `URDU_YT_REFRESH_TOKEN` |
@@ -45,7 +45,7 @@ Both lanes live under muzzamilhassandev@gmail.com (consolidated 2026-09-28 — t
 ### Step 1 — create the channel (manual, ~2 min; no API exists for this)
 
 Sign in to **muzzamilhassandev@gmail.com**, go to youtube.com → avatar → **Create a
-channel**, name it `Sealed Histories`, handle `@SealedHistories`. This creates a Brand
+channel**, name it `The Sealed Histories`, handle `@TheSealedHistories`. This creates a Brand
 Account under that Google account. No new Google account is needed.
 
 If it errors with *"Failed to create channel. Please try changing your channel name"*:
@@ -60,7 +60,7 @@ free). Work through these, in order:
    in-app browser kept showing an old `muzzamilhassan302` session, which is exactly this
    failure mode).
 4. **Create with a slightly different name** (e.g. add a word), then rename to
-   "Sealed Histories" in YouTube Studio → Customization immediately after.
+   "The Sealed Histories" in YouTube Studio → Customization immediately after.
 
 ### Step 2 — put the OAuth client in a local .env (gitignored)
 
@@ -86,10 +86,10 @@ While signed in to **muzzamilhassandev@gmail.com** in your normal browser (priva
 window is safest against the wrong-account issue):
 
 ```bash
-node tools/get-refresh-token.mjs --name URDU_YT_REFRESH_TOKEN --label "@SealedHistories"
+node tools/get-refresh-token.mjs --name URDU_YT_REFRESH_TOKEN --label "@TheSealedHistories"
 ```
 
-Open the printed URL, pick the dev-mail account, pick the **Sealed Histories** channel
+Open the printed URL, pick the dev-mail account, pick **The Sealed Histories** channel
 identity on the consent screen, Allow ("Google hasn't verified this app" → it is your own
 app, Continue is safe). Paste the token into `.env` (and later
 `gh secret set URDU_YT_REFRESH_TOKEN -R muzzamilhassan/how-dev-works` if/when the Urdu
@@ -98,7 +98,7 @@ lane moves to Actions).
 ### Step 4 — verify + first upload
 
 ```bash
-node tools/urdu-channel.mjs whoami          # must print Sealed Histories
+node tools/urdu-channel.mjs whoami          # must print The Sealed Histories
 node tools/urdu-channel.mjs upload --file out/urdu-demo/urdu-tea-demo.mp4 \
   --title "چائے کی تاریخ" --privacy private   # smoke test, private
 ```
