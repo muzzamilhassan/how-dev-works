@@ -8,7 +8,7 @@
  * the SHA-256 hex of the new password:
  *   node -e "console.log(require('crypto').createHash('sha256').update('NEW').digest('hex'))"
  */
-const BAKED_HASH = "f252d35fc49a9f73d4029e74b72137e9969d2643cce35614036fce9ff35b5567";
+const BAKED_HASH = "8637f0642dc2d2f6d6c1cc31672a4e8ebe1b7a64486337180398cb1c64d9fbdc";
 
 const ENV_HASH = import.meta.env.VITE_ACCESS_PASSWORD_HASH as string | undefined;
 export const PASSWORD_HASH = (ENV_HASH ?? BAKED_HASH).toLowerCase();
