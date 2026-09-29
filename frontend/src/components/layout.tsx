@@ -4,6 +4,7 @@ import {
   Film,
   LayoutDashboard,
   ListVideo,
+  Lock,
   Menu,
   Moon,
   PenLine,
@@ -24,6 +25,7 @@ import {
 } from "react";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { cn, fmtDay, fmtPKT, pad2, splitCountdown, nextUrduRun } from "../lib/utils";
+import { clearUnlocked } from "../lib/access";
 import { Avatar, Kbd } from "./ui";
 
 /* ---------------- Theme ---------------- */
@@ -210,6 +212,17 @@ function Sidebar({ open, onClose }: { open: boolean; onClose: () => void }) {
             <SettingsIcon className="size-4" />
             Settings
           </NavLink>
+          <button
+            onClick={() => {
+              clearUnlocked();
+              onClose();
+              window.location.reload();
+            }}
+            className="flex w-full cursor-pointer items-center gap-2.5 rounded-[10px] px-2.5 py-2 text-[13.5px] font-medium text-muted transition-colors hover:bg-raised hover:text-ink"
+          >
+            <Lock className="size-4" />
+            Lock console
+          </button>
         </div>
       </aside>
     </>

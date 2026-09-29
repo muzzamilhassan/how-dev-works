@@ -40,6 +40,22 @@ npm run preview  # serve the production build
 All data is demo data (`src/lib/data.ts`) modeled on the real pipeline. It is ready to
 be swapped for real API calls once the `yt-analytics` scope is added to the token.
 
+## Access lock
+
+The console opens on a password gate (`src/pages/LockScreen.tsx`); nothing renders
+until it is unlocked, and "Lock console" in the sidebar re-seals it. Only the SHA-256
+hash of the password is committed — never the password itself. To rotate it, set
+`VITE_ACCESS_PASSWORD_HASH` in the Vercel project environment to the SHA-256 hex of
+the new password and redeploy:
+
+```bash
+node -e "console.log(require('crypto').createHash('sha256').update('NEW-PASSWORD').digest('hex'))"
+```
+
+This gate is a polite UI lock, not real security — the bundle is inspectable. The
+hard wall is Vercel Deployment Protection (Vercel Authentication, all deployments)
+in front of the URL.
+
 ## Deploying to Vercel
 
 1. Import the repo at [vercel.com/new](https://vercel.com/new) → set **Root Directory**
