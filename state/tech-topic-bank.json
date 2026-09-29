@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-28T05:54:07.036Z",
+  "updated": "2026-09-29T06:14:56.659Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
     {
@@ -156,6 +156,20 @@
       "status": "new"
     },
     {
+      "id": "KfPEpQdOl",
+      "title": "I burned out. Now I don't know how to start again.",
+      "url": "https://dev.to/embernoglow/i-burned-out-now-i-dont-know-how-to-start-again-1h79",
+      "source": "DEV",
+      "tags": [
+        "open-source",
+        "productivity",
+        "mental-health"
+      ],
+      "score": 35,
+      "addedAt": "2026-09-29",
+      "status": "new"
+    },
+    {
       "id": "6lmauEkPV",
       "title": "Clean Code Is Not the Same as Clear Code: Comments Were Never the Problem",
       "url": "https://dev.to/georgekobaidze/clean-code-is-not-the-same-as-clear-code-comments-were-never-the-problem-42n",
@@ -196,6 +210,54 @@
       ],
       "score": 17,
       "addedAt": "2026-09-26",
+      "status": "new"
+    },
+    {
+      "id": "rrFPegQZT",
+      "title": "Everyone's learning to prompt better. That's the wrong skill.",
+      "url": "https://dev.to/infoinlet1/everyones-learning-to-prompt-better-thats-the-wrong-skill-544o",
+      "source": "DEV",
+      "tags": [
+        "ai",
+        "webdev",
+        "career",
+        "llm",
+        "testing",
+        "ai-coding",
+        "prompt-engineering",
+        "code-review"
+      ],
+      "score": 15,
+      "addedAt": "2026-09-29",
+      "status": "new"
+    },
+    {
+      "id": "4UVgbxuDB",
+      "title": "How fast is the web? Explore billions of real-user measurements with BEACON",
+      "url": "https://blog.cloudflare.com/how-fast-is-the-web",
+      "source": "Cloudflare",
+      "tags": [
+        "webdev",
+        "cloudflare",
+        "google-bigquery"
+      ],
+      "score": 14,
+      "addedAt": "2026-09-29",
+      "status": "new"
+    },
+    {
+      "id": "oBDUfGZ7N",
+      "title": "Dear Coder: Open This If You're Feeling AI FOMO",
+      "url": "https://dev.to/canro91/dear-coder-open-this-if-youre-feeling-ai-fomo-58d4",
+      "source": "DEV",
+      "tags": [
+        "ai",
+        "career",
+        "ai-coding",
+        "vibe-coding"
+      ],
+      "score": 11,
+      "addedAt": "2026-09-29",
       "status": "new"
     },
     {
