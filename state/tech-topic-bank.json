@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-30T05:59:42.351Z",
+  "updated": "2026-10-01T06:34:09.342Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
     {
@@ -246,6 +246,19 @@
       ],
       "score": 14,
       "addedAt": "2026-09-29",
+      "status": "new"
+    },
+    {
+      "id": "2HsITdYwt",
+      "title": "Example.com Just Launched The Biggest Redesign In Decades",
+      "url": "https://www.debugbear.com/blog/example-dot-com-redesign-history",
+      "source": "DebugBear",
+      "tags": [
+        "webdev",
+        "css"
+      ],
+      "score": 12,
+      "addedAt": "2026-10-01",
       "status": "new"
     },
     {
