@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-01T06:34:09.342Z",
+  "updated": "2026-10-02T06:14:48.337Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
     {
@@ -182,6 +182,19 @@
       "status": "new"
     },
     {
+      "id": "yf9B58pww",
+      "title": "Front-end fast money with Adam Argyle",
+      "url": "https://www.youtube.com/watch?v=SANA0mKg6tw",
+      "source": "Kevin Powell",
+      "tags": [
+        "webdev",
+        "css"
+      ],
+      "score": 20,
+      "addedAt": "2026-10-02",
+      "status": "new"
+    },
+    {
       "id": "4I7VllOCg",
       "title": "Are LLMs still surprisingly bad at some simple tasks?",
       "url": "https://shkspr.mobi/blog/2026/09/are-llms-still-surprisingly-bad-at-some-simple-tasks",
@@ -199,6 +212,21 @@
       "wave": true,
       "expires": "2026-10-02T13:14:01.760Z",
       "waveFrom": "news amplifier: \"llm\" 100 articles this week (1.7x prev week)"
+    },
+    {
+      "id": "KGEEoFyhY",
+      "title": "DESIGN.md vs. Design System MCP: Which Does What?",
+      "url": "https://www.headway.io/blog/designmd-vs-design-system-mcp",
+      "source": "Headway",
+      "tags": [
+        "webdev",
+        "react",
+        "ai-agents",
+        "mcp"
+      ],
+      "score": 17,
+      "addedAt": "2026-10-02",
+      "status": "new"
     },
     {
       "id": "BkbDbNDuV",
