@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-02T06:14:48.337Z",
+  "updated": "2026-10-02T13:02:01.814Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
     {
@@ -226,7 +226,10 @@
       ],
       "score": 17,
       "addedAt": "2026-10-02",
-      "status": "new"
+      "status": "new",
+      "wave": true,
+      "expires": "2026-10-05T13:01:49.842Z",
+      "waveFrom": "news amplifier: \"mcp\" 100 articles this week (1.6x prev week)"
     },
     {
       "id": "BkbDbNDuV",
@@ -371,6 +374,18 @@
       "addedAt": "2026-09-21",
       "status": "rejected",
       "note": "off-brand opinion headline — auto-pick skipped; curated list takes priority"
+    },
+    {
+      "id": "wave-2026-10-02-1",
+      "title": "How to speed up the Rust compiler in September 2026",
+      "url": "https://nnethercote.github.io/2026/09/30/how-to-speed-up-the-rust-compiler-in-september-2026.html",
+      "source": "HN",
+      "tags": [],
+      "score": 600,
+      "addedAt": "2026-10-02",
+      "status": "new",
+      "wave": true,
+      "expires": "2026-10-05T13:01:48.972Z"
     }
   ]
 }
