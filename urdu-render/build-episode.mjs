@@ -94,9 +94,24 @@ fs.writeFileSync(path.join(PUB, 'props-' + slug + '.json'), JSON.stringify({
   scenes, totalMs: totalS * 1000, fps: 30, music: 'audio/music.mp3',
 }, null, 2));
 const spawnOpts = { stdio: 'inherit', shell: process.platform === 'win32', cwd: HERE };
+const propsFile = path.join(PUB, 'props-' + slug + '.json');
 const ensure = spawnSync('npx', ['remotion', 'browser', 'ensure'], spawnOpts);
 if (ensure.status !== 0) { console.error('FAIL: browser ensure'); process.exit(1); }
-const r = spawnSync('npx', ['remotion', 'render', 'remotion/index.ts', 'DocShort', OUT,
-  `--props=${path.join(PUB, 'props-' + slug + '.json')}`, '--concurrency=1', '--timeout=240000', '--port=3495', '--crf=21'], spawnOpts);
+// Master = DocWide, LANDSCAPE 1920x1080 (long documentaries are 16:9 — user
+// decision 2026-10-03; vertical episodes read as Reels/Shorts on YouTube).
+const r = spawnSync('npx', ['remotion', 'render', 'remotion/index.ts', 'DocWide', OUT,
+  `--props=${propsFile}`, '--concurrency=1', '--timeout=240000', '--port=3495', '--crf=21'], spawnOpts);
 if (r.status !== 0) { console.error('FAIL: render'); process.exit(1); }
+// Promo Shorts stay VERTICAL 9:16 for the Shorts feed — a landscape master
+// can't be ffmpeg-cut into 9:16, so re-render each short natively from the
+// same timeline via the DocShort composition (--frames keeps absolute audio).
+const FPS = 30;
+for (const [n, sh] of (S.shorts || []).entries()) {
+  const out = path.resolve(HERE, '..', 'out', 'urdu-episodes', `${slug}-short-${String(n + 1).padStart(2, '0')}.mp4`);
+  const a = Math.round(sh.start * FPS), b = Math.round(sh.end * FPS);
+  log(`short ${n + 1}: native vertical render frames ${a}-${b} (${sh.end - sh.start}s)`);
+  const rs = spawnSync('npx', ['remotion', 'render', 'remotion/index.ts', 'DocShort', out,
+    `--props=${propsFile}`, `--frames=${a}-${b}`, '--concurrency=1', '--timeout=240000', '--port=3495', '--crf=21'], spawnOpts);
+  if (rs.status !== 0) { console.error('FAIL: short render ' + (n + 1)); process.exit(1); }
+}
 log('DONE: ' + OUT + ' (' + (fs.statSync(OUT).size / 1048576).toFixed(1) + ' MB, ' + totalS + 's, voice ' + VOICE + ')');

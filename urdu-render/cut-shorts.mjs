@@ -16,6 +16,18 @@ const S = JSON.parse(fs.readFileSync(path.resolve(sp), 'utf8'));
 const slug = S.slug || path.basename(sp, '.json');
 if (!S.shorts || !S.shorts.length) { console.log('[shorts] none defined'); process.exit(0); }
 const ffmpeg = process.env.FFMPEG || 'ffmpeg';
+const ffprobe = ffmpeg.replace(/ffmpeg(\.exe)?$/, 'ffprobe$1');
+
+// Landscape masters ship native VERTICAL shorts (build-episode.mjs re-renders
+// them via the DocShort composition). Cutting a 16:9 master here would
+// overwrite them with landscape clips YouTube won't treat as Shorts.
+const probe = spawnSync(ffprobe, ['-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=width,height', '-of', 'csv=p=0',
+  path.join(ROOT, 'out', 'urdu-episodes', slug + '.mp4')], { encoding: 'utf8' });
+const [w, h] = (probe.stdout || '').trim().split(',').map(Number);
+if (w > h) {
+  console.log(`[shorts] master is landscape (${w}x${h}) — vertical shorts already rendered natively, skipping ffmpeg cut`);
+  process.exit(0);
+}
 
 for (const [n, sh] of S.shorts.entries()) {
   const src = path.join(ROOT, 'out', 'urdu-episodes', slug + '.mp4');
