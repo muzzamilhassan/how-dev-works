@@ -113,6 +113,22 @@
       ],
       "artifactId": 10937811677,
       "runId": 36336506226
+    },
+    {
+      "date": "2026-10-03",
+      "title": "How to speed up the Rust compiler in September 2026",
+      "topic": "How to speed up the Rust compiler in September 2026",
+      "videoId": "0pUwkTvywjI",
+      "publishAt": "2026-10-06T23:30:00.000Z",
+      "searchPhrase": "How to speed up the Rust compiler in September 2026",
+      "tags": [
+        "how dev works",
+        "How to speed up the Rust compiler in September 2026",
+        "programming explained",
+        "software engineering"
+      ],
+      "artifactId": 11262351061,
+      "runId": 37089026865
     }
   ]
 }
