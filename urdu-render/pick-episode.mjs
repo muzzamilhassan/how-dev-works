@@ -9,11 +9,12 @@ const [inpScript, inpUpload, inpPrivacy] = process.argv.slice(2);
 const env = (k, v) => { fs.appendFileSync(process.env.GITHUB_ENV, `${k}=${v}\n`); };
 
 if (inpScript) {
+  const upload = inpUpload === 'true' ? 'true' : 'false';
   env('SCRIPT', inpScript);
-  env('UPLOAD', inpUpload === 'true' ? 'true' : 'false');
+  env('UPLOAD', upload);
   env('PRIVACY', inpPrivacy || 'public');
   env('SKIP', 'false');
-  console.log('[pick] manual dispatch:', inpScript, 'upload=' + env.UPLOAD);
+  console.log('[pick] manual dispatch:', inpScript, 'upload=' + upload);
   process.exit(0);
 }
 

@@ -1,0 +1,142 @@
+{
+  "slug": "tea",
+  "voice": "ur-PK-AsadNeural",
+  "rate": "-2%",
+  "hookLines": 3,
+  "titleCard": {
+    "clip": "clips/tea/p03.mp4",
+    "headline": "THE HISTORY OF TEA",
+    "era": "A DOCUMENTARY FILM"
+  },
+  "endCard": {
+    "headline": "THE SEALED HISTORIES",
+    "era": "نئی مہر بند کہانی ہر ہفتے"
+  },
+  "yt": {
+    "title": "History of Tea — وہ پتہ جس نے جنگ کرائی | #history",
+    "desc": "چائے کی مکمل تاریخ — وہ پتہ جس کے بدلے چاندی دی جاتی تھی، جس نے افیون کی جنگ کرائی، اور جس کی کھیپ چوری کر کے ایک سلطنت کی اجارہ داری ختم کی گئی۔\n\nThe full history of tea: the leaf worth its weight in silver, the opium war it funded, the spy who stole it, and how one bitter leaf conquered the world.\n\nنئی قسط ہر ہفتے — The Sealed Histories\n\n📧 Business: muzzamilhassandev@gmail.com",
+    "tags": [
+      "history of tea",
+      "tea history urdu",
+      "چائے کی تاریخ",
+      "urdu documentary",
+      "history in urdu",
+      "opium war explained",
+      "robert fortune tea spy",
+      "darjeeling tea history",
+      "chai ki tareekh",
+      "تاریخ کی کہانیاں",
+      "tea documentary",
+      "silk road tea"
+    ]
+  },
+  "phrases": [
+    {
+      "text": "آپ کے سامنے رکھے اس چائے کے کپ میں وہ پتہ ہے جو کبھی چاندی کے وزن پر بکتا تھا۔",
+      "q": "tea cup steam dark background",
+      "zoom": 1
+    },
+    {
+      "text": "اور یہ مبالغہ نہیں ہے — اس پتے کے لیے جنگیں لڑی گئیں، منشیات بیچی گئی، اور ایک سلطنت اسی سے آدھی دنیا پر حکومت کرنے پہنچی۔",
+      "q": "dark storm clouds dramatic sky",
+      "zoom": -1
+    },
+    {
+      "text": "تو آخر بات کیا ہے؟ ایک کڑوا سا پتہ پوری دنیا کا پسندیدہ مشروب کیسے بنا؟ جواب آپ کی سوچ سے بھی عجیب ہے۔",
+      "q": "tea leaves macro dark",
+      "zoom": 1
+    },
+    {
+      "text": "کہانی چین سے شروع ہوتی ہے — کہتے ہیں کہ 2737 قبل از مسیح میں شہنشاہ شن نونگ کے ابلتے پانی میں جھاڑی کے پتے گر گئے — اور اسی اتفاق سے چائے وجود میں آئی۔",
+      "q": "chinese temple misty mountains",
+      "era": "2737 BC — CHINA",
+      "zoom": -1
+    },
+    {
+      "text": "شروع میں یہ پتہ بدھ راہبوں کا مشروب تھا — مراقبے کی راتوں میں نیند بھگانے کے لیے۔ پھر یہ راہب جاپان تک گئے، اور چائے نے پورا مشرق جیت لیا۔",
+      "q": "buddhist monks temple meditation",
+      "zoom": 1
+    },
+    {
+      "text": "یورپ میں چائے ولندیزی تاجروں کے جہازوں سے پہنچی — مگر اصل انقلاب 1662 میں آیا، جب پرتگالی شہزادی کیتھرین نے انگلستان کے بادشاہ سے شادی کی، اور شاہی دربار میں چائے فیشن بن گئی۔",
+      "q": "royal palace golden interior",
+      "era": "1662 — ENGLAND",
+      "zoom": -1
+    },
+    {
+      "text": "اس دور میں چائے سونے جیسی نایاب تھی — ایک پاؤنڈ چائے کی قیمت ایک مزدور کی ہفتہ بھر کی کمائی کے برابر تھی، اور یہ چاندی کے بند ڈبوں میں محفوظ ہوتی تھی۔",
+      "q": "antique silver coins dark",
+      "zoom": 1
+    },
+    {
+      "text": "مگر برطانیہ کے لیے ایک مسئلہ تھا — چین چائے کے بدلے سونا نہیں، مسالے نہیں — صرف چاندی مانگتا تھا۔ اور برطانیہ کے خزانے خالی ہوتے جا رہے تھے۔",
+      "q": "old sailing ship ocean",
+      "headline": "THE SILVER DRAIN",
+      "zoom": -1
+    },
+    {
+      "text": "تو برطانیہ نے تاریخ کا سب سے گندا سودا کیا — ہندوستان میں افیون اگا کر، چین میں چوری چھپے پھیلا دی، تاکہ چاندی واپس لوٹ آئے۔",
+      "q": "poppy field red flowers",
+      "zoom": 1
+    },
+    {
+      "text": "جب کروڑوں چینی افیون کے عادی ہو گئے، تو افسر لن زی شو نے 1839 میں بیس ہزار ڈبوں افیون سمندر میں تباہ کر دیں۔ اور برطانیہ نے اس کا جواب توپوں سے دیا۔",
+      "q": "old cannon fortress sea",
+      "era": "1839 — CHINA",
+      "zoom": -1
+    },
+    {
+      "text": "افیون کی جنگ میں چین ہار گیا — اور جیت کا انعام تھا: ہانگ کانگ — جو 1997 تک برطانیہ کے پاس رہا۔",
+      "q": "union jack flag wind",
+      "headline": "THE OPIUM WAR",
+      "zoom": 1
+    },
+    {
+      "text": "مگر چائے کی سب سے عجیب کہانی ابھی باقی تھی — 1848 میں برطانوی جاسوس رابرٹ فورچون چین میں بھیس بدل کر گھسا۔",
+      "q": "tea plantation hills fog",
+      "era": "1848 — THE TEA SPY",
+      "zoom": -1
+    },
+    {
+      "text": "اس نے چینی لباس میں پہاڑی گاؤں نکلے، چائے کے قیمتی بیج اور پودے چرائے — اور چین کی ہزار سال کی کھیپ ہندوستان کی وادیوں میں بو دی۔",
+      "q": "picking tea leaves hands",
+      "zoom": 1
+    },
+    {
+      "text": "دارجیلنگ اور آسام کی پہاڑیاں جلد چائے سے ڈھک گئیں — اور ایک صدی کے اندر ہندوستان دنیا کا سب سے بڑا چائے کارخانہ بنا — چین کی ہزار سالہ اجارہ داری ختم۔",
+      "q": "tea plantation workers picking",
+      "era": "DARJEELING — INDIA",
+      "zoom": -1
+    },
+    {
+      "text": "پھر مشینوں نے چائے سستی کر دی — فیکٹری مزدوروں کا ایندھن، ٹوٹ بھنگ کا ساتھی — اور آج پانی کے بعد دنیا کا دوسرا سب سے بڑا مشروب: ہر روز اربوں کپ۔",
+      "q": "vintage factory machinery steam",
+      "era": "TODAY",
+      "zoom": 1
+    },
+    {
+      "text": "تو راز وہی پرانا ہے — جو چیز لذت دیتی ہے، طاقت بھی وہی دیتی ہے۔ چائے محض ایک پتہ نہیں — یہ سلطنتوں کی معیشت، جنگوں کا بہانہ، اور تاریخ کا سب سے میٹھا ہتھیار تھا۔",
+      "q": "pouring tea cup steam dark",
+      "zoom": -1
+    },
+    {
+      "text": "اگلی مہر بند کہانی چینی کی ہے — وہ میٹھا دانہ جس نے کروڑوں کو غلام بنایا۔ اور آپ سے سوال: چائے میں دودھ پہلے ڈالتے ہیں یا بعد میں؟ کمنٹ میں اپنی ٹیم بتائیے۔",
+      "q": "sugar cubes white dark background",
+      "zoom": 1
+    }
+  ],
+  "shorts": [
+    {
+      "start": 0,
+      "end": 26.5,
+      "title": "چائے — وہ پتہ جو چاندی کے وزن پر بکتا تھا | The Sealed Histories",
+      "tags": "history of tea,tea history urdu,urdu documentary,history shorts,chai ki tareekh,تاریخ کی کہانیاں"
+    },
+    {
+      "start": 84.09,
+      "end": 113.9,
+      "title": "Chai ne Jang Karayi — جب ایک پتے نے سلطنت ہلا دی | The Sealed Histories",
+      "tags": "opium war,tea history,history shorts urdu,urdu documentary,1839,تاریخ"
+    }
+  ]
+}
