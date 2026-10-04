@@ -9,13 +9,17 @@ on:
   workflow_dispatch:
     inputs:
       topic:
-        description: "Topic (blank = first status:new spec in specs/index.json)"
+        description: "Topic (blank = auto: next idea from topic-ideas.json, AI writes the spec)"
         required: false
         default: ""
       spec:
-        description: "Explicit spec path under tech-render/ (overrides topic)"
+        description: "Explicit spec path under tech-render/ (skips AI generation)"
         required: false
         default: ""
+      demo:
+        description: "true = shortform demo (chain test, never uploads)"
+        required: false
+        default: "false"
       test:
         description: "true = render + validate ONLY, no upload"
         required: false
@@ -56,10 +60,13 @@ jobs:
           YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
           TECH_YT_REFRESH_TOKEN: ${{ secrets.TECH_YT_REFRESH_TOKEN }}
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           CONCURRENCY: "3"
         run: |
           ARGS=""
           if [ "${{ inputs.test }}" = "true" ]; then ARGS="$ARGS --test"; fi
+          if [ "${{ inputs.demo }}" = "true" ]; then ARGS="$ARGS --demo"; fi
           if [ -n "${{ inputs.spec }}" ]; then ARGS="$ARGS --spec ${{ inputs.spec }}"; fi
           node publish-diagram.mjs $ARGS
 

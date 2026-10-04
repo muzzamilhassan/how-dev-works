@@ -1,0 +1,18 @@
+{
+  "updated": "2026-10-05T00:00:00.000Z",
+  "_note": "diagram-lane topic ideas. auto-pick order follows insertion (same convention as tech-topic-bank). Seeded from docs/research/2026-10-04-diagram-channel-automation-research.md: English DB/SQL-internals = winning niche (evergreen, top RPM, unowned animated lane). Evergreen internals only — no version-specific framework topics.",
+  "ideas": [
+    { "id": "db-01", "topic": "Why Is My Query Slow?", "tags": ["database", "sql", "performance", "query optimization"], "status": "new" },
+    { "id": "db-02", "topic": "Database Connections Are Expensive", "tags": ["database", "connection pool", "postgres", "backend"], "status": "new" },
+    { "id": "db-03", "topic": "How Transactions Actually Work", "tags": ["database", "transactions", "acid", "postgres"], "status": "new" },
+    { "id": "db-04", "topic": "MVCC: How Databases Read While Others Write", "tags": ["database", "mvcc", "concurrency", "postgres"], "status": "new" },
+    { "id": "db-05", "topic": "Replication Lag, Explained", "tags": ["database", "replication", "distributed systems", "postgres"], "status": "new" },
+    { "id": "db-06", "topic": "Sharding: When One Database Stops Being Enough", "tags": ["database", "sharding", "scaling", "architecture"], "status": "new" },
+    { "id": "db-07", "topic": "The Buffer Pool: Your Database's Memory", "tags": ["database", "caching", "postgres", "internals"], "status": "new" },
+    { "id": "db-08", "topic": "How a Query Planner Thinks", "tags": ["database", "sql", "query planner", "explain"], "status": "new" },
+    { "id": "db-09", "topic": "Why LIKE '%text%' Kills Your Database", "tags": ["database", "sql", "indexes", "performance"], "status": "new" },
+    { "id": "db-10", "topic": "Write-Ahead Logging: The Contract Before the Commit", "tags": ["database", "wal", "durability", "postgres"], "status": "new" },
+    { "id": "db-11", "topic": "Primary Keys: Auto-Increment vs UUID vs Snowflake", "tags": ["database", "primary key", "uuid", "schema design"], "status": "new" },
+    { "id": "db-12", "topic": "What Really Happens When You INSERT a Row", "tags": ["database", "postgres", "internals", "wal"], "status": "new" }
+  ]
+}

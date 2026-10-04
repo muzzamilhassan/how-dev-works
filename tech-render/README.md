@@ -39,13 +39,19 @@ Coordinates are 1920×1080 absolute; captions live below y≈940 (checker warns)
 
 - **`.github/workflows/tech-render.yml`** — manual dispatch: renders a spec on a
   runner (no local RAM needed), uploads the mp4 as an artifact.
-- **`.github/workflows/publish-diagram.yml`** → `publish-diagram.mjs` — the
-  publish flow (render → research → upload → thumbnail → state → ntfy) for this
-  style. Picks the first `status:"new"` spec from `specs/index.json` (or matches
-  `--topic`). `longform:false` specs ALWAYS run in test mode (no upload) — the
-  channel's 300s gate stays law.
+- **`.github/workflows/publish-diagram.yml`** → `publish-diagram.mjs` — **the
+  full auto pipeline**: no inputs needed. It picks the next idea from
+  `specs/topic-ideas.json` (seeded from the niche research: DB/SQL internals),
+  asks the AI to write the spec (`write-spec.mjs` — house style + schema in the
+  prompt, check-spec as syntax oracle with 2 repair retries), renders, then
+  uploads → thumbnail → state. Needs a free LLM key in repo secrets:
+  `gh secret set GROQ_API_KEY` (console.groq.com) **or** `GEMINI_API_KEY`
+  (aistudio.google.com). `--topic "X"` overrides the auto-pick; `demo: true`
+  runs a shortform chain-test that never uploads.
+- Publishing law unchanged: a video uploads only when the spec is `longform:true`
+  AND the render is ≥ 300s. Demo-length specs always run in test mode.
 - The old `publish.yml` → quarry-render lane is untouched; flip the cron over
-  when a longform diagram episode has been through the chain once.
+  when the first auto longform episode has been through the chain once.
 
 ## Writing specs
 

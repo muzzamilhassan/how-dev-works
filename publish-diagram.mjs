@@ -14,6 +14,7 @@ import { google } from 'googleapis';
 import { research } from './tools/yt-research.mjs';
 
 const INDEX_FILE = 'tech-render/specs/index.json';
+const IDEAS_FILE = 'tech-render/specs/topic-ideas.json';
 const PUBLISHED_FILE = 'state/published.json';
 const BANK_FILE = 'state/tech-topic-bank.json';
 const MIN_DURATION_SEC = 300;
@@ -88,20 +89,61 @@ async function uploadYouTube(videoFile, topic, bankTags, meta) {
   return { videoId: res.data.id, publishAt, title, youtube };
 }
 
+function markIdeaUsed(topic, status = 'used') {
+  const ideas = loadJson(IDEAS_FILE, { ideas: [] });
+  const idea = ideas.ideas.find((i) => (i.topic || '').toLowerCase() === (topic || '').toLowerCase());
+  if (idea) { idea.status = status; ideas.updated = new Date().toISOString(); saveJson(IDEAS_FILE, ideas); }
+}
+
 async function main() {
   const isTest = arg('test') === true || arg('test') === 'true';
+  const isDemo = arg('demo') === true || arg('demo') === 'true';
+  const forceTest = isTest || isDemo; // demo specs are chain-tests by law
   // topic travels via INPUT_TOPIC env (shell-safe); --topic argv kept for local runs
   let topicArg = arg('topic', '');
   if (typeof topicArg !== 'string' || !topicArg.trim()) topicArg = (process.env.INPUT_TOPIC || '').trim();
   const specArg = (typeof arg('spec', '') === 'string' ? arg('spec', '') : '').trim();
 
   const index = loadJson(INDEX_FILE, { specs: [] });
+
+  // AUTO mode (default): nothing explicit → take the next idea from the seeded
+  // research-backed topic list (DB/SQL internals — the winning niche).
+  let autoTopic = false;
+  if (!specArg && !topicArg) {
+    const ideas = loadJson(IDEAS_FILE, { ideas: [] });
+    const idea = ideas.ideas.find((i) => i.status === 'new');
+    if (!idea) {
+      log('No new topic ideas left in tech-render/specs/topic-ideas.json — done.');
+      notify('How Dev Works - GAP', 'publish-diagram: topic-ideas.json exhausted.');
+      return;
+    }
+    topicArg = idea.topic;
+    autoTopic = true;
+    log('Auto-picked topic [' + idea.id + ']: ' + topicArg);
+  }
+
   let entry = null;
   if (specArg) entry = index.specs.find((s) => s.file.replace(/^.*specs[\\/]/, '') === specArg.replace(/^.*specs[\\/]/, ''));
-  if (!entry && topicArg) entry = index.specs.find((s) => s.topic.toLowerCase() === topicArg.toLowerCase());
-  if (!entry) entry = index.specs.find((s) => s.status === 'new');
+  if (!entry && topicArg) entry = index.specs.find((s) => (s.topic || '').toLowerCase() === topicArg.toLowerCase() && s.status === 'new');
+  if (!entry && !topicArg) entry = index.specs.find((s) => s.status === 'new');
+
+  // topic named (or auto-picked) but no spec yet → the AI writes it (needs GROQ_API_KEY / GEMINI_API_KEY)
+  if (!entry && topicArg) {
+    log('No spec for "' + topicArg + '" — generating with write-spec (' + (isDemo ? 'demo' : 'longform') + ')...');
+    const wargs = ['write-spec.mjs', '--topic', topicArg];
+    if (!isDemo) wargs.push('--longform');
+    const w = sh('node', wargs, { cwd: 'tech-render', stdio: 'inherit' });
+    if (w.status !== 0) {
+      notify('How Dev Works - GAP', 'write-spec failed for "' + topicArg + '" — check GROQ_API_KEY / GEMINI_API_KEY.');
+      throw new Error('write-spec failed');
+    }
+    const fresh = loadJson(INDEX_FILE, { specs: [] });
+    entry = fresh.specs.find((s) => (s.topic || '').toLowerCase() === topicArg.toLowerCase() && s.status === 'new')
+         || fresh.specs.find((s) => s.status === 'new');
+    if (!entry) throw new Error('write-spec did not register a spec');
+  }
   if (!entry) {
-    log('No status:"new" spec in specs/index.json — write a spec first. Done.');
+    log('No status:"new" spec in specs/index.json — write or generate a spec first. Done.');
     notify('How Dev Works - GAP', 'publish-diagram: no new spec in tech-render/specs/index.json.');
     return;
   }
@@ -122,12 +164,13 @@ async function main() {
   log(`Rendered: ${spec.id} — ${dur}s`);
 
   const longform = spec.longform === true && dur >= MIN_DURATION_SEC;
-  if (!longform || isTest) {
+  if (!longform || forceTest) {
     log(longform ? 'TEST mode — skipping upload. Chain OK.' :
       `Not uploading: ${dur}s < ${MIN_DURATION_SEC}s or longform:false — demo/test render (chain validated, YouTube untouched).`);
     entry.status = 'done';
     entry.rendered = { at: new Date().toISOString(), dur };
     saveJson(INDEX_FILE, index);
+    markIdeaUsed(entry.topic, 'tested');
     notify('How Dev Works - diagram render', `${entry.topic}\n${dur}s (test mode, not uploaded)`);
     return;
   }
@@ -166,6 +209,7 @@ async function main() {
   entry.status = 'done';
   entry.rendered = { at: new Date().toISOString(), dur, videoId };
   saveJson(INDEX_FILE, index);
+  markIdeaUsed(entry.topic);
   notify('How Dev Works - scheduled', entry.topic + '\nPublic ' + publishAt + '\nhttps://youtube.com/watch?v=' + videoId);
 }
 
