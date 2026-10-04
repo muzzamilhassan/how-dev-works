@@ -2,22 +2,25 @@
 // Strategy (see BRANDING/roadmap): never chase the news itself; explain the thing
 // the news made people curious about. This scanner:
 //   1. Hacker News front page (Algolia API) — points = dev-world attention
-//   2. Reddit top/week over 6 tech subs (official OAuth; skipped without secrets)
-//   3. Google Trends daily RSS — catch-net for search-side waves HN misses
-//   4. Techmeme + GitHub Trending RSS — awareness/suggestions only
-//   5. Google News amplifier — promotes an existing bank topic to a wave when
+//   2. daily.dev latest feed (public GraphQL) — dev-native aggregator attention
+//   3. Reddit top/week over 6 tech subs (official OAuth; skipped without secrets)
+//   4. Google Trends daily RSS — catch-net for search-side waves HN misses
+//   5. Techmeme + GitHub Trending RSS — awareness/suggestions only
+//   6. Google News amplifier — promotes an existing bank topic to a wave when
 //      its keyword spikes vs the previous week ("the news made my evergreen urgent")
-//   6. YouTube mostPopular in Education (27) + Science&Tech (28) — official API
+//   7. YouTube mostPopular in Education (27) + Science&Tech (28) — official API
 // Stories that are ALREADY explainer-shaped get injected into the topic bank as
-// `wave` topics (72h expiry, top priority, max 2/day across sources 1–3).
+// `wave` topics (72h expiry, top priority, max 2/day across sources 1–4).
 // Everything else noteworthy goes to the phone as a suggestion only.
 // Source rationale + endpoint verification: docs/research/2026-09-23-hot-topics-and-trend-platforms.md
-//   node tools/trend-radar.mjs   (workflow: trend-radar.yml, daily)
+//   node tools/trend-radar.mjs   (workflow: trend-radar.yml, daily; also run
+//   fresh inside publish-diagram.yml right before every diagram episode)
 import fs from 'fs';
 
 const BANK_FILE = process.env.RADAR_BANK_FILE || 'state/tech-topic-bank.json';
 const WAVE_HOURS = 72;          // reactive waves decay fast
 const HN_MIN_POINTS = 120;      // front-page attention worth riding
+const DAILYDEV_MIN_UPVOTES = 120; // daily.dev community upvotes worth riding (keyless latest feed)
 const REDDIT_MIN_UPS = 1500;    // r/top?t=week upvotes worth riding
 const TRENDS_WAVE_MIN = 50000;  // approx_traffic needed to inject a trend
 const TRENDS_SUGGEST_MIN = 2000;// approx_traffic worth even suggesting
@@ -87,6 +90,25 @@ async function hnFrontPage() {
     source: 'HN', title: h.title.replace(/^(Show|Launch) HN:\s*/i, '').trim(),
     points: h.points, comments: h.num_comments || 0, url: h.url || ('https://news.ycombinator.com/item?id=' + h.objectID)
   })).filter(h => devRelevant(h.title));
+}
+
+async function dailyDevTop() {
+  // public keyless feed: { latest: Post[] } — verified 2026-10-04 (introspection
+  // is disabled; `feed` needs auth, `latest` does not)
+  try {
+    const res = await fetch('https://api.daily.dev/graphql', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'User-Agent': UA },
+      body: JSON.stringify({ query: '{ latest { title permalink numUpvotes source { name } } }' }),
+      signal: AbortSignal.timeout(10000)
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const j = await res.json();
+    return ((j.data || {}).latest || []).filter(p => p.title && p.permalink).map(p => ({
+      source: 'daily.dev', title: p.title, points: p.numUpvotes || 0,
+      url: p.permalink, srcName: (p.source && p.source.name) || ''
+    })).filter(h => devRelevant(h.title));
+  } catch (e) { log('daily.dev skipped: ' + String(e.message || e).slice(0, 80)); return []; }
 }
 
 async function redditTopWeek() {
@@ -249,6 +271,18 @@ for (const h of hot) {
     continue;
   }
   injectWave(h);
+}
+
+// --- 1b. daily.dev latest — dev-native aggregator attention (keyless)
+const dd = await dailyDevTop();
+log('daily.dev dev-relevant posts: ' + dd.length);
+const ddHot = dd.filter(h => h.points >= DAILYDEV_MIN_UPVOTES).sort((a, b) => b.points - a.points);
+for (const d of ddHot) {
+  if (injected.length >= MAX_INJECT) break;
+  if (overlapsBank(bank, d.title)) continue;
+  d.heat = d.points + ' ups' + (d.srcName ? ' · ' + d.srcName : '');
+  if (!explainerShaped(d.title)) { suggest(d.source, d.title, d.heat); continue; }
+  injectWave(d);
 }
 
 // --- 2. Reddit top/week (needs REDDIT_* secrets; silently skipped otherwise)

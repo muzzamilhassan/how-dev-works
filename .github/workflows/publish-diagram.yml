@@ -53,6 +53,20 @@ jobs:
           npm install googleapis sharp puppeteer-core --no-save
           mkdir -p ~/.fonts && cp assets/fonts/*.ttf ~/.fonts/ && fc-cache -f >/dev/null
 
+      - name: 📡 Fresh trend scan — what is boosting right now (non-fatal)
+        # runs the radar (HN, daily.dev, Reddit, Trends, Techmeme, GitHub, YT,
+        # News amplifier) so the topic pick is minutes old, not up to 24h
+        env:
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          TECH_YT_REFRESH_TOKEN: ${{ secrets.TECH_YT_REFRESH_TOKEN }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+          REDDIT_USERNAME: ${{ secrets.REDDIT_USERNAME }}
+          REDDIT_PASSWORD: ${{ secrets.REDDIT_PASSWORD }}
+        run: node tools/trend-radar.mjs || echo "::warning::trend radar failed — proceeding with existing bank"
+
       - name: 🎬 Render + upload
         env:
           INPUT_TOPIC: ${{ inputs.topic }}

@@ -20,6 +20,7 @@ const today = new Date().toISOString().slice(0, 10);
 const topic = typeof arg('topic', '') === 'string' ? arg('topic', '').trim() : '';
 const longform = arg('longform') === true || arg('longform') === 'true';
 const outArg = typeof arg('out', '') === 'string' ? arg('out', '').trim() : '';
+const waveNote = typeof arg('wave-note', '') === 'string' ? arg('wave-note', '').trim() : '';
 if (!topic) { console.error('[write-spec] --topic required'); process.exit(1); }
 if (arg('longform') === true && typeof arg('longform') === 'boolean') { /* bare --longform ok */ }
 
@@ -124,6 +125,7 @@ function parseJSONLoose(text) {
 
 async function generate(topic, priorErrors, priorSpecFile) {
   const user = [
+    waveNote ? 'TREND CONTEXT:\n' + waveNote + '\nHook rule for waves: ride the attention, teach the evergreen machine underneath.' : '',
     priorSpecFile
       ? 'Your previous JSON for this topic failed validation. Here it is — fix ONLY these errors and return the FULL corrected JSON:\n' + priorErrors
       : '',
@@ -154,6 +156,7 @@ for (let attempt = 0; attempt < 3; attempt++) {
   spec.id = spec.id || `${today}-${slug(topic)}`;
   spec.voice = spec.voice || 'en-US-GuyNeural';
   spec.rate = spec.rate || '+6%';
+  if (waveNote) spec.waveNote = waveNote;
   fs.writeFileSync(specPath, JSON.stringify(spec, null, 2));
   const chk = spawnSync('node', ['check-spec.mjs', specPath], { encoding: 'utf8', shell: process.platform === 'win32' });
   if (chk.status === 0) {

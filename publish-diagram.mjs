@@ -106,9 +106,24 @@ async function main() {
 
   const index = loadJson(INDEX_FILE, { specs: [] });
 
-  // AUTO mode (default): nothing explicit → take the next idea from the seeded
-  // research-backed topic list (DB/SQL internals — the winning niche).
+  // AUTO mode (default): fresh trend research wins FIRST. A live wave from the
+  // radar's shared bank (72h expiry, same precedence as publish.mjs) beats the
+  // static evergreen list — "the news made people curious, we explain the thing."
   let autoTopic = false;
+  let waveNote = '';
+  if (!specArg && !topicArg) {
+    const bank = loadJson(BANK_FILE, { topics: [] });
+    const now = Date.now();
+    const wave = bank.topics.find((t) => t.status === 'new' && t.wave && (!t.expires || new Date(t.expires).getTime() > now));
+    if (wave) {
+      topicArg = wave.title;
+      waveNote = 'TREND CONTEXT (why now): "' + wave.title + '" is riding a wave right now'
+        + (wave.source ? ' — spotted via ' + wave.source : '')
+        + (wave.waveFrom ? ' (' + wave.waveFrom + ')' : '')
+        + '. Open the video by connecting to this live attention in the first sentences, then settle into the evergreen explanation.';
+      log('WAVE picked from trend radar: ' + topicArg);
+    }
+  }
   if (!specArg && !topicArg) {
     const ideas = loadJson(IDEAS_FILE, { ideas: [] });
     const idea = ideas.ideas.find((i) => i.status === 'new');
@@ -131,6 +146,7 @@ async function main() {
   if (!entry && topicArg) {
     log('No spec for "' + topicArg + '" — generating with write-spec (' + (isDemo ? 'demo' : 'longform') + ')...');
     const wargs = ['write-spec.mjs', '--topic', topicArg];
+    if (waveNote) wargs.push('--wave-note', waveNote);
     if (!isDemo) wargs.push('--longform');
     const w = sh('node', wargs, { cwd: 'tech-render', stdio: 'inherit' });
     if (w.status !== 0) {
