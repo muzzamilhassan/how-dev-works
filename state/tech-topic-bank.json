@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-03T05:46:07.781Z",
+  "updated": "2026-10-04T06:22:20.684Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
     {
@@ -122,6 +122,21 @@
       "addedAt": "2026-09-21",
       "status": "new",
       "curated": true
+    },
+    {
+      "id": "oBDUfGZ7N",
+      "title": "Dear Coder: Open This If You're Feeling AI FOMO",
+      "url": "https://dev.to/canro91/dear-coder-open-this-if-youre-feeling-ai-fomo-58d4",
+      "source": "DEV",
+      "tags": [
+        "ai",
+        "career",
+        "ai-coding",
+        "vibe-coding"
+      ],
+      "score": 195,
+      "addedAt": "2026-10-04",
+      "status": "new"
     },
     {
       "id": "6kIGfavoR",
@@ -283,22 +298,6 @@
       ],
       "score": 12,
       "addedAt": "2026-10-01",
-      "status": "new"
-    },
-    {
-      "id": "vzW8IUKDR",
-      "title": "Confident Isn't Accurate: How AI Hallucinations Actually Work",
-      "url": "https://dev.to/ale3oula/confident-isnt-accurate-how-ai-hallucinations-actually-work-4djo",
-      "source": "DEV",
-      "tags": [
-        "ai",
-        "security",
-        "llm",
-        "prompt-engineering",
-        "rag"
-      ],
-      "score": 11,
-      "addedAt": "2026-10-03",
       "status": "new"
     },
     {
