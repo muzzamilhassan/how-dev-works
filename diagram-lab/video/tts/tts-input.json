@@ -1,0 +1,10 @@
+[
+  { "i": 0, "text": "You write one line of SQL. Insert into orders. And hit run." },
+  { "i": 1, "text": "But under the hood, your database runs five jobs before that OK comes back." },
+  { "i": 2, "text": "Job one. The connection pool hands your query to a free worker." },
+  { "i": 3, "text": "Job two. The parser validates your SQL, and the planner picks the cheapest path." },
+  { "i": 4, "text": "Job three, the critical one. Postgres appends the change to the write-ahead log, and fsyncs it to disk." },
+  { "i": 5, "text": "Only after the log is durable does the row land in the buffer pool." },
+  { "i": 6, "text": "Job four. At checkpoint, dirty pages finally flush to your table files." },
+  { "i": 7, "text": "Why the log first? One sequential write beats random writes everywhere. That is how one line of SQL becomes a durable commit." }
+]

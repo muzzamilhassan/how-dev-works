@@ -1,0 +1,8 @@
+{
+  "updated": "2026-10-05T00:00:00.000Z",
+  "_note": "diagram-style episode ledger. status: new | rendering | done. longform:false specs are demo-length (<5 min) — publish-diagram runs them in test mode (no upload) until a longform spec exists.",
+  "specs": [
+    { "file": "specs/2026-10-05-insert.json", "topic": "What Really Happens When You INSERT a Row", "status": "done", "longform": false, "note": "demo — rendered 2026-10-04 in diagram-lab, re-rendered via tech-render as parity proof" },
+    { "file": "specs/2026-10-05-btree.json", "topic": "Why Databases Love B-Trees", "status": "new", "longform": false }
+  ]
+}

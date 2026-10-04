@@ -1,0 +1,55 @@
+name: diagram-lab
+
+# Manual trigger only — renders the diagram-lab examples and uploads SVGs.
+# This is the seed of the code-to-diagram render lane; it touches nothing else.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install renderers (graphviz, plantuml, D2, mermaid-cli, diagrams)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y graphviz plantuml
+          curl -fsSL https://github.com/terrastruct/d2/releases/latest/download/d2-amd64-linux.tar.gz -o d2.tgz
+          tar -xzf d2.tgz
+          sudo mv d2-amd64-linux/bin/d2 /usr/local/bin/d2
+          npm install -g @mermaid-js/mermaid-cli
+          pip install diagrams
+
+      - name: Render Mermaid
+        run: |
+          mkdir -p diagram-lab/out
+          echo '{"args":["--no-sandbox"]}' > diagram-lab/puppeteer.json
+          mmdc -p diagram-lab/puppeteer.json \
+               -i diagram-lab/mermaid/01-insert-flow.mmd \
+               -o diagram-lab/out/01-insert-flow.svg \
+               -t dark -b transparent
+
+      - name: Render D2 (storyboard static + animated + replication)
+        run: |
+          d2 --theme 201 diagram-lab/d2/01-insert-storyboard.d2 diagram-lab/out/01-insert-storyboard.svg
+          d2 --theme 201 --animate-interval 700 diagram-lab/d2/01-insert-storyboard.d2 diagram-lab/out/01-insert-storyboard-anim.svg
+          d2 --theme 201 diagram-lab/d2/02-replication.d2 diagram-lab/out/02-replication.svg
+
+      - name: Render Python Diagrams
+        run: python diagram-lab/diagrams_py/01-replication.py
+
+      - name: Render PlantUML
+        run: plantuml -tsvg -o ../out diagram-lab/plantuml/01-insert-sequence.puml
+
+      - name: List outputs (board naming check)
+        run: ls -la diagram-lab/out/
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: diagrams
+          path: diagram-lab/out/

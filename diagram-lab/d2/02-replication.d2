@@ -1,0 +1,13 @@
+direction: right
+
+app: "App servers"
+pool: "pgbouncer" {shape: hexagon}
+primary: "primary" {shape: cylinder}
+r1: "replica-1" {shape: cylinder}
+r2: "replica-2" {shape: cylinder}
+
+app -> pool: "queries"
+pool -> primary: "writes"
+primary -> r1: "streaming WAL" {style.animated: true}
+primary -> r2: "streaming WAL" {style.animated: true}
+r1 -> app: "reads"

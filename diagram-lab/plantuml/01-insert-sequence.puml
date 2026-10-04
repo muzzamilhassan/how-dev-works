@@ -1,0 +1,18 @@
+@startuml
+skinparam backgroundColor transparent
+skinparam defaultFontName monospaced
+skinparam shadowing false
+
+actor Client
+participant "pgbouncer" as PB
+database "primary" as P
+database "WAL" as W
+
+Client -> PB: INSERT
+PB -> P: EXECUTE
+P -> W: append log record
+P -> W: fsync
+W --> P: flushed
+P --> PB: COMMIT ok
+PB --> Client: 201
+@enduml

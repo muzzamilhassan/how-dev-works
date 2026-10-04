@@ -1,0 +1,67 @@
+{
+  "id": "2026-10-05-btree",
+  "title": "Why Databases Love B-Trees",
+  "longform": false,
+  "voice": "en-US-GuyNeural",
+  "rate": "+6%",
+  "accentPerBeat": ["cyan", "red", "cyan", "amber", "amber", "green", "violet", "green"],
+  "hook": { "beat": 0, "text": "SELECT * FROM users WHERE id = 42;" },
+  "badges": [
+    { "t": "01 · SCAN", "beat": 1, "color": "red" },
+    { "t": "02 · TREE", "beat": 1, "color": "cyan" },
+    { "t": "03 · ROOT", "beat": 1, "color": "amber" },
+    { "t": "04 · LEAF", "beat": 1, "color": "amber" },
+    { "t": "05 · ROW", "beat": 1, "color": "green" }
+  ],
+  "badgeFadeBeat": 2,
+  "headlines": [
+    { "beat": 0, "parts": [{ "t": "Find " }, { "t": "one row", "tint": true }, { "t": " in a billion." }] },
+    { "beat": 1, "parts": [{ "t": "No index? " }, { "t": "Scan everything.", "tint": true }] },
+    { "beat": 2, "parts": [{ "t": "Hundreds of keys " }, { "t": "on one page.", "tint": true }] },
+    { "beat": 3, "parts": [{ "t": "Start at the " }, { "t": "root.", "tint": true }] },
+    { "beat": 4, "parts": [{ "t": "One leaf → " }, { "t": "your row.", "tint": true }] },
+    { "beat": 5, "parts": [{ "t": "Three hops", "tint": true }, { "t": ", not a billion." }] },
+    { "beat": 6, "parts": [{ "t": "The tree stays " }, { "t": "flat.", "tint": true }] },
+    { "beat": 7, "parts": [{ "t": "Depth " }, { "t": "four.", "tint": true }] }
+  ],
+  "panels": [
+    { "id": "heap", "title": "TABLE HEAP", "sub": "1,000,000,000 rows", "x": 110, "y": 450, "w": 270, "h": 110, "beat": 1, "db": true, "color": "red" },
+    { "id": "root", "badge": "01", "title": "ROOT PAGE", "sub": "17 · 35 · 78", "x": 1130, "y": 260, "w": 250, "h": 100, "beat": 2, "color": "cyan" },
+    { "id": "int1", "title": "INTERNAL A", "sub": "17 · 35", "x": 940, "y": 450, "w": 220, "h": 95, "beat": 2, "color": "cyan" },
+    { "id": "int2", "title": "INTERNAL B", "sub": "35 · 78", "x": 1290, "y": 450, "w": 220, "h": 95, "beat": 2, "color": "cyan" },
+    { "id": "leaf1", "title": "LEAF α", "sub": "rows 1–16", "x": 840, "y": 630, "w": 200, "h": 95, "beat": 2, "db": true, "color": "cyan" },
+    { "id": "leaf2", "title": "LEAF β", "sub": "rows 17–77", "x": 1070, "y": 630, "w": 200, "h": 95, "beat": 2, "db": true, "color": "cyan" },
+    { "id": "leaf3", "title": "LEAF γ", "sub": "rows 78+", "x": 1300, "y": 630, "w": 200, "h": 95, "beat": 2, "db": true, "color": "cyan" },
+    { "id": "fanout", "title": "FAN-OUT", "sub": "≈ 500 keys / page", "x": 1620, "y": 260, "w": 200, "h": 90, "beat": 6, "color": "violet" },
+    { "id": "depth", "title": "DEPTH", "sub": "≈ 4 for 10⁹ rows", "x": 1620, "y": 430, "w": 200, "h": 90, "beat": 6, "color": "violet" }
+  ],
+  "edges": [
+    { "id": "scan", "path": "M 300 560 C 320 640 180 640 195 562", "beat": 1, "color": "red", "dash": true, "label": "scan all", "lx": 245, "ly": 700 },
+    { "id": "s-root-int1", "path": "M 1180 360 C 1110 400 1070 410 1050 450", "beat": 2, "color": "cyan" },
+    { "id": "s-root-int2", "path": "M 1330 360 C 1400 400 1440 410 1400 450", "beat": 2, "color": "cyan" },
+    { "id": "s-int1-leaf1", "path": "M 1010 545 C 990 580 970 600 960 630", "beat": 2, "color": "cyan" },
+    { "id": "s-int1-leaf2", "path": "M 1090 545 C 1120 580 1140 600 1160 630", "beat": 2, "color": "cyan" },
+    { "id": "s-int2-leaf2", "path": "M 1340 545 C 1320 580 1300 600 1280 630", "beat": 2, "color": "cyan" },
+    { "id": "s-int2-leaf3", "path": "M 1440 545 C 1470 580 1490 600 1500 630", "beat": 2, "color": "cyan" },
+    { "id": "q1", "path": "M 1290 330 C 1360 380 1395 400 1400 450", "beat": 3, "color": "amber", "pulse": true, "label": "42 > 35 →", "lx": 1495, "ly": 402 },
+    { "id": "q2", "path": "M 1395 545 C 1390 600 1210 585 1180 630", "beat": 4, "color": "amber", "pulse": true },
+    { "id": "row", "path": "M 1070 690 C 800 780 430 700 355 560", "beat": 5, "color": "green", "label": "row ✓", "lx": 700, "ly": 745 }
+  ],
+  "takeaways": [
+    { "t": "every page ≈ 500 sorted keys", "color": "green" },
+    { "t": "depth ≈ log₅₀₀(N) → 3–4 hops", "color": "amber" },
+    { "t": "one lookup, always fast", "color": "cyan" }
+  ],
+  "takeawaysBeat": 7,
+  "outro": "a billion rows, four hops",
+  "beats": [
+    { "i": 0, "text": "You ask for one user, by id. Somewhere inside a billion rows." },
+    { "i": 1, "text": "Without an index, the database scans the whole table. Row, by row, by row." },
+    { "i": 2, "text": "The B-tree changes the game. Every page holds hundreds of sorted keys." },
+    { "i": 3, "text": "A lookup starts at the root page, and takes exactly one branch." },
+    { "i": 4, "text": "Then exactly one leaf. And the leaf points straight at your row." },
+    { "i": 5, "text": "Three hops. Not a billion." },
+    { "i": 6, "text": "Because every page fans out hundreds of times, the tree stays almost flat, no matter how much you insert." },
+    { "i": 7, "text": "A billion rows. Depth four. That is why databases love B-trees." }
+  ]
+}

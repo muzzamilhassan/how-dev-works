@@ -1,0 +1,9 @@
+%%{init: {'theme': 'dark', 'themeVariables': {'fontFamily': 'JetBrains Mono, monospace'}, 'flowchart': {'curve': 'basis'}}}%%
+flowchart LR
+    C["Client"] -->|"INSERT"| P["Connection Pool"]
+    P --> Q["Parser + Planner"]
+    Q --> W[("WAL buffer")]
+    W -->|"fsync"| WD[("WAL segment")]
+    WD -.->|"commit ✓"| C
+    WD --> B["Buffer pool: dirty page"]
+    B -->|"checkpoint"| T[("Table files")]

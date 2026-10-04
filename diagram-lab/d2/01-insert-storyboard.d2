@@ -1,0 +1,30 @@
+direction: right
+
+# Steps boards inherit cumulatively: step 2 contains everything from step 1
+# plus what it adds. Rendered with --animate-interval this becomes ONE
+# animated SVG that walks through the reveal — a storyboard from text.
+
+steps: {
+  1: {
+    client: "Client" {shape: person}
+    pool: "Connection Pool"
+    client -> pool: "INSERT ..."
+  }
+  2: {
+    planner: "Parser + Planner"
+    pool -> planner
+  }
+  3: {
+    wal: "WAL Buffer" {shape: cylinder}
+    planner -> wal: "append log record"
+  }
+  4: {
+    waldisk: "WAL Segment" {shape: cylinder}
+    wal -> waldisk: "fsync"
+  }
+  5: {
+    table: "Table Files" {shape: cylinder}
+    waldisk -> table: "checkpoint flush"
+    waldisk -> client: "commit ✓"
+  }
+}

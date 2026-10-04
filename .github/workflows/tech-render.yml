@@ -1,0 +1,50 @@
+name: Render diagram episode (tech-render)
+
+# Manual dispatch: renders one diagram-style episode from its spec on a runner
+# (no local RAM needed). Does NOT publish — for that use publish-diagram.yml.
+# Inert for the live pipeline: workflow_dispatch only.
+
+on:
+  workflow_dispatch:
+    inputs:
+      spec:
+        description: "Spec path relative to tech-render/ (e.g. specs/2026-10-05-btree.json)"
+        required: true
+        default: "specs/2026-10-05-btree.json"
+
+concurrency:
+  group: tech-render
+  cancel-in-progress: false
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: ⚙️ Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 📦 Install render stack (remotion deps + edge-tts + ffmpeg)
+        run: |
+          cd tech-render
+          npm install --no-audit --no-fund
+          pip install edge-tts
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+
+      - name: 🎬 Render (muted jpeg + premix/mux — the robust path)
+        env:
+          CONCURRENCY: "3"
+        run: |
+          cd tech-render
+          node make.mjs "${{ inputs.spec }}" --render
+
+      - name: 📦 Upload video artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: diagram-video
+          path: tech-render/out/*.mp4
+          if-no-files-found: error

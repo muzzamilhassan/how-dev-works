@@ -1,0 +1,60 @@
+{
+  "id": "2026-10-05-insert",
+  "title": "What Really Happens When You INSERT a Row",
+  "longform": false,
+  "voice": "en-US-GuyNeural",
+  "rate": "+6%",
+  "accentPerBeat": ["cyan", "cyan", "cyan", "amber", "green", "green", "violet", "green"],
+  "hook": { "beat": 0, "text": "INSERT INTO orders VALUES (...);" },
+  "badges": [
+    { "t": "01 · POOL", "beat": 1, "color": "cyan" },
+    { "t": "02 · PLAN", "beat": 1, "color": "amber" },
+    { "t": "03 · LOG", "beat": 1, "color": "green" },
+    { "t": "04 · FLUSH", "beat": 1, "color": "violet" },
+    { "t": "05 · ACK", "beat": 1, "color": "green" }
+  ],
+  "badgeFadeBeat": 2,
+  "headlines": [
+    { "beat": 0, "parts": [{ "t": "One line of " }, { "t": "SQL", "tint": true }, { "t": "." }] },
+    { "beat": 1, "parts": [{ "t": "Five jobs " }, { "t": "under the hood", "tint": true }, { "t": "." }] },
+    { "beat": 3, "parts": [{ "t": "Parse it. " }, { "t": "Plan it cheap", "tint": true }, { "t": "." }] },
+    { "beat": 4, "parts": [{ "t": "The log " }, { "t": "is the contract", "tint": true }, { "t": "." }] },
+    { "beat": 6, "parts": [{ "t": "Tables update " }, { "t": "later", "tint": true }, { "t": "." }] },
+    { "beat": 7, "parts": [{ "t": "Sequential " }, { "t": "beats random", "tint": true }, { "t": "." }] }
+  ],
+  "panels": [
+    { "id": "client", "title": "CLIENT", "sub": "your app", "x": 80, "y": 430, "w": 220, "h": 104, "beat": 2 },
+    { "id": "pool", "badge": "01", "title": "CONNECTION POOL", "sub": "free worker", "x": 380, "y": 430, "w": 250, "h": 104, "beat": 2 },
+    { "id": "plan", "badge": "02", "title": "PARSER + PLANNER", "sub": "cheapest path", "x": 710, "y": 430, "w": 280, "h": 104, "beat": 3 },
+    { "id": "walbuf", "badge": "03", "title": "WAL BUFFER", "sub": "append-only", "x": 1070, "y": 430, "w": 230, "h": 104, "beat": 4, "db": true },
+    { "id": "waldisk", "badge": "03", "title": "WAL SEGMENT", "sub": "fsync'd on disk", "x": 1070, "y": 620, "w": 230, "h": 104, "beat": 4, "db": true },
+    { "id": "buf", "title": "BUFFER POOL", "sub": "dirty page", "x": 1420, "y": 430, "w": 220, "h": 104, "beat": 5 },
+    { "id": "table", "badge": "04", "title": "TABLE FILES", "sub": "16 KB pages", "x": 1420, "y": 620, "w": 220, "h": 104, "beat": 6, "db": true }
+  ],
+  "edges": [
+    { "id": "e1", "path": "M 300 482 L 380 482", "beat": 2, "color": "cyan" },
+    { "id": "e2", "path": "M 630 482 L 710 482", "beat": 3, "color": "amber" },
+    { "id": "e3", "path": "M 990 482 L 1070 482", "beat": 4, "color": "green" },
+    { "id": "e4", "path": "M 1185 534 L 1185 620", "beat": 4, "color": "green", "label": "fsync", "lx": 1100, "ly": 577, "pulse": true },
+    { "id": "e5", "path": "M 1300 672 C 1360 672 1370 482 1420 482", "beat": 5, "color": "green", "label": "row safe", "lx": 1470, "ly": 577 },
+    { "id": "e6", "path": "M 1070 640 C 900 240 420 240 190 430", "beat": 5, "color": "green", "label": "COMMIT ✓", "lx": 630, "ly": 258, "dash": true },
+    { "id": "e7", "path": "M 1530 534 L 1530 620", "beat": 6, "color": "violet", "label": "checkpoint", "lx": 1648, "ly": 577 }
+  ],
+  "takeaways": [
+    { "t": "the log = ONE sequential append", "color": "green" },
+    { "t": "random page writes = slow", "color": "amber" },
+    { "t": "log first → durable commit ✓", "color": "cyan" }
+  ],
+  "takeawaysBeat": 7,
+  "outro": "one line of SQL → durable commit",
+  "beats": [
+    { "i": 0, "text": "You write one line of SQL. Insert into orders. And hit run." },
+    { "i": 1, "text": "But under the hood, your database runs five jobs before that OK comes back." },
+    { "i": 2, "text": "Job one. The connection pool hands your query to a free worker." },
+    { "i": 3, "text": "Job two. The parser validates your SQL, and the planner picks the cheapest path." },
+    { "i": 4, "text": "Job three, the critical one. Postgres appends the change to the write-ahead log, and fsyncs it to disk." },
+    { "i": 5, "text": "Only after the log is durable does the row land in the buffer pool." },
+    { "i": 6, "text": "Job four. At checkpoint, dirty pages finally flush to your table files." },
+    { "i": 7, "text": "Why the log first? One sequential write beats random writes everywhere. That is how one line of SQL becomes a durable commit." }
+  ]
+}

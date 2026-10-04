@@ -1,0 +1,85 @@
+name: Publish diagram episode (render → YouTube)
+
+# Diagram-style lane: renders a tech-render spec in-repo, then the same
+# upload → thumbnail → state flow as publish.yml. DEMO-LENGTH specs
+# (longform:false) always run in test mode — render + chain validation,
+# NO YouTube upload. The old quarry-render publish.yml is untouched.
+
+on:
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: "Topic (blank = first status:new spec in specs/index.json)"
+        required: false
+        default: ""
+      spec:
+        description: "Explicit spec path under tech-render/ (overrides topic)"
+        required: false
+        default: ""
+      test:
+        description: "true = render + validate ONLY, no upload"
+        required: false
+        default: "false"
+
+concurrency:
+  group: publish-diagram
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: 📥 Checkout (push-capable — state files get committed)
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.SECRET_WRITER_PAT || github.token }}
+
+      - name: ⚙️ Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 📦 Install render + upload stack
+        run: |
+          cd tech-render && npm install --no-audit --no-fund
+          pip install edge-tts
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          cd ..
+          npm install googleapis sharp puppeteer-core --no-save
+          mkdir -p ~/.fonts && cp assets/fonts/*.ttf ~/.fonts/ && fc-cache -f >/dev/null
+
+      - name: 🎬 Render + upload
+        env:
+          INPUT_TOPIC: ${{ inputs.topic }}
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          TECH_YT_REFRESH_TOKEN: ${{ secrets.TECH_YT_REFRESH_TOKEN }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          CONCURRENCY: "3"
+        run: |
+          ARGS=""
+          if [ "${{ inputs.test }}" = "true" ]; then ARGS="$ARGS --test"; fi
+          if [ -n "${{ inputs.spec }}" ]; then ARGS="$ARGS --spec ${{ inputs.spec }}"; fi
+          node publish-diagram.mjs $ARGS
+
+      - name: 💾 Commit state
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: |
+          git config user.name "publish-bot"
+          git config user.email "bot@howdevworks"
+          git add state/ tech-render/specs/index.json || true
+          git diff --cached --quiet || git commit -m "publish-diagram state [skip ci]"
+          git pull --rebase || true
+          if ! git push; then
+            [ -n "$NTFY_TOPIC" ] && curl -s -H "Title: How Dev Works - STATE PUSH FAILED" -d "diagram publish ledger not saved" "https://ntfy.sh/$NTFY_TOPIC" || true
+            exit 1
+          fi
+
+      - name: 📢 Alert on failure
+        if: failure()
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: |
+          [ -n "$NTFY_TOPIC" ] && curl -s -H "Title: How Dev Works - DIAGRAM PUBLISH FAILED" -d "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" "https://ntfy.sh/$NTFY_TOPIC" || true

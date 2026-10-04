@@ -1,0 +1,16 @@
+{
+  "name": "diagram-video",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "tts": "python tts/tts.py public/tts",
+    "timeline": "node compute-timeline.mjs",
+    "render": "remotion render remotion/index.ts InsertExplainer out/insert-explainer.mp4 --props=props.json"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.524",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.524"
+  }
+}

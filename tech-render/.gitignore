@@ -1,0 +1,4 @@
+node_modules/
+out/
+props.json
+tts/tts-input.json
