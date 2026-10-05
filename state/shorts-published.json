@@ -51,6 +51,15 @@
       "searchPhrase": "How to speed up the Rust compiler in September 2026",
       "artifactId": 11282095920,
       "runId": 37143956986
+    },
+    {
+      "date": "2026-10-05",
+      "title": "How HTTPS Actually Works",
+      "topic": "How HTTPS Actually Works",
+      "videoId": "nzGUjpr8Oe4",
+      "searchPhrase": "how do https certificates work",
+      "artifactId": 11373200143,
+      "runId": 37377650244
     }
   ]
 }
