@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-05T06:14:33.994Z",
+  "updated": "2026-10-05T15:12:13.525Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
     {
@@ -210,24 +210,6 @@
       "status": "new"
     },
     {
-      "id": "KGEEoFyhY",
-      "title": "DESIGN.md vs. Design System MCP: Which Does What?",
-      "url": "https://www.headway.io/blog/designmd-vs-design-system-mcp",
-      "source": "Headway",
-      "tags": [
-        "webdev",
-        "react",
-        "ai-agents",
-        "mcp"
-      ],
-      "score": 17,
-      "addedAt": "2026-10-02",
-      "status": "new",
-      "wave": true,
-      "expires": "2026-10-05T13:01:49.842Z",
-      "waveFrom": "news amplifier: \"mcp\" 100 articles this week (1.6x prev week)"
-    },
-    {
       "id": "BkbDbNDuV",
       "title": "Tailwind has a huge problem...",
       "url": "https://www.youtube.com/watch?v=tHBbNNh1-OE",
@@ -350,19 +332,6 @@
       "curated": true,
       "note": "already rendered — run 35585098737 in state/pending-renders.json, uploads on next publish",
       "videoId": "7_FBiOslvUE"
-    },
-    {
-      "id": "wave-2026-10-02-1",
-      "title": "How to speed up the Rust compiler in September 2026",
-      "url": "https://nnethercote.github.io/2026/09/30/how-to-speed-up-the-rust-compiler-in-september-2026.html",
-      "source": "HN",
-      "tags": [],
-      "score": 600,
-      "addedAt": "2026-10-02",
-      "status": "used",
-      "wave": true,
-      "expires": "2026-10-05T13:01:48.972Z",
-      "videoId": "0pUwkTvywjI"
     },
     {
       "id": "VIVynMBNG",
