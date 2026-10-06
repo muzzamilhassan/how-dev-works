@@ -80,7 +80,7 @@ fs.writeFileSync(
 );
 const premix = (flag) =>
   spawnSync('ffmpeg', ['-y', '-loglevel', 'error',
-    ...beats.flatMap((b, i) => ['-i', `public/tts/beat-0${b.i}.mp3`]),
+    ...beats.flatMap((b, i) => ['-i', `public/tts/beat-${String(b.i).padStart(2, '0')}.mp3`]),
     flag, afx, '-map', '[out]', '-ar', '44100', narration],
     { stdio: 'inherit', shell: process.platform === 'win32' });
 const rScript = premix('-filter_complex_script');

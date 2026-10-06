@@ -552,7 +552,7 @@ export const DiagramExplainer: React.FC<TimelineProps> = (props) => {
       {/* narration audio, one clip per beat at its exact start */}
       {beats.map((b) => (
         <Sequence key={b.i} from={startF(b.i)}>
-          <Audio src={staticFile(`tts/beat-0${b.i}.mp3`)} />
+          <Audio src={staticFile(`tts/beat-${String(b.i).padStart(2, '0')}.mp3`)} />
         </Sequence>
       ))}
     </AbsoluteFill>

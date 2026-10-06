@@ -1,8 +1,9 @@
 {
   "updated": "2026-10-05T00:00:00.000Z",
-  "_note": "diagram-style episode ledger. status: new | rendering | done. longform:false specs are demo-length (<5 min) — publish-diagram runs them in test mode (no upload) until a longform spec exists.",
+  "_note": "diagram-lane episode ledger. status: new | rendering | done. longform:false specs run in test mode (never upload — the 300s law stands).",
   "specs": [
+    { "file": "specs/2026-10-05-backend-ecosystem.json", "topic": "The Backend Is a City: Every Part Explained on One Map", "status": "rendering", "longform": false, "note": "CloudXBerry-style ecosystem map episode (reference: youtube.com/watch?v=mZ27vUoOEB0)" },
     { "file": "specs/2026-10-05-insert.json", "topic": "What Really Happens When You INSERT a Row", "status": "done", "longform": false, "note": "demo — rendered 2026-10-04 in diagram-lab, re-rendered via tech-render as parity proof" },
-    { "file": "specs/2026-10-05-btree.json", "topic": "Why Databases Love B-Trees", "status": "new", "longform": false }
+    { "file": "specs/2026-10-05-btree.json", "topic": "Why Databases Love B-Trees", "status": "done", "longform": false }
   ]
 }
