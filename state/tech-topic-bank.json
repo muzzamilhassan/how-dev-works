@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-05T15:12:13.525Z",
+  "updated": "2026-10-06T06:52:35.305Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
     {
@@ -280,6 +280,22 @@
       ],
       "score": 12,
       "addedAt": "2026-10-01",
+      "status": "new"
+    },
+    {
+      "id": "vzW8IUKDR",
+      "title": "Confident Isn't Accurate: How AI Hallucinations Actually Work",
+      "url": "https://dev.to/ale3oula/confident-isnt-accurate-how-ai-hallucinations-actually-work-4djo",
+      "source": "DEV",
+      "tags": [
+        "ai",
+        "security",
+        "llm",
+        "prompt-engineering",
+        "rag"
+      ],
+      "score": 11,
+      "addedAt": "2026-10-06",
       "status": "new"
     },
     {
