@@ -55,6 +55,10 @@ const rects = [];
   }
   if (p.x + p.w > W) errors.push(`${w}: x+w=${p.x + p.w} overflows width`);
   if (p.y + p.h > H - 140) warns.push(`${w}: y+h=${p.y + p.h} enters caption band (keep above y≈940)`);
+  if (p.rows !== undefined) {
+    if (!Array.isArray(p.rows) || p.rows.length > 4) errors.push(`${w}: rows max 4`);
+    (p.rows || []).forEach((r, ri) => { if (typeof r !== 'string' || r.length > 24) errors.push(`${w}: row ${ri} max 24 chars`); });
+  }
   rects.push({ id: p.id, ...p });
   useColor(w, p.color);
 });
@@ -75,9 +79,46 @@ for (let i = 0; i < rects.length; i++)
   if (e.label && (typeof e.lx !== 'number' || typeof e.ly !== 'number')) warns.push(`${w}: label without lx/ly → chip lands at 0,0`);
   if (typeof e.lx === 'number' && (e.lx < 0 || e.lx > W)) errors.push(`${w}: lx out of range`);
   if (typeof e.ly === 'number' && (e.ly < 0 || e.ly > H)) errors.push(`${w}: ly out of range`);
+  if (e.flow && !/^[MLC\s\d.-]+$/.test(e.path)) errors.push(`${w}: flow path must be pure M/L/C commands`);
+  if (e.dots !== undefined && (!Number.isInteger(e.dots) || e.dots < 1 || e.dots > 6)) errors.push(`${w}: dots 1–6`);
 });
 
-// takeaways + outro
+// counters (odometer chips)
+(spec.counters || []).forEach((c, i) => {
+  const w = `counters[${i}](${c.label})`;
+  checkBeat(w, c.beat);
+  useColor(w, c.color);
+  if (!c.label || c.label.length > 24) errors.push(`${w}: label 1–24 chars`);
+  if (!Number.isInteger(c.from) || !Number.isInteger(c.to) || c.from >= c.to) errors.push(`${w}: from < to (integers)`);
+  if (typeof c.x !== 'number' || c.x < 0 || c.x > W) errors.push(`${w}: x out of range`);
+  if (typeof c.y !== 'number' || c.y < 0 || c.y > H - 140) errors.push(`${w}: y out of range (caption band)`);
+  rects.push({ id: 'counter:' + (c.label || i), x: c.x, y: c.y, w: c.w ?? 240, h: 64 });
+});
+
+// terminals (typing windows)
+(spec.terminals || []).forEach((t, i) => {
+  const w = `terminals[${i}](${t.title})`;
+  checkBeat(w, t.beat);
+  useColor(w, t.color);
+  if (!t.title || t.title.length > 30) errors.push(`${w}: title 1–30 chars`);
+  if (!Array.isArray(t.lines) || !t.lines.length || t.lines.length > 5) errors.push(`${w}: 1–5 lines`);
+  (t.lines || []).forEach((ln, li) => { if (typeof ln !== 'string' || ln.length > 44) errors.push(`${w}: line ${li} max 44 chars`); });
+  if (typeof t.x !== 'number' || t.x < 0 || t.x + t.w > W) errors.push(`${w}: x/w overflow width`);
+  if (typeof t.y !== 'number' || t.y < 0 || t.y + (t.h ?? 130) > H - 140) errors.push(`${w}: y/h enters caption band`);
+  rects.push({ id: 'terminal:' + (t.title || i), x: t.x, y: t.y, w: t.w, h: t.h ?? 130 });
+});
+
+// selectors (highlight walks options)
+(spec.selectors || []).forEach((s, i) => {
+  const w = `selectors[${i}](${s.title || i})`;
+  checkBeat(w, s.beat);
+  useColor(w, s.color);
+  if (!Array.isArray(s.options) || s.options.length < 2 || s.options.length > 5) errors.push(`${w}: 2–5 options`);
+  (s.options || []).forEach((o, oi) => { if (typeof o !== 'string' || o.length > 16) errors.push(`${w}: option ${oi} max 16 chars`); });
+  if (typeof s.x !== 'number' || s.x < 0 || s.x + s.w > W) errors.push(`${w}: x/w overflow width`);
+  if (typeof s.y !== 'number' || s.y < 0 || s.y > H - 140) errors.push(`${w}: y out of range (caption band)`);
+  rects.push({ id: 'selector:' + (s.title || i), x: s.x, y: s.y, w: s.w, h: s.title ? 92 : 62 });
+});
 (spec.takeaways || []).forEach((t, i) => {
   if (!t.t || t.t.length > 70) errors.push(`takeaways[${i}].t: 1–70 chars`);
   useColor(`takeaways[${i}]`, t.color);

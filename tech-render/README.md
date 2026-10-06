@@ -27,8 +27,12 @@ ffmpeg premix/mux** — the audio mix never runs inside the browser.
 | `hook` | `{beat, text}` — the typewriter SQL/code chip |
 | `headlines[]` | `{beat, parts:[{t, tint?}]}` — chapter headline swaps |
 | `badges[]` + `badgeFadeBeat` | the numbered job chips strip |
-| `panels[]` | `{id, title, sub, badge?, x,y,w,h, beat, db?, color?}` — pop when their beat is spoken |
-| `edges[]` | `{id, path:"M …", beat, color?, label?, lx,ly?, dash?, pulse?}` — draw-on in narration order; `pulse` = thickens while its own beat is spoken |
+| `panels[]` | `{id, title, sub, badge?, x,y,w,h, beat, db?, color?, rows?}` — pop when their beat is spoken; **breathe (glow) while their beat is active**; idle-float forever after; `rows` = staggered sub-lines instead of `sub` |
+| `edges[]` | `{id, path:"M …", beat, color?, label?, lx,ly?, dash?, pulse?, flow?, dots?}` — draw-on in narration order; `pulse` = thickens while its own beat is spoken; **`flow` = data dots travel the path forever after** (the map stays alive) |
+| `counters[]` | `{beat, x,y, label, from, to, suffix?, color?}` — **odometer chip**: the number ticks from→to while its beat is spoken |
+| `terminals[]` | `{beat, x,y,w, title, lines[], color?}` — **fake terminal window** (traffic lights): lines type character-by-character across the beat |
+| `selectors[]` | `{beat, x,y,w, title?, options[], color?}` — **highlight walks the options** in narration order (interactive-selector simulation) |
+| headline swap | crossfade: previous headline fades up-out while the new one springs in |
 | `takeaways[]` + `takeawaysBeat` | the closing comparison build (diagram shrinks up) |
 | `outro` | final lockup chip |
 
