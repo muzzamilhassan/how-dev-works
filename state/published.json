@@ -129,6 +129,22 @@
       ],
       "artifactId": 11262351061,
       "runId": 37089026865
+    },
+    {
+      "date": "2026-10-07",
+      "title": "How DNS Finds a Website in Milliseconds",
+      "topic": "How DNS Finds a Website in Milliseconds",
+      "videoId": "V_3K6t8UjDo",
+      "publishAt": "2026-10-09T23:30:00.000Z",
+      "searchPhrase": "How DNS Finds a Website in Milliseconds",
+      "tags": [
+        "how dev works",
+        "How DNS Finds a Website in Milliseconds",
+        "programming explained",
+        "software engineering"
+      ],
+      "artifactId": 11458365882,
+      "runId": 37562718050
     }
   ]
 }
