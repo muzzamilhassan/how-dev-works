@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
     inputs:
       script:
-        description: "Episode script path inside urdu-render/ (blank on schedule = take next from state/urdu-queue.json)"
+        description: "Episode script path inside urdu-render/ (blank = take next from state/urdu-queue.json)"
         required: false
-        default: "episodes/salt.json"
+        default: ""
       voice:
         description: "Override narrator (default: script's voice)"
         required: false
@@ -86,6 +86,10 @@ jobs:
           path: out/urdu-episodes/*.mp4
           retention-days: 14
           if-no-files-found: error
+
+      - name: 📚 Root deps (googleapis — publish script resolves it from repo root)
+        if: ${{ env.UPLOAD == 'true' }}
+        run: npm ci --no-audit --no-fund
 
       - name: 📢 Publish to YouTube (The Sealed Histories)
         if: ${{ env.UPLOAD == 'true' }}
