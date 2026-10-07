@@ -72,7 +72,10 @@ export function Card({
   return (
     <div
       className={cn(
-        "rounded-xl border border-line bg-surface transition-colors duration-200",
+        // min-w-0 + overflow-hidden: grid items default to min-width:auto, so a
+        // fixed-width chart svg inside would stretch the whole grid track and
+        // force horizontal page overflow on narrow screens
+        "min-w-0 overflow-hidden rounded-xl border border-line bg-surface transition-colors duration-200",
         className,
       )}
       {...props}

@@ -133,7 +133,7 @@ export function Overview() {
           ) : null}
         </Card>
 
-        <div className="grid grid-cols-2 gap-4 lg:col-span-4">
+        <div className="grid min-w-0 grid-cols-2 gap-4 lg:col-span-4">
           <StatCard label={kpis.subs.label} value={kpis.subs.value} delta={kpis.subs.delta} icon={Users} />
           <StatCard label={kpis.views.label} value={kpis.views.value} delta={kpis.views.delta} icon={Eye} />
           <StatCard label={kpis.watchHours.label} value={kpis.watchHours.value} delta={kpis.watchHours.delta} icon={Timer} />
@@ -223,7 +223,7 @@ export function Overview() {
           </ul>
         </Card>
 
-        <div className="grid gap-4 lg:col-span-4">
+        <div className="grid min-w-0 content-start gap-4 lg:col-span-4">
           <Card>
             <CardHead eyebrow="Where views come from" title="Format mix" />
             <div className="px-5 pb-5 pt-2">

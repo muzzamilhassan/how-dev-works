@@ -185,7 +185,10 @@ export function Queue() {
                               size="sm"
                               variant="ghost"
                               icon={ArrowUpRight}
-                              onClick={(ev) => ev.stopPropagation()}
+                              onClick={(ev) => {
+                                ev.stopPropagation();
+                                window.open(`https://youtu.be/${e.videoId}`, "_blank", "noopener");
+                              }}
                               aria-label="Open on YouTube"
                             />
                           ) : (
@@ -289,7 +292,11 @@ function EpisodeSheet({ episode, onClose }: { episode: Episode | null; onClose: 
 
           <div className="mt-6 flex gap-2">
             {episode.videoId ? (
-              <Button variant="primary" icon={ArrowUpRight}>
+              <Button
+                variant="primary"
+                icon={ArrowUpRight}
+                onClick={() => window.open(`https://youtu.be/${episode.videoId}`, "_blank", "noopener")}
+              >
                 Open on YouTube
               </Button>
             ) : (

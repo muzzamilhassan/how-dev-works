@@ -45,7 +45,7 @@ export function Analytics() {
             <ViewsChart data={range === "7" ? views28d.slice(-7) : views28d} height={300} />
           </div>
         </Card>
-        <div className="grid content-start gap-4 lg:col-span-4">
+        <div className="grid min-w-0 content-start gap-4 lg:col-span-4">
           <Card>
             <CardHead eyebrow="Format pull" title="Views by format" />
             <div className="px-5 pb-5 pt-2">

@@ -18,8 +18,9 @@ export function fmtPct(n: number, digits = 1): string {
 }
 
 export function fmtDur(totalSec: number): string {
-  const m = Math.floor(totalSec / 60);
-  const s = Math.round(totalSec % 60);
+  const total = Math.round(totalSec); // round once: 119.7s is "2:00", never "1:60"
+  const m = Math.floor(total / 60);
+  const s = total % 60;
   return `${m}:${String(s).padStart(2, "0")}`;
 }
 

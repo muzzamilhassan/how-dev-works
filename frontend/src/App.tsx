@@ -1,5 +1,5 @@
 import { HashRouter, Route, Routes } from "react-router-dom";
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { AppLayout } from "./components/layout";
 import { LockScreen } from "./pages/LockScreen";
 import { Overview } from "./pages/Overview";
@@ -8,9 +8,18 @@ import { Studio } from "./pages/Studio";
 import { Media } from "./pages/Media";
 import { Channels } from "./pages/Channels";
 import { Automation } from "./pages/Automation";
-import { Analytics } from "./pages/Analytics";
 import { Settings } from "./pages/Settings";
 import { isUnlocked, setUnlocked } from "./lib/access";
+
+// Analytics pulls in recharts (~half the bundle) — load it on first visit instead
+// of shipping it in the entry chunk.
+const Analytics = lazy(() =>
+  import("./pages/Analytics").then((m) => ({ default: m.Analytics })),
+);
+
+function RouteFallback() {
+  return <div className="min-h-[60vh] animate-pulse rounded-xl bg-surface" aria-busy="true" />;
+}
 
 export function App() {
   const [unlocked, setUnlockedState] = useState(isUnlocked);
@@ -37,7 +46,7 @@ export function App() {
           <Route path="media" element={<Media />} />
           <Route path="channels" element={<Channels />} />
           <Route path="automation" element={<Automation />} />
-          <Route path="analytics" element={<Analytics />} />
+          <Route path="analytics" element={<Suspense fallback={<RouteFallback />}><Analytics /></Suspense>} />
           <Route path="settings" element={<Settings />} />
           <Route path="*" element={<Overview />} />
         </Route>
