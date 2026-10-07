@@ -106,6 +106,24 @@ async function main() {
 
   const index = loadJson(INDEX_FILE, { specs: [] });
 
+  // Crash latch: a killed run (timeout, cancel, runner loss) leaves its spec in
+  // status:"rendering" forever and the picker below only takes "new" — the episode
+  // would never re-render. The workflow holds a concurrency group, so overlapping
+  // renders are impossible; any "rendering" entry older than 3h (or predating the
+  // claimedAt stamp) is dead by definition.
+  const STALE_RENDER_MS = 3 * 60 * 60 * 1000;
+  let unlatched = false;
+  for (const s of index.specs) {
+    if (s.status !== 'rendering') continue;
+    const fresh = s.claimedAt && (Date.now() - new Date(s.claimedAt).getTime()) < STALE_RENDER_MS;
+    if (fresh) continue;
+    log(`Reset stale rendering latch on ${s.file} (claimed ${s.claimedAt || 'never'}) → new`);
+    s.status = 'new';
+    delete s.claimedAt;
+    unlatched = true;
+  }
+  if (unlatched) saveJson(INDEX_FILE, index);
+
   // AUTO mode (default): fresh trend research wins FIRST. A live wave from the
   // radar's shared bank (72h expiry, same precedence as publish.mjs) beats the
   // static evergreen list — "the news made people curious, we explain the thing."
@@ -170,11 +188,12 @@ async function main() {
 
   // mark rendering immediately so a re-run can't double-render
   entry.status = 'rendering';
+  entry.claimedAt = new Date().toISOString();
   saveJson(INDEX_FILE, index);
 
   // render in-repo (muted jpeg + premix/mux — the robust path)
   const r = sh('node', ['make.mjs', entry.file, '--render'], { cwd: 'tech-render', stdio: 'inherit' });
-  if (r.status !== 0) { entry.status = 'new'; saveJson(INDEX_FILE, index); throw new Error('render failed'); }
+  if (r.status !== 0) { entry.status = 'new'; delete entry.claimedAt; saveJson(INDEX_FILE, index); throw new Error('render failed'); }
   const videoFile = path.join('tech-render', 'out', `${spec.id}.mp4`);
   const dur = durationSec(videoFile);
   log(`Rendered: ${spec.id} — ${dur}s`);

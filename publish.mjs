@@ -17,6 +17,7 @@ const ARTIFACT_NAME = 'tech-video';
 const BANK_FILE = 'state/tech-topic-bank.json';
 const PENDING_FILE = 'state/pending-renders.json';
 const PUBLISHED_FILE = 'state/published.json';
+const SKIPPED_FILE = 'state/skipped-renders.json';
 const MIN_DURATION_SEC = 300;      // shorter renders are test renders — never publish
 const SLOTS_UTC = [                // Tue + Fri 23:30 UTC = 19:30 ET (US prime evening)
   { dow: 2, h: 23, m: 30 },
@@ -128,9 +129,9 @@ function downloadArtifact(runId, artId) {
   fs.mkdirSync(inbox, { recursive: true });
   gh(['run', 'download', String(runId), '-R', RENDER_REPO, '-n', ARTIFACT_NAME, '-D', inbox]);
   const files = fs.readdirSync(inbox);
-  const videoFile = path.join(inbox, files.find(f => f.endsWith('.mp4')));
-  if (!videoFile || !fs.existsSync(videoFile)) throw new Error('no mp4 in artifact');
-  return videoFile;
+  const mp4 = files.find(f => f.endsWith('.mp4'));
+  if (!mp4) throw new Error('no mp4 in artifact (got: ' + files.join(', ').slice(0, 120) + ')');
+  return path.join(inbox, mp4);
 }
 
 function durationSec(file) {
@@ -208,7 +209,9 @@ async function main() {
 
   const published = loadJson(PUBLISHED_FILE, { uploads: [] });
   const pending = loadJson(PENDING_FILE, { renders: [] });
+  const skipped = loadJson(SKIPPED_FILE, { renders: [] });
   const publishedIds = published.uploads.map(u => String(u.artifactId));
+  const skippedIds = skipped.renders.map(s => String(s.artifactId));
 
   // 1. already-rendered video waiting? upload it first (self-heal for failed upload runs)
   let chosen = null;
@@ -219,6 +222,7 @@ async function main() {
       const art = artifactFor(r.databaseId);
       if (!art) continue;
       if (publishedIds.includes(String(art.id))) continue;
+      if (skippedIds.includes(String(art.id))) continue; // rejected render (e.g. test-length) — don't re-adopt
       const pend = pending.renders.find(p => String(p.runId) === String(r.databaseId));
       let t = (pend && pend.topic) || '';
       if (!t && nameWaiting && topicArg) {
@@ -299,6 +303,15 @@ async function main() {
   if (dur < MIN_DURATION_SEC) {
     log('GAP: render is ' + dur + 's (< ' + MIN_DURATION_SEC + ') — treating as test render, NOT publishing.');
     notify('How Dev Works - GAP', chosen.topic + ' rendered only ' + dur + 's — not published. Re-render with fallback=true.');
+    // record the rejection, or every later run re-adopts this artifact and GAPs forever
+    skipped.renders.push({
+      date: new Date().toISOString().slice(0, 10),
+      artifactId: chosen.art.id, runId: chosen.run.databaseId,
+      topic: chosen.topic, durSec: dur, reason: 'render shorter than ' + MIN_DURATION_SEC + 's'
+    });
+    saveJson(SKIPPED_FILE, skipped);
+    pending.renders = pending.renders.filter(p => String(p.runId) !== String(chosen.run.databaseId));
+    saveJson(PENDING_FILE, pending);
     return;
   }
 

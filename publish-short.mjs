@@ -18,6 +18,7 @@ const RENDER_WORKFLOW = 'tech-video.yml';           // same workflow — minutes
 const ARTIFACT_NAME = 'tech-video';
 const BANK_FILE = 'state/tech-topic-bank.json';
 const SHORTS_FILE = 'state/shorts-published.json';
+const PUBLISHED_FILE = 'state/published.json';
 const MIN_DUR = 20, MAX_DUR = 180;                  // Shorts window (YouTube allows <=180s)
 const BRAND_BG = '0x0D1117', BRAND_CYAN = '0x22D3EE';
 
@@ -70,9 +71,9 @@ function downloadArtifact(runId) {
   fs.rmSync(inbox, { recursive: true, force: true });
   fs.mkdirSync(inbox, { recursive: true });
   gh(['run', 'download', String(runId), '-R', RENDER_REPO, '-n', ARTIFACT_NAME, '-D', inbox]);
-  const f = path.join(inbox, fs.readdirSync(inbox).find(f => f.endsWith('.mp4')));
-  if (!f || !fs.existsSync(f)) throw new Error('no mp4 in artifact');
-  return f;
+  const mp4 = fs.readdirSync(inbox).find(f => f.endsWith('.mp4'));
+  if (!mp4) throw new Error('no mp4 in artifact');
+  return path.join(inbox, mp4);
 }
 function durationSec(file) {
   const r = spawnSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', file], { encoding: 'utf8' });
@@ -106,13 +107,18 @@ function makeVertical(inFile, outFile, cardPng) {
   if (r.error || r.status !== 0) throw new Error('ffmpeg vertical repack failed: ' + String(r.error || r.stderr || '').slice(-300));
 }
 
-function pickTopic(bank, explicit) {
+function pickTopic(bank, explicit, longUploads, promotedTopics) {
   if (explicit) return explicit;
-  // Shorts promote the channel: default to the most recent PUBLISHED long video
-  // (the 60-second version of it). No bank topic is consumed.
-  const used = bank.topics.filter(t => t.status === 'used')
-    .sort((a, b) => String(b.addedAt || '').localeCompare(String(a.addedAt || '')));
-  if (used.length) return used[0].title;
+  // Promo the most recent PUBLISHED long video that doesn't have a short yet.
+  // (Sorting the bank's `used` topics by addedAt repeatedly returned the same one —
+  // HTTPS got promoted four times before this dedupe.)
+  const recent = [...(longUploads || [])]
+    .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
+  for (const u of recent) {
+    const t = u.topic || u.title;
+    if (t && !promotedTopics.has(t)) return t;
+  }
+  // every published long already has its promo — fall back to a fresh bank idea
   const idea = bank.topics.filter(t => t.status === 'new')
     .sort((a, b) => (b.curated ? 1 : 0) - (a.curated ? 1 : 0) || b.score - a.score)[0];
   return idea ? idea.title : null;
@@ -151,10 +157,15 @@ async function uploadYouTube(videoFile, topic, meta) {
   return { videoId: res.data.id, title };
 }
 
-function notify(title, body) {
+async function notify(title, body) {
   const t = (process.env.NTFY_TOPIC || '').trim().replace(/[^a-zA-Z0-9_-]/g, '');
   if (!t) return;
-  fetch('https://ntfy.sh/' + t, { method: 'POST', headers: { 'Title': title, 'Tags': 'clapper' }, body }).catch(() => {});
+  try {
+    await fetch('https://ntfy.sh/' + t, {
+      method: 'POST', headers: { 'Title': title, 'Tags': 'clapper' }, body,
+      signal: AbortSignal.timeout(5000),
+    });
+  } catch { /* best-effort */ }
 }
 
 async function main() {
@@ -164,12 +175,14 @@ async function main() {
 
   const shorts = loadJson(SHORTS_FILE, { uploads: [] });
   const publishedIds = shorts.uploads.map(u => String(u.artifactId));
+  const promotedTopics = new Set(shorts.uploads.map(u => u.topic).filter(Boolean));
+  const longUploads = loadJson(PUBLISHED_FILE, { uploads: [] }).uploads;
 
   const bank = loadJson(BANK_FILE, { topics: [] });
-  const topic = pickTopic(bank, topicArg);
+  const topic = pickTopic(bank, topicArg, longUploads, promotedTopics);
   if (!topic) {
-    log('GAP: no topic for short (empty bank).');
-    notify('How Dev Works - GAP', 'Shorts run skipped: nothing to make a short about.');
+    log('GAP: no topic for short (every published long already has its promo, bank empty).');
+    notify('How Dev Works - GAP', 'Shorts run skipped: nothing new to make a short about.');
     return;
   }
   log('Topic: ' + topic);
@@ -220,4 +233,8 @@ async function main() {
   notify('How Dev Works - SHORT live', topic + '\nhttps://youtube.com/shorts/' + videoId);
 }
 
-main().catch(e => { log('FAIL: ' + (e.message || e)); notify('How Dev Works - SHORTS FAILED', String(e.message || e).slice(0, 180)); process.exit(1); });
+main().catch(async e => {
+  log('FAIL: ' + (e.message || e));
+  await notify('How Dev Works - SHORTS FAILED', String(e.message || e).slice(0, 180));
+  process.exit(1);
+});

@@ -32,7 +32,9 @@ if (!GROQ && !GEM) {
   process.exit(1);
 }
 
-const BEAT_TARGET = longform ? '60-72' : '8-12';
+// longform target must stay within check-spec's hard cap (2–60 beats) or every
+// generation that obeys the prompt fails validation and burns the repair rounds
+const BEAT_TARGET = longform ? '50-60' : '8-12';
 const DUR_TARGET = longform ? '5.5-7.5 minutes (>= 300s is the publish law)' : '30-60 seconds';
 
 const SCHEMA_RULES = `
