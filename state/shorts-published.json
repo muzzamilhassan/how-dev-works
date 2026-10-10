@@ -60,6 +60,15 @@
       "searchPhrase": "how do https certificates work",
       "artifactId": 11373200143,
       "runId": 37377650244
+    },
+    {
+      "date": "2026-10-10",
+      "title": "Inside the V8 Engine: How JavaScript Gets Fast",
+      "topic": "Inside the V8 Engine: How JavaScript Gets Fast",
+      "videoId": "F1hAScMyKPQ",
+      "searchPhrase": "Inside the V8 Engine: How JavaScript Gets Fast",
+      "artifactId": 11679427353,
+      "runId": 38077970551
     }
   ]
 }
