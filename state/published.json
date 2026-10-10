@@ -145,6 +145,22 @@
       ],
       "artifactId": 11458365882,
       "runId": 37562718050
+    },
+    {
+      "date": "2026-10-10",
+      "title": "Inside the V8 Engine: How JavaScript Gets Fast",
+      "topic": "Inside the V8 Engine: How JavaScript Gets Fast",
+      "videoId": "jGaCHLpd1tI",
+      "publishAt": "2026-10-13T23:30:00.000Z",
+      "searchPhrase": "Inside the V8 Engine: How JavaScript Gets Fast",
+      "tags": [
+        "how dev works",
+        "Inside the V8 Engine: How JavaScript Gets Fast",
+        "programming explained",
+        "software engineering"
+      ],
+      "artifactId": 11657086061,
+      "runId": 38017400901
     }
   ]
 }
