@@ -1,23 +1,7 @@
 {
-  "updated": "2026-10-09T06:45:34.426Z",
+  "updated": "2026-10-10T06:23:47.352Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
-    {
-      "id": "curated-05",
-      "title": "Inside the V8 Engine: How JavaScript Gets Fast",
-      "url": "",
-      "source": "BRANDING.md first-12",
-      "tags": [
-        "v8",
-        "javascript",
-        "performance"
-      ],
-      "score": 497,
-      "addedAt": "2026-09-21",
-      "status": "used",
-      "curated": true,
-      "videoId": "jGaCHLpd1tI"
-    },
     {
       "id": "curated-06",
       "title": "How Database Indexes Work",
@@ -223,6 +207,22 @@
       "status": "new"
     },
     {
+      "id": "d5JYRFE1s",
+      "title": "How we made a 9 MB WebAssembly module feel faster without removing a single byte",
+      "url": "https://dev.to/bra31k/how-we-made-a-9-mb-webassembly-module-feel-faster-without-removing-a-single-byte-5h3a",
+      "source": "DEV",
+      "tags": [
+        "webdev",
+        "react",
+        "frontend",
+        "nextjs",
+        "webassembly"
+      ],
+      "score": 15,
+      "addedAt": "2026-10-10",
+      "status": "new"
+    },
+    {
       "id": "rrFPegQZT",
       "title": "Everyone's learning to prompt better. That's the wrong skill.",
       "url": "https://dev.to/infoinlet1/everyones-learning-to-prompt-better-thats-the-wrong-skill-544o",
@@ -283,6 +283,22 @@
       "score": 11,
       "addedAt": "2026-10-06",
       "status": "new"
+    },
+    {
+      "id": "curated-05",
+      "title": "Inside the V8 Engine: How JavaScript Gets Fast",
+      "url": "",
+      "source": "BRANDING.md first-12",
+      "tags": [
+        "v8",
+        "javascript",
+        "performance"
+      ],
+      "score": 497,
+      "addedAt": "2026-09-21",
+      "status": "used",
+      "curated": true,
+      "videoId": "jGaCHLpd1tI"
     },
     {
       "id": "curated-04",
