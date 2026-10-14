@@ -1,23 +1,7 @@
 {
-  "updated": "2026-10-13T07:07:27.720Z",
+  "updated": "2026-10-14T05:25:44.321Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
-    {
-      "id": "curated-06",
-      "title": "How Database Indexes Work",
-      "url": "",
-      "source": "BRANDING.md first-12",
-      "tags": [
-        "databases",
-        "indexes",
-        "backend"
-      ],
-      "score": 496,
-      "addedAt": "2026-09-21",
-      "status": "used",
-      "curated": true,
-      "videoId": "StBBFmGmDAo"
-    },
     {
       "id": "curated-07",
       "title": "Promises vs Async/Await: What Actually Happens",
@@ -284,6 +268,22 @@
       "score": 11,
       "addedAt": "2026-10-06",
       "status": "new"
+    },
+    {
+      "id": "curated-06",
+      "title": "How Database Indexes Work",
+      "url": "",
+      "source": "BRANDING.md first-12",
+      "tags": [
+        "databases",
+        "indexes",
+        "backend"
+      ],
+      "score": 496,
+      "addedAt": "2026-09-21",
+      "status": "used",
+      "curated": true,
+      "videoId": "StBBFmGmDAo"
     },
     {
       "id": "curated-05",
