@@ -69,6 +69,15 @@
       "searchPhrase": "Inside the V8 Engine: How JavaScript Gets Fast",
       "artifactId": 11679427353,
       "runId": 38077970551
+    },
+    {
+      "date": "2026-10-14",
+      "title": "How Database Indexes Work",
+      "topic": "How Database Indexes Work",
+      "videoId": "UYGzBQpZTZg",
+      "searchPhrase": "how database indexes work",
+      "artifactId": 11921736499,
+      "runId": 38619987010
     }
   ]
 }
