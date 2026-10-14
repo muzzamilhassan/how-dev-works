@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-14T05:25:44.321Z",
+  "updated": "2026-10-14T12:15:45.662Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
     {
@@ -30,7 +30,10 @@
       "score": 494,
       "addedAt": "2026-09-21",
       "status": "new",
-      "curated": true
+      "curated": true,
+      "wave": true,
+      "expires": "2026-10-17T12:15:43.856Z",
+      "waveFrom": "news amplifier: \"docker\" 54 articles this week (2.1x prev week)"
     },
     {
       "id": "curated-09",
