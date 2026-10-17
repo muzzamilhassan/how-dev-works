@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-16T05:02:25.181Z",
+  "updated": "2026-10-17T05:00:27.449Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
     {
@@ -16,25 +16,6 @@
       "addedAt": "2026-09-21",
       "status": "new",
       "curated": true
-    },
-    {
-      "id": "curated-08",
-      "title": "How Docker Containers Actually Work",
-      "url": "",
-      "source": "BRANDING.md first-12",
-      "tags": [
-        "docker",
-        "containers",
-        "devops"
-      ],
-      "score": 494,
-      "addedAt": "2026-09-21",
-      "status": "used",
-      "curated": true,
-      "wave": true,
-      "expires": "2026-10-17T12:15:43.856Z",
-      "waveFrom": "news amplifier: \"docker\" 54 articles this week (2.1x prev week)",
-      "videoId": "1no3UjCzwqs"
     },
     {
       "id": "curated-09",
@@ -111,6 +92,21 @@
       ],
       "score": 95,
       "addedAt": "2026-09-28",
+      "status": "new"
+    },
+    {
+      "id": "esOEV78M2",
+      "title": "Learn How to Design Software Systems Like a Senior Engineer in Our New Course",
+      "url": "https://www.freecodecamp.org/news/learn-how-to-design-software-systems-like-a-senior-engineer-in-our-new-course",
+      "source": "freeCodeCamp",
+      "tags": [
+        "webdev",
+        "career",
+        "architecture",
+        "interview"
+      ],
+      "score": 73,
+      "addedAt": "2026-10-17",
       "status": "new"
     },
     {
@@ -272,6 +268,25 @@
       "score": 11,
       "addedAt": "2026-10-06",
       "status": "new"
+    },
+    {
+      "id": "curated-08",
+      "title": "How Docker Containers Actually Work",
+      "url": "",
+      "source": "BRANDING.md first-12",
+      "tags": [
+        "docker",
+        "containers",
+        "devops"
+      ],
+      "score": 494,
+      "addedAt": "2026-09-21",
+      "status": "used",
+      "curated": true,
+      "wave": true,
+      "expires": "2026-10-17T12:15:43.856Z",
+      "waveFrom": "news amplifier: \"docker\" 54 articles this week (2.1x prev week)",
+      "videoId": "1no3UjCzwqs"
     },
     {
       "id": "curated-06",
