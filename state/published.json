@@ -182,6 +182,28 @@
       ],
       "artifactId": 11865272422,
       "runId": 38499086231
+    },
+    {
+      "date": "2026-10-17",
+      "title": "How Docker Containers Actually Work",
+      "topic": "How Docker Containers Actually Work",
+      "videoId": "1no3UjCzwqs",
+      "publishAt": "2026-10-20T23:30:00.000Z",
+      "searchPhrase": "how does docker containers work",
+      "tags": [
+        "how does docker containers work",
+        "how docker containers work",
+        "how do docker containers work",
+        "how docker and kubernetes work together",
+        "how does docker and kubernetes work together",
+        "how docker compose works",
+        "how docker images work",
+        "how docker works animation",
+        "what is docker container",
+        "how dev works"
+      ],
+      "artifactId": 12085795232,
+      "runId": 38990742418
     }
   ]
 }

@@ -29,11 +29,12 @@
       ],
       "score": 494,
       "addedAt": "2026-09-21",
-      "status": "new",
+      "status": "used",
       "curated": true,
       "wave": true,
       "expires": "2026-10-17T12:15:43.856Z",
-      "waveFrom": "news amplifier: \"docker\" 54 articles this week (2.1x prev week)"
+      "waveFrom": "news amplifier: \"docker\" 54 articles this week (2.1x prev week)",
+      "videoId": "1no3UjCzwqs"
     },
     {
       "id": "curated-09",
