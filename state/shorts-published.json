@@ -78,6 +78,15 @@
       "searchPhrase": "how database indexes work",
       "artifactId": 11921736499,
       "runId": 38619987010
+    },
+    {
+      "date": "2026-10-17",
+      "title": "How Docker Containers Actually Work",
+      "topic": "How Docker Containers Actually Work",
+      "videoId": "2W5evTyesJ8",
+      "searchPhrase": "how does docker containers work",
+      "artifactId": 12109176904,
+      "runId": 39054372599
     }
   ]
 }
