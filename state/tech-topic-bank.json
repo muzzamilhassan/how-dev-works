@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-18T05:09:56.187Z",
+  "updated": "2026-10-18T11:35:31.925Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
     {
@@ -295,25 +295,6 @@
       "score": 11,
       "addedAt": "2026-10-18",
       "status": "new"
-    },
-    {
-      "id": "curated-08",
-      "title": "How Docker Containers Actually Work",
-      "url": "",
-      "source": "BRANDING.md first-12",
-      "tags": [
-        "docker",
-        "containers",
-        "devops"
-      ],
-      "score": 494,
-      "addedAt": "2026-09-21",
-      "status": "used",
-      "curated": true,
-      "wave": true,
-      "expires": "2026-10-17T12:15:43.856Z",
-      "waveFrom": "news amplifier: \"docker\" 54 articles this week (2.1x prev week)",
-      "videoId": "1no3UjCzwqs"
     },
     {
       "id": "curated-06",
