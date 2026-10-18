@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-17T11:04:32.225Z",
+  "updated": "2026-10-18T05:09:56.187Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
     {
@@ -62,6 +62,18 @@
       "addedAt": "2026-09-21",
       "status": "new",
       "curated": true
+    },
+    {
+      "id": "wave-2026-10-17-1",
+      "title": "How the Claude Code team does code review",
+      "url": "https://claude.dev/blog/solving-code-review-at-anthropic/",
+      "source": "HN",
+      "tags": [],
+      "score": 600,
+      "addedAt": "2026-10-17",
+      "status": "new",
+      "wave": true,
+      "expires": "2026-10-20T11:04:24.477Z"
     },
     {
       "id": "oBDUfGZ7N",
@@ -165,6 +177,22 @@
       "status": "new"
     },
     {
+      "id": "NsyvHz0Sh",
+      "title": "What I Actually Learn When I Build With AI",
+      "url": "https://dev.to/sizzlebop/what-i-actually-learn-when-i-build-with-ai-1074",
+      "source": "DEV",
+      "tags": [
+        "ai",
+        "productivity",
+        "ai-coding",
+        "code-review",
+        "vibe-coding"
+      ],
+      "score": 19,
+      "addedAt": "2026-10-18",
+      "status": "new"
+    },
+    {
       "id": "BkbDbNDuV",
       "title": "Tailwind has a huge problem...",
       "url": "https://www.youtube.com/watch?v=tHBbNNh1-OE",
@@ -254,19 +282,18 @@
       "status": "new"
     },
     {
-      "id": "vzW8IUKDR",
-      "title": "Confident Isn't Accurate: How AI Hallucinations Actually Work",
-      "url": "https://dev.to/ale3oula/confident-isnt-accurate-how-ai-hallucinations-actually-work-4djo",
-      "source": "DEV",
+      "id": "z8Zhkg5M2",
+      "title": "No more tech debt",
+      "url": "https://swizec.com/blog/no-more-tech-debt",
+      "source": "swizec.com",
       "tags": [
-        "ai",
-        "security",
-        "llm",
-        "prompt-engineering",
-        "rag"
+        "webdev",
+        "general-programming",
+        "ai-agents",
+        "tailwind-css"
       ],
       "score": 11,
-      "addedAt": "2026-10-06",
+      "addedAt": "2026-10-18",
       "status": "new"
     },
     {
@@ -403,18 +430,6 @@
       "addedAt": "2026-09-21",
       "status": "rejected",
       "note": "off-brand opinion headline — auto-pick skipped; curated list takes priority"
-    },
-    {
-      "id": "wave-2026-10-17-1",
-      "title": "How the Claude Code team does code review",
-      "url": "https://claude.dev/blog/solving-code-review-at-anthropic/",
-      "source": "HN",
-      "tags": [],
-      "score": 600,
-      "addedAt": "2026-10-17",
-      "status": "new",
-      "wave": true,
-      "expires": "2026-10-20T11:04:24.477Z"
     }
   ]
 }
