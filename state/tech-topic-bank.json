@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-18T11:35:31.925Z",
+  "updated": "2026-10-19T05:21:20.410Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
     {
@@ -255,6 +255,20 @@
       "status": "new"
     },
     {
+      "id": "9YRz1rUXa",
+      "title": "Astro 7.4",
+      "url": "https://astro.build/blog/astro-740",
+      "source": "Astro",
+      "tags": [
+        "webdev",
+        "nodejs",
+        "astro"
+      ],
+      "score": 14,
+      "addedAt": "2026-10-19",
+      "status": "new"
+    },
+    {
       "id": "4UVgbxuDB",
       "title": "How fast is the web? Explore billions of real-user measurements with BEACON",
       "url": "https://blog.cloudflare.com/how-fast-is-the-web",
@@ -279,21 +293,6 @@
       ],
       "score": 12,
       "addedAt": "2026-10-01",
-      "status": "new"
-    },
-    {
-      "id": "z8Zhkg5M2",
-      "title": "No more tech debt",
-      "url": "https://swizec.com/blog/no-more-tech-debt",
-      "source": "swizec.com",
-      "tags": [
-        "webdev",
-        "general-programming",
-        "ai-agents",
-        "tailwind-css"
-      ],
-      "score": 11,
-      "addedAt": "2026-10-18",
       "status": "new"
     },
     {
