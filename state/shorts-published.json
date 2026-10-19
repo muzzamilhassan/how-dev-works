@@ -87,6 +87,15 @@
       "searchPhrase": "how does docker containers work",
       "artifactId": 12109176904,
       "runId": 39054372599
+    },
+    {
+      "date": "2026-10-19",
+      "title": "How DNS Finds a Website in Milliseconds",
+      "topic": "How DNS Finds a Website in Milliseconds",
+      "videoId": "VM6KDJX4qSU",
+      "searchPhrase": "How DNS Finds a Website in Milliseconds",
+      "artifactId": 12219207487,
+      "runId": 39317905209
     }
   ]
 }
