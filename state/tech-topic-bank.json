@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-19T05:21:20.410Z",
+  "updated": "2026-10-20T05:20:22.163Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
     {
@@ -104,6 +104,21 @@
       ],
       "score": 95,
       "addedAt": "2026-09-28",
+      "status": "new"
+    },
+    {
+      "id": "z8Zhkg5M2",
+      "title": "No more tech debt",
+      "url": "https://swizec.com/blog/no-more-tech-debt",
+      "source": "swizec.com",
+      "tags": [
+        "webdev",
+        "general-programming",
+        "ai-agents",
+        "tailwind-css"
+      ],
+      "score": 76,
+      "addedAt": "2026-10-20",
       "status": "new"
     },
     {
@@ -220,6 +235,19 @@
       "status": "new"
     },
     {
+      "id": "pbMBHtNPF",
+      "title": "Input Range Slider with Custom Shapes",
+      "url": "https://css-tip.com/shaped-range-slider",
+      "source": "CSS Tip",
+      "tags": [
+        "webdev",
+        "css"
+      ],
+      "score": 15,
+      "addedAt": "2026-10-20",
+      "status": "new"
+    },
+    {
       "id": "d5JYRFE1s",
       "title": "How we made a 9 MB WebAssembly module feel faster without removing a single byte",
       "url": "https://dev.to/bra31k/how-we-made-a-9-mb-webassembly-module-feel-faster-without-removing-a-single-byte-5h3a",
@@ -266,33 +294,6 @@
       ],
       "score": 14,
       "addedAt": "2026-10-19",
-      "status": "new"
-    },
-    {
-      "id": "4UVgbxuDB",
-      "title": "How fast is the web? Explore billions of real-user measurements with BEACON",
-      "url": "https://blog.cloudflare.com/how-fast-is-the-web",
-      "source": "Cloudflare",
-      "tags": [
-        "webdev",
-        "cloudflare",
-        "google-bigquery"
-      ],
-      "score": 14,
-      "addedAt": "2026-09-29",
-      "status": "new"
-    },
-    {
-      "id": "2HsITdYwt",
-      "title": "Example.com Just Launched The Biggest Redesign In Decades",
-      "url": "https://www.debugbear.com/blog/example-dot-com-redesign-history",
-      "source": "DebugBear",
-      "tags": [
-        "webdev",
-        "css"
-      ],
-      "score": 12,
-      "addedAt": "2026-10-01",
       "status": "new"
     },
     {
