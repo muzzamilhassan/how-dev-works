@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-20T05:20:22.163Z",
+  "updated": "2026-10-20T11:58:06.056Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
     {
@@ -62,18 +62,6 @@
       "addedAt": "2026-09-21",
       "status": "new",
       "curated": true
-    },
-    {
-      "id": "wave-2026-10-17-1",
-      "title": "How the Claude Code team does code review",
-      "url": "https://claude.dev/blog/solving-code-review-at-anthropic/",
-      "source": "HN",
-      "tags": [],
-      "score": 600,
-      "addedAt": "2026-10-17",
-      "status": "new",
-      "wave": true,
-      "expires": "2026-10-20T11:04:24.477Z"
     },
     {
       "id": "oBDUfGZ7N",
