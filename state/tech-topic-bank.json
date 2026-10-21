@@ -1,23 +1,7 @@
 {
-  "updated": "2026-10-20T11:58:06.056Z",
+  "updated": "2026-10-21T05:20:21.577Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
-    {
-      "id": "curated-07",
-      "title": "Promises vs Async/Await: What Actually Happens",
-      "url": "",
-      "source": "BRANDING.md first-12",
-      "tags": [
-        "javascript",
-        "async",
-        "event loop"
-      ],
-      "score": 495,
-      "addedAt": "2026-09-21",
-      "status": "used",
-      "curated": true,
-      "videoId": "Jw_kNHuxyWA"
-    },
     {
       "id": "curated-09",
       "title": "Garbage Collection Explained",
@@ -168,6 +152,21 @@
       "status": "new"
     },
     {
+      "id": "js6QzTT4f",
+      "title": "Cloudflare Pages vs Workers: which should you choose?",
+      "url": "https://flaviocopes.com/cloudflare-pages-vs-workers",
+      "source": "Flavio Copes",
+      "tags": [
+        "webdev",
+        "serverless",
+        "cloudflare",
+        "astro"
+      ],
+      "score": 26,
+      "addedAt": "2026-10-21",
+      "status": "new"
+    },
+    {
       "id": "yf9B58pww",
       "title": "Front-end fast money with Adam Argyle",
       "url": "https://www.youtube.com/watch?v=SANA0mKg6tw",
@@ -284,6 +283,22 @@
       "score": 14,
       "addedAt": "2026-10-19",
       "status": "new"
+    },
+    {
+      "id": "curated-07",
+      "title": "Promises vs Async/Await: What Actually Happens",
+      "url": "",
+      "source": "BRANDING.md first-12",
+      "tags": [
+        "javascript",
+        "async",
+        "event loop"
+      ],
+      "score": 495,
+      "addedAt": "2026-09-21",
+      "status": "used",
+      "curated": true,
+      "videoId": "Jw_kNHuxyWA"
     },
     {
       "id": "curated-06",
