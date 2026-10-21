@@ -204,6 +204,28 @@
       ],
       "artifactId": 12085795232,
       "runId": 38990742418
+    },
+    {
+      "date": "2026-10-21",
+      "title": "Promises vs Async/Await: What Actually Happens",
+      "topic": "Promises vs Async/Await: What Actually Happens",
+      "videoId": "Jw_kNHuxyWA",
+      "publishAt": "2026-10-23T23:30:00.000Z",
+      "searchPhrase": "how does async await work",
+      "tags": [
+        "how does async await work",
+        "promise async and await in javascript",
+        "what is await and async in javascript",
+        "difference between async await and promise",
+        "promises vs async await",
+        "promises vs async await in js",
+        "how dev works",
+        "Promises vs Async/Await: What Actually Happens",
+        "programming explained",
+        "software engineering"
+      ],
+      "artifactId": 12315420434,
+      "runId": 39529598470
     }
   ]
 }
