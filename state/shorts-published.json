@@ -96,6 +96,15 @@
       "searchPhrase": "How DNS Finds a Website in Milliseconds",
       "artifactId": 12219207487,
       "runId": 39317905209
+    },
+    {
+      "date": "2026-10-21",
+      "title": "Promises vs Async/Await: What Actually Happens",
+      "topic": "Promises vs Async/Await: What Actually Happens",
+      "videoId": "MfsRUaUyfrg",
+      "searchPhrase": "how does async await work",
+      "artifactId": 12373255435,
+      "runId": 39657849737
     }
   ]
 }
