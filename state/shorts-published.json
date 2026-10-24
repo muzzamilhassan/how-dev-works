@@ -105,6 +105,15 @@
       "searchPhrase": "how does async await work",
       "artifactId": 12373255435,
       "runId": 39657849737
+    },
+    {
+      "date": "2026-10-24",
+      "title": "How does garbage collection work",
+      "topic": "Garbage Collection Explained",
+      "videoId": "piErBlmcRmM",
+      "searchPhrase": "how does garbage collection work",
+      "artifactId": 12570021783,
+      "runId": 40117232054
     }
   ]
 }
