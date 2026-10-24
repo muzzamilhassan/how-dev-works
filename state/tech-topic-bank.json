@@ -1,23 +1,7 @@
 {
-  "updated": "2026-10-23T05:24:03.738Z",
+  "updated": "2026-10-24T05:02:39.524Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
-    {
-      "id": "curated-09",
-      "title": "Garbage Collection Explained",
-      "url": "",
-      "source": "BRANDING.md first-12",
-      "tags": [
-        "memory",
-        "garbage collection",
-        "runtimes"
-      ],
-      "score": 493,
-      "addedAt": "2026-09-21",
-      "status": "used",
-      "curated": true,
-      "videoId": "WI1NYaER4Mk"
-    },
     {
       "id": "curated-10",
       "title": "REST vs GraphQL: What Each One Really Costs You",
@@ -296,6 +280,22 @@
       "score": 12,
       "addedAt": "2026-10-23",
       "status": "new"
+    },
+    {
+      "id": "curated-09",
+      "title": "Garbage Collection Explained",
+      "url": "",
+      "source": "BRANDING.md first-12",
+      "tags": [
+        "memory",
+        "garbage collection",
+        "runtimes"
+      ],
+      "score": 493,
+      "addedAt": "2026-09-21",
+      "status": "used",
+      "curated": true,
+      "videoId": "WI1NYaER4Mk"
     },
     {
       "id": "curated-07",
