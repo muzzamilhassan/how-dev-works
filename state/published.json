@@ -226,6 +226,28 @@
       ],
       "artifactId": 12315420434,
       "runId": 39529598470
+    },
+    {
+      "date": "2026-10-24",
+      "title": "How does garbage collection work",
+      "topic": "Garbage Collection Explained",
+      "videoId": "WI1NYaER4Mk",
+      "publishAt": "2026-10-27T23:30:00.000Z",
+      "searchPhrase": "how does garbage collection work",
+      "tags": [
+        "how does garbage collection work",
+        "jvm garbage collection explained",
+        "garbage collection explained",
+        "what is garbage collection in java explain with example",
+        "garbage collector explained",
+        "garbage collection",
+        "what is garbage collection",
+        "how dev works",
+        "programming explained",
+        "software engineering"
+      ],
+      "artifactId": 12544886250,
+      "runId": 40053229507
     }
   ]
 }
