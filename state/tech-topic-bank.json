@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-24T11:27:14.392Z",
+  "updated": "2026-10-25T05:20:10.125Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
     {
@@ -181,6 +181,18 @@
       ],
       "score": 19,
       "addedAt": "2026-10-18",
+      "status": "new"
+    },
+    {
+      "id": "gxa7Vv6N6",
+      "title": "OpenCode got hacked",
+      "url": "https://www.youtube.com/watch?v=9OahTki4cPA",
+      "source": "ThePrimeTime",
+      "tags": [
+        "ui-design"
+      ],
+      "score": 17,
+      "addedAt": "2026-10-25",
       "status": "new"
     },
     {
