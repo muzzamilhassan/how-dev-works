@@ -114,6 +114,15 @@
       "searchPhrase": "how does garbage collection work",
       "artifactId": 12570021783,
       "runId": 40117232054
+    },
+    {
+      "date": "2026-10-26",
+      "title": "How DNS Actually Works",
+      "topic": "How DNS Actually Works",
+      "videoId": "h4_O4qoUOQs",
+      "searchPhrase": "how dns works in active directory",
+      "artifactId": 12685112364,
+      "runId": 40393579531
     }
   ]
 }
