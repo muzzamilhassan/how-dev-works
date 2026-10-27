@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-26T05:20:25.018Z",
+  "updated": "2026-10-27T05:37:45.946Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
     {
@@ -184,6 +184,18 @@
       "status": "new"
     },
     {
+      "id": "UXWeQX784",
+      "title": "Programming Laws Tier list | TheStandup",
+      "url": "https://www.youtube.com/watch?v=Bye5avxGMKM",
+      "source": "ThePrimeTime",
+      "tags": [
+        "ui-design"
+      ],
+      "score": 17,
+      "addedAt": "2026-10-27",
+      "status": "new"
+    },
+    {
       "id": "gxa7Vv6N6",
       "title": "OpenCode got hacked",
       "url": "https://www.youtube.com/watch?v=9OahTki4cPA",
@@ -282,18 +294,6 @@
       ],
       "score": 14,
       "addedAt": "2026-10-19",
-      "status": "new"
-    },
-    {
-      "id": "kxJzQzucI",
-      "title": "How To Become A 10x Programmer",
-      "url": "https://www.youtube.com/watch?v=KbFGEH4A8G0",
-      "source": "CodeHead",
-      "tags": [
-        "webdev"
-      ],
-      "score": 12,
-      "addedAt": "2026-10-23",
       "status": "new"
     },
     {
