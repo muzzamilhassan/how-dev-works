@@ -123,6 +123,15 @@
       "searchPhrase": "how dns works in active directory",
       "artifactId": 12685112364,
       "runId": 40393579531
+    },
+    {
+      "date": "2026-10-28",
+      "title": "REST vs GraphQL: What Each One Really Costs You",
+      "topic": "REST vs GraphQL: What Each One Really Costs You",
+      "videoId": "XcBE7jowX98",
+      "searchPhrase": "REST vs GraphQL: What Each One Really Costs You",
+      "artifactId": 12847477059,
+      "runId": 40758929752
     }
   ]
 }
