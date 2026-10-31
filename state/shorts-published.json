@@ -132,6 +132,15 @@
       "searchPhrase": "REST vs GraphQL: What Each One Really Costs You",
       "artifactId": 12847477059,
       "runId": 40758929752
+    },
+    {
+      "date": "2026-10-31",
+      "title": "Cloudflare Pages vs Workers: which should you choose?",
+      "topic": "Cloudflare Pages vs Workers: which should you choose?",
+      "videoId": "73olZVGiUEg",
+      "searchPhrase": "cloudflare pages vs workers",
+      "artifactId": 13053878240,
+      "runId": 41231570828
     }
   ]
 }
