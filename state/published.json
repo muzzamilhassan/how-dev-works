@@ -264,6 +264,23 @@
       ],
       "artifactId": 12787434269,
       "runId": 40621328286
+    },
+    {
+      "date": "2026-10-31",
+      "title": "Cloudflare Pages vs Workers: which should you choose?",
+      "topic": "Cloudflare Pages vs Workers: which should you choose?",
+      "videoId": "emwxMUUU-kE",
+      "publishAt": "2026-11-03T23:30:00.000Z",
+      "searchPhrase": "cloudflare pages vs workers",
+      "tags": [
+        "cloudflare pages vs workers",
+        "how dev works",
+        "Cloudflare Pages vs Workers: which should you choose?",
+        "programming explained",
+        "software engineering"
+      ],
+      "artifactId": 13027337003,
+      "runId": 41160897218
     }
   ]
 }
