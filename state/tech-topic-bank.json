@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-31T06:18:36.406Z",
+  "updated": "2026-11-01T06:52:19.187Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
     {
@@ -247,6 +247,22 @@
       ],
       "score": 14,
       "addedAt": "2026-10-19",
+      "status": "new"
+    },
+    {
+      "id": "6xH6jcun2",
+      "title": "We Need to Talk About How Gross Modern Web Design Has Become (And How We Built an AI to Catch It)",
+      "url": "https://dev.to/dj29/we-need-to-talk-about-how-gross-modern-web-design-has-become-and-how-we-built-an-ai-to-catch-it-5gin",
+      "source": "DEV",
+      "tags": [
+        "webdev",
+        "devtools",
+        "google-gemini",
+        "ui-ux",
+        "fastapi"
+      ],
+      "score": 10,
+      "addedAt": "2026-11-01",
       "status": "new"
     },
     {
