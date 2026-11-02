@@ -141,6 +141,15 @@
       "searchPhrase": "cloudflare pages vs workers",
       "artifactId": 13053878240,
       "runId": 41231570828
+    },
+    {
+      "date": "2026-11-02",
+      "title": "How Git Actually Works",
+      "topic": "How Git Actually Works",
+      "videoId": "3OQee-3X-KE",
+      "searchPhrase": "how git works explained in 4 minutes",
+      "artifactId": 13186577486,
+      "runId": 41541377647
     }
   ]
 }
