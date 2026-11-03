@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-02T06:51:59.818Z",
+  "updated": "2026-11-03T07:15:55.435Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
     {
@@ -247,6 +247,20 @@
       ],
       "score": 14,
       "addedAt": "2026-10-19",
+      "status": "new"
+    },
+    {
+      "id": "HtxF0l8ZG",
+      "title": "Best Free APIs for Developers : The Complete, Categorized List",
+      "url": "https://dev.to/startupcafe/best-free-apis-for-developers-the-complete-categorized-list-27oc",
+      "source": "DEV",
+      "tags": [
+        "javascript",
+        "productivity",
+        "authentication"
+      ],
+      "score": 12,
+      "addedAt": "2026-11-03",
       "status": "new"
     },
     {
