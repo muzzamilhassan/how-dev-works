@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-04T06:59:09.254Z",
+  "updated": "2026-11-04T14:47:50.064Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
     {
@@ -295,23 +295,6 @@
       "score": 10,
       "addedAt": "2026-10-28",
       "status": "new"
-    },
-    {
-      "id": "yf9B58pww",
-      "title": "Front-end fast money with Adam Argyle",
-      "url": "https://www.youtube.com/watch?v=SANA0mKg6tw",
-      "source": "Kevin Powell",
-      "tags": [
-        "webdev",
-        "css"
-      ],
-      "score": 20,
-      "addedAt": "2026-10-02",
-      "status": "used",
-      "wave": true,
-      "expires": "2026-11-04T13:42:30.686Z",
-      "waveFrom": "news amplifier: \"css\" 42 articles this week (1.8x prev week)",
-      "videoId": "XimwBg5EsSM"
     },
     {
       "id": "curated-10",
