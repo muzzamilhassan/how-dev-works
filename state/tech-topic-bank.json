@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-03T14:33:56.664Z",
+  "updated": "2026-11-04T06:59:09.254Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
     {
@@ -117,23 +117,6 @@
       "status": "new"
     },
     {
-      "id": "yf9B58pww",
-      "title": "Front-end fast money with Adam Argyle",
-      "url": "https://www.youtube.com/watch?v=SANA0mKg6tw",
-      "source": "Kevin Powell",
-      "tags": [
-        "webdev",
-        "css"
-      ],
-      "score": 20,
-      "addedAt": "2026-10-02",
-      "status": "used",
-      "wave": true,
-      "expires": "2026-11-04T13:42:30.686Z",
-      "waveFrom": "news amplifier: \"css\" 42 articles this week (1.8x prev week)",
-      "videoId": "XimwBg5EsSM"
-    },
-    {
       "id": "NsyvHz0Sh",
       "title": "What I Actually Learn When I Build With AI",
       "url": "https://dev.to/sizzlebop/what-i-actually-learn-when-i-build-with-ai-1074",
@@ -147,6 +130,20 @@
       ],
       "score": 19,
       "addedAt": "2026-10-18",
+      "status": "new"
+    },
+    {
+      "id": "5Kuaf5ZQo",
+      "title": "How to Find and Fix Common Technical SEO Issues on Your Website",
+      "url": "https://www.freecodecamp.org/news/fix-common-technical-seo-issues",
+      "source": "freeCodeCamp",
+      "tags": [
+        "webdev",
+        "nodejs",
+        "curl"
+      ],
+      "score": 17,
+      "addedAt": "2026-11-04",
       "status": "new"
     },
     {
@@ -298,6 +295,23 @@
       "score": 10,
       "addedAt": "2026-10-28",
       "status": "new"
+    },
+    {
+      "id": "yf9B58pww",
+      "title": "Front-end fast money with Adam Argyle",
+      "url": "https://www.youtube.com/watch?v=SANA0mKg6tw",
+      "source": "Kevin Powell",
+      "tags": [
+        "webdev",
+        "css"
+      ],
+      "score": 20,
+      "addedAt": "2026-10-02",
+      "status": "used",
+      "wave": true,
+      "expires": "2026-11-04T13:42:30.686Z",
+      "waveFrom": "news amplifier: \"css\" 42 articles this week (1.8x prev week)",
+      "videoId": "XimwBg5EsSM"
     },
     {
       "id": "curated-10",
