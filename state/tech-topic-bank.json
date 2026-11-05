@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-04T14:47:50.064Z",
+  "updated": "2026-11-05T07:25:12.987Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
     {
@@ -251,6 +251,21 @@
       "status": "new"
     },
     {
+      "id": "D3mfejO1F",
+      "title": "No Human Will Ever Write Code Better Than LLMs? Better at What?",
+      "url": "https://dev.to/dannwaneri/no-human-will-ever-write-code-better-than-llms-better-at-what-1dme",
+      "source": "DEV",
+      "tags": [
+        "ai",
+        "llm",
+        "career",
+        "ai-coding"
+      ],
+      "score": 12,
+      "addedAt": "2026-11-05",
+      "status": "new"
+    },
+    {
       "id": "HtxF0l8ZG",
       "title": "Best Free APIs for Developers : The Complete, Categorized List",
       "url": "https://dev.to/startupcafe/best-free-apis-for-developers-the-complete-categorized-list-27oc",
@@ -278,22 +293,6 @@
       ],
       "score": 10,
       "addedAt": "2026-11-01",
-      "status": "new"
-    },
-    {
-      "id": "D0ddZcNZv",
-      "title": "The Hidden Bugs Behind Duplicate API Requests",
-      "url": "https://dev.to/hanzla/the-hidden-bugs-behind-duplicate-api-requests-1npb",
-      "source": "DEV",
-      "tags": [
-        "ai",
-        "webdev",
-        "react",
-        "architecture",
-        "postgresql"
-      ],
-      "score": 10,
-      "addedAt": "2026-10-28",
       "status": "new"
     },
     {
