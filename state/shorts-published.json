@@ -159,6 +159,15 @@
       "searchPhrase": "Front-end fast money with Adam Argyle",
       "artifactId": 13365790326,
       "runId": 41911663503
+    },
+    {
+      "date": "2026-11-07",
+      "title": "How React Re-Renders (and Why Your App Gets Slow)",
+      "topic": "How React Re-Renders (and Why Your App Gets Slow)",
+      "videoId": "cQI170kv9Oo",
+      "searchPhrase": "How React Re-Renders (and Why Your App Gets Slow)",
+      "artifactId": 13587016676,
+      "runId": 42404582219
     }
   ]
 }
