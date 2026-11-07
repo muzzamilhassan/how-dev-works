@@ -1,0 +1,12 @@
+{
+  "renders": [
+    {
+      "date": "2026-11-07",
+      "artifactId": 13557823408,
+      "runId": 42331969470,
+      "topic": "I Built a Visual System Design Reference — Switch Any Architecture Between AWS, Azure, GCP & Open Source",
+      "durSec": 246,
+      "reason": "render shorter than 300s"
+    }
+  ]
+}
