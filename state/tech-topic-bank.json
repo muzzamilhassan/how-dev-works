@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-06T14:31:11.404Z",
+  "updated": "2026-11-07T06:37:28.341Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
     {
@@ -137,6 +137,36 @@
       "status": "new"
     },
     {
+      "id": "GIqM4P76d",
+      "title": "Don't Write Markdown Files for Your Coding Agent. Write Scripts.",
+      "url": "https://dev.to/dannwaneri/dont-write-markdown-files-for-your-coding-agent-write-scripts-j00",
+      "source": "DEV",
+      "tags": [
+        "ai",
+        "devops",
+        "ai-agents",
+        "devtools",
+        "productivity",
+        "cicd",
+        "claude-code"
+      ],
+      "score": 19,
+      "addedAt": "2026-11-07",
+      "status": "new"
+    },
+    {
+      "id": "VlEWp3w7G",
+      "title": "well this is bad",
+      "url": "https://www.youtube.com/watch?v=B3_Ftfhkzz0",
+      "source": "ThePrimeTime",
+      "tags": [
+        "ui-design"
+      ],
+      "score": 19,
+      "addedAt": "2026-11-07",
+      "status": "new"
+    },
+    {
       "id": "NsyvHz0Sh",
       "title": "What I Actually Learn When I Build With AI",
       "url": "https://dev.to/sizzlebop/what-i-actually-learn-when-i-build-with-ai-1074",
@@ -238,28 +268,6 @@
       "status": "new"
     },
     {
-      "id": "rrFPegQZT",
-      "title": "Everyone's learning to prompt better. That's the wrong skill.",
-      "url": "https://dev.to/infoinlet1/everyones-learning-to-prompt-better-thats-the-wrong-skill-544o",
-      "source": "DEV",
-      "tags": [
-        "ai",
-        "webdev",
-        "career",
-        "llm",
-        "testing",
-        "ai-coding",
-        "prompt-engineering",
-        "code-review"
-      ],
-      "score": 15,
-      "addedAt": "2026-09-29",
-      "status": "new",
-      "wave": true,
-      "expires": "2026-11-06T14:33:49.642Z",
-      "waveFrom": "news amplifier: \"llm\" 64 articles this week (1.6x prev week)"
-    },
-    {
       "id": "9YRz1rUXa",
       "title": "Astro 7.4",
       "url": "https://astro.build/blog/astro-740",
@@ -286,20 +294,6 @@
       ],
       "score": 12,
       "addedAt": "2026-11-05",
-      "status": "new"
-    },
-    {
-      "id": "HtxF0l8ZG",
-      "title": "Best Free APIs for Developers : The Complete, Categorized List",
-      "url": "https://dev.to/startupcafe/best-free-apis-for-developers-the-complete-categorized-list-27oc",
-      "source": "DEV",
-      "tags": [
-        "javascript",
-        "productivity",
-        "authentication"
-      ],
-      "score": 12,
-      "addedAt": "2026-11-03",
       "status": "new"
     },
     {
