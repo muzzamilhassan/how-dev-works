@@ -297,6 +297,22 @@
       ],
       "artifactId": 13292289557,
       "runId": 41765046093
+    },
+    {
+      "date": "2026-11-11",
+      "title": "How React Re-Renders (and Why Your App Gets Slow)",
+      "topic": "How React Re-Renders (and Why Your App Gets Slow)",
+      "videoId": "Hb20Ah0PSAk",
+      "publishAt": "2026-11-13T23:30:00.000Z",
+      "searchPhrase": "How React Re-Renders (and Why Your App Gets Slow)",
+      "tags": [
+        "how dev works",
+        "How React Re-Renders (and Why Your App Gets Slow)",
+        "programming explained",
+        "software engineering"
+      ],
+      "artifactId": 13825161167,
+      "runId": 42949238355
     }
   ]
 }
