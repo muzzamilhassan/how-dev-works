@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-12T07:44:22.637Z",
+  "updated": "2026-11-12T15:31:37.824Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
     {
@@ -438,6 +438,18 @@
       "addedAt": "2026-09-21",
       "status": "rejected",
       "note": "off-brand opinion headline — auto-pick skipped; curated list takes priority"
+    },
+    {
+      "id": "wave-2026-11-12-1",
+      "title": "Why Writing Correct Software Is Hard",
+      "url": "https://pron.github.io/posts/correctness-and-complexity",
+      "source": "HN",
+      "tags": [],
+      "score": 600,
+      "addedAt": "2026-11-12",
+      "status": "new",
+      "wave": true,
+      "expires": "2026-11-15T15:31:31.991Z"
     }
   ]
 }
