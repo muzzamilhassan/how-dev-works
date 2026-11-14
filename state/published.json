@@ -313,6 +313,22 @@
       ],
       "artifactId": 13825161167,
       "runId": 42949238355
+    },
+    {
+      "date": "2026-11-14",
+      "title": "Why Writing Correct Software Is Hard",
+      "topic": "Why Writing Correct Software Is Hard",
+      "videoId": "NP27SeJ76Qs",
+      "publishAt": "2026-11-17T23:30:00.000Z",
+      "searchPhrase": "Why Writing Correct Software Is Hard",
+      "tags": [
+        "how dev works",
+        "Why Writing Correct Software Is Hard",
+        "programming explained",
+        "software engineering"
+      ],
+      "artifactId": 14096413485,
+      "runId": 43551733166
     }
   ]
 }
