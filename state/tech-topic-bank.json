@@ -1,20 +1,7 @@
 {
-  "updated": "2026-11-13T07:19:50.468Z",
+  "updated": "2026-11-14T07:02:25.453Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
-    {
-      "id": "wave-2026-11-12-1",
-      "title": "Why Writing Correct Software Is Hard",
-      "url": "https://pron.github.io/posts/correctness-and-complexity",
-      "source": "HN",
-      "tags": [],
-      "score": 600,
-      "addedAt": "2026-11-12",
-      "status": "used",
-      "wave": true,
-      "expires": "2026-11-15T15:31:31.991Z",
-      "videoId": "NP27SeJ76Qs"
-    },
     {
       "id": "oBDUfGZ7N",
       "title": "Dear Coder: Open This If You're Feeling AI FOMO",
@@ -129,6 +116,18 @@
       "status": "new"
     },
     {
+      "id": "VlEWp3w7G",
+      "title": "well this is bad",
+      "url": "https://www.youtube.com/watch?v=B3_Ftfhkzz0",
+      "source": "ThePrimeTime",
+      "tags": [
+        "ui-design"
+      ],
+      "score": 19,
+      "addedAt": "2026-11-07",
+      "status": "new"
+    },
+    {
       "id": "GIqM4P76d",
       "title": "Don't Write Markdown Files for Your Coding Agent. Write Scripts.",
       "url": "https://dev.to/dannwaneri/dont-write-markdown-files-for-your-coding-agent-write-scripts-j00",
@@ -141,18 +140,6 @@
         "productivity",
         "cicd",
         "claude-code"
-      ],
-      "score": 19,
-      "addedAt": "2026-11-07",
-      "status": "new"
-    },
-    {
-      "id": "VlEWp3w7G",
-      "title": "well this is bad",
-      "url": "https://www.youtube.com/watch?v=B3_Ftfhkzz0",
-      "source": "ThePrimeTime",
-      "tags": [
-        "ui-design"
       ],
       "score": 19,
       "addedAt": "2026-11-07",
@@ -270,6 +257,19 @@
       "score": 13,
       "addedAt": "2026-11-09",
       "status": "new"
+    },
+    {
+      "id": "wave-2026-11-12-1",
+      "title": "Why Writing Correct Software Is Hard",
+      "url": "https://pron.github.io/posts/correctness-and-complexity",
+      "source": "HN",
+      "tags": [],
+      "score": 600,
+      "addedAt": "2026-11-12",
+      "status": "used",
+      "wave": true,
+      "expires": "2026-11-15T15:31:31.991Z",
+      "videoId": "NP27SeJ76Qs"
     },
     {
       "id": "curated-11",
