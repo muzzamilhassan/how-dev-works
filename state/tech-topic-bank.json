@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-17T08:30:19.773Z",
+  "updated": "2026-11-17T16:23:04.413Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
     {
@@ -75,7 +75,10 @@
       ],
       "score": 35,
       "addedAt": "2026-09-29",
-      "status": "new"
+      "status": "new",
+      "wave": true,
+      "expires": "2026-11-20T16:23:01.292Z",
+      "waveFrom": "news amplifier: \"open-source\" 100 articles this week (1.6x prev week)"
     },
     {
       "id": "6lmauEkPV",
@@ -452,6 +455,18 @@
       "addedAt": "2026-09-21",
       "status": "rejected",
       "note": "off-brand opinion headline — auto-pick skipped; curated list takes priority"
+    },
+    {
+      "id": "wave-2026-11-17-1",
+      "title": "How the Claude Code team thinks about verification",
+      "url": "https://claude.dev/blog/how-the-claude-code-team-thinks-about-verification/",
+      "source": "HN",
+      "tags": [],
+      "score": 600,
+      "addedAt": "2026-11-17",
+      "status": "new",
+      "wave": true,
+      "expires": "2026-11-20T16:23:00.539Z"
     }
   ]
 }
