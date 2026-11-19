@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-18T07:57:43.237Z",
+  "updated": "2026-11-19T07:57:22.037Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
     {
@@ -133,18 +133,6 @@
       "status": "new"
     },
     {
-      "id": "VlEWp3w7G",
-      "title": "well this is bad",
-      "url": "https://www.youtube.com/watch?v=B3_Ftfhkzz0",
-      "source": "ThePrimeTime",
-      "tags": [
-        "ui-design"
-      ],
-      "score": 19,
-      "addedAt": "2026-11-07",
-      "status": "new"
-    },
-    {
       "id": "GIqM4P76d",
       "title": "Don't Write Markdown Files for Your Coding Agent. Write Scripts.",
       "url": "https://dev.to/dannwaneri/dont-write-markdown-files-for-your-coding-agent-write-scripts-j00",
@@ -157,6 +145,18 @@
         "productivity",
         "cicd",
         "claude-code"
+      ],
+      "score": 19,
+      "addedAt": "2026-11-07",
+      "status": "new"
+    },
+    {
+      "id": "VlEWp3w7G",
+      "title": "well this is bad",
+      "url": "https://www.youtube.com/watch?v=B3_Ftfhkzz0",
+      "source": "ThePrimeTime",
+      "tags": [
+        "ui-design"
       ],
       "score": 19,
       "addedAt": "2026-11-07",
@@ -176,6 +176,21 @@
       ],
       "score": 19,
       "addedAt": "2026-10-18",
+      "status": "new"
+    },
+    {
+      "id": "EIFaV35LX",
+      "title": "Is Coding with AI Actually Faster and Cheaper?",
+      "url": "https://dev.to/sylwia-lask/is-coding-with-ai-actually-faster-and-cheaper-2810",
+      "source": "DEV",
+      "tags": [
+        "ai",
+        "ai-agents",
+        "github",
+        "productivity"
+      ],
+      "score": 17,
+      "addedAt": "2026-11-19",
       "status": "new"
     },
     {
@@ -215,6 +230,20 @@
       ],
       "score": 16,
       "addedAt": "2026-10-03",
+      "status": "new"
+    },
+    {
+      "id": "IX55YQWQM",
+      "title": "What do you think I should make next?",
+      "url": "https://dev.to/gtref/what-do-you-think-i-should-make-next-1clf",
+      "source": "DEV",
+      "tags": [
+        "general-programming",
+        "productivity",
+        "golang"
+      ],
+      "score": 15,
+      "addedAt": "2026-11-19",
       "status": "new"
     },
     {
@@ -258,21 +287,6 @@
       ],
       "score": 14,
       "addedAt": "2026-10-19",
-      "status": "new"
-    },
-    {
-      "id": "D3mfejO1F",
-      "title": "No Human Will Ever Write Code Better Than LLMs? Better at What?",
-      "url": "https://dev.to/dannwaneri/no-human-will-ever-write-code-better-than-llms-better-at-what-1dme",
-      "source": "DEV",
-      "tags": [
-        "ai",
-        "llm",
-        "career",
-        "ai-coding"
-      ],
-      "score": 13,
-      "addedAt": "2026-11-09",
       "status": "new"
     },
     {
