@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-20T07:46:35.391Z",
+  "updated": "2026-11-21T07:43:07.366Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
     {
@@ -64,23 +64,6 @@
       "status": "new"
     },
     {
-      "id": "KfPEpQdOl",
-      "title": "I burned out. Now I don't know how to start again.",
-      "url": "https://dev.to/embernoglow/i-burned-out-now-i-dont-know-how-to-start-again-1h79",
-      "source": "DEV",
-      "tags": [
-        "open-source",
-        "productivity",
-        "mental-health"
-      ],
-      "score": 35,
-      "addedAt": "2026-09-29",
-      "status": "new",
-      "wave": true,
-      "expires": "2026-11-20T16:23:01.292Z",
-      "waveFrom": "news amplifier: \"open-source\" 100 articles this week (1.6x prev week)"
-    },
-    {
       "id": "6lmauEkPV",
       "title": "Clean Code Is Not the Same as Clear Code: Comments Were Never the Problem",
       "url": "https://dev.to/georgekobaidze/clean-code-is-not-the-same-as-clear-code-comments-were-never-the-problem-42n",
@@ -133,18 +116,6 @@
       "status": "new"
     },
     {
-      "id": "VlEWp3w7G",
-      "title": "well this is bad",
-      "url": "https://www.youtube.com/watch?v=B3_Ftfhkzz0",
-      "source": "ThePrimeTime",
-      "tags": [
-        "ui-design"
-      ],
-      "score": 19,
-      "addedAt": "2026-11-07",
-      "status": "new"
-    },
-    {
       "id": "GIqM4P76d",
       "title": "Don't Write Markdown Files for Your Coding Agent. Write Scripts.",
       "url": "https://dev.to/dannwaneri/dont-write-markdown-files-for-your-coding-agent-write-scripts-j00",
@@ -157,6 +128,18 @@
         "productivity",
         "cicd",
         "claude-code"
+      ],
+      "score": 19,
+      "addedAt": "2026-11-07",
+      "status": "new"
+    },
+    {
+      "id": "VlEWp3w7G",
+      "title": "well this is bad",
+      "url": "https://www.youtube.com/watch?v=B3_Ftfhkzz0",
+      "source": "ThePrimeTime",
+      "tags": [
+        "ui-design"
       ],
       "score": 19,
       "addedAt": "2026-11-07",
@@ -177,25 +160,6 @@
       "score": 19,
       "addedAt": "2026-10-18",
       "status": "new"
-    },
-    {
-      "id": "EIFaV35LX",
-      "title": "Is Coding with AI Actually Faster and Cheaper?",
-      "url": "https://dev.to/sylwia-lask/is-coding-with-ai-actually-faster-and-cheaper-2810",
-      "source": "DEV",
-      "tags": [
-        "ai",
-        "ai-agents",
-        "github",
-        "productivity"
-      ],
-      "score": 17,
-      "addedAt": "2026-11-19",
-      "status": "used",
-      "wave": true,
-      "expires": "2026-11-22T15:58:52.625Z",
-      "waveFrom": "news amplifier: \"github\" 100 articles this week (1.8x prev week)",
-      "videoId": "f_8XAIxuPn4"
     },
     {
       "id": "gxa7Vv6N6",
@@ -290,6 +254,25 @@
       "score": 14,
       "addedAt": "2026-11-20",
       "status": "new"
+    },
+    {
+      "id": "EIFaV35LX",
+      "title": "Is Coding with AI Actually Faster and Cheaper?",
+      "url": "https://dev.to/sylwia-lask/is-coding-with-ai-actually-faster-and-cheaper-2810",
+      "source": "DEV",
+      "tags": [
+        "ai",
+        "ai-agents",
+        "github",
+        "productivity"
+      ],
+      "score": 17,
+      "addedAt": "2026-11-19",
+      "status": "used",
+      "wave": true,
+      "expires": "2026-11-22T15:58:52.625Z",
+      "waveFrom": "news amplifier: \"github\" 100 articles this week (1.8x prev week)",
+      "videoId": "f_8XAIxuPn4"
     },
     {
       "id": "curated-11",
