@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-21T07:43:07.366Z",
+  "updated": "2026-11-21T14:52:44.597Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
     {
@@ -437,19 +437,6 @@
       "curated": true,
       "note": "already rendered — run 35585098737 in state/pending-renders.json, uploads on next publish",
       "videoId": "7_FBiOslvUE"
-    },
-    {
-      "id": "wave-2026-11-17-1",
-      "title": "How the Claude Code team thinks about verification",
-      "url": "https://claude.dev/blog/how-the-claude-code-team-thinks-about-verification/",
-      "source": "HN",
-      "tags": [],
-      "score": 600,
-      "addedAt": "2026-11-17",
-      "status": "used",
-      "wave": true,
-      "expires": "2026-11-20T16:23:00.539Z",
-      "videoId": "QyJeZzzNYSc"
     },
     {
       "id": "VIVynMBNG",
