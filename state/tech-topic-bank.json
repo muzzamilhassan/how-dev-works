@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-21T14:52:44.597Z",
+  "updated": "2026-11-22T07:28:27.448Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
     {
@@ -116,6 +116,18 @@
       "status": "new"
     },
     {
+      "id": "VlEWp3w7G",
+      "title": "well this is bad",
+      "url": "https://www.youtube.com/watch?v=B3_Ftfhkzz0",
+      "source": "ThePrimeTime",
+      "tags": [
+        "ui-design"
+      ],
+      "score": 19,
+      "addedAt": "2026-11-07",
+      "status": "new"
+    },
+    {
       "id": "GIqM4P76d",
       "title": "Don't Write Markdown Files for Your Coding Agent. Write Scripts.",
       "url": "https://dev.to/dannwaneri/dont-write-markdown-files-for-your-coding-agent-write-scripts-j00",
@@ -128,18 +140,6 @@
         "productivity",
         "cicd",
         "claude-code"
-      ],
-      "score": 19,
-      "addedAt": "2026-11-07",
-      "status": "new"
-    },
-    {
-      "id": "VlEWp3w7G",
-      "title": "well this is bad",
-      "url": "https://www.youtube.com/watch?v=B3_Ftfhkzz0",
-      "source": "ThePrimeTime",
-      "tags": [
-        "ui-design"
       ],
       "score": 19,
       "addedAt": "2026-11-07",
@@ -253,6 +253,19 @@
       ],
       "score": 14,
       "addedAt": "2026-11-20",
+      "status": "new"
+    },
+    {
+      "id": "bsP1uCdc3",
+      "title": "How to Vibe Code a Web App With AI (2027 Beginner's Tutorial)",
+      "url": "https://www.youtube.com/watch?v=yL9x8xhLHtY",
+      "source": "Tech With Lucy",
+      "tags": [
+        "webdev",
+        "vibe-coding"
+      ],
+      "score": 10,
+      "addedAt": "2026-11-22",
       "status": "new"
     },
     {
