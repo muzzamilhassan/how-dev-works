@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-23T08:16:07.068Z",
+  "updated": "2026-11-23T18:41:35.723Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
     {
@@ -267,25 +267,6 @@
       "score": 10,
       "addedAt": "2026-11-22",
       "status": "new"
-    },
-    {
-      "id": "EIFaV35LX",
-      "title": "Is Coding with AI Actually Faster and Cheaper?",
-      "url": "https://dev.to/sylwia-lask/is-coding-with-ai-actually-faster-and-cheaper-2810",
-      "source": "DEV",
-      "tags": [
-        "ai",
-        "ai-agents",
-        "github",
-        "productivity"
-      ],
-      "score": 17,
-      "addedAt": "2026-11-19",
-      "status": "used",
-      "wave": true,
-      "expires": "2026-11-22T15:58:52.625Z",
-      "waveFrom": "news amplifier: \"github\" 100 articles this week (1.8x prev week)",
-      "videoId": "f_8XAIxuPn4"
     },
     {
       "id": "curated-11",
