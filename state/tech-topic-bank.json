@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-26T08:54:38.905Z",
+  "updated": "2026-11-26T17:13:31.562Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
     {
@@ -116,7 +116,10 @@
       ],
       "score": 28,
       "addedAt": "2026-11-02",
-      "status": "new"
+      "status": "new",
+      "wave": true,
+      "expires": "2026-11-29T17:13:28.951Z",
+      "waveFrom": "news amplifier: \"ui-design\" 74 articles this week (2.2x prev week)"
     },
     {
       "id": "VlEWp3w7G",
