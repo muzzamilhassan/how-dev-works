@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-27T09:06:21.541Z",
+  "updated": "2026-11-27T16:55:06.161Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
     {
@@ -231,7 +231,10 @@
       ],
       "score": 15,
       "addedAt": "2026-10-20",
-      "status": "new"
+      "status": "new",
+      "wave": true,
+      "expires": "2026-11-30T16:55:00.500Z",
+      "waveFrom": "news amplifier: \"css\" 57 articles this week (1.8x prev week)"
     },
     {
       "id": "d5JYRFE1s",
