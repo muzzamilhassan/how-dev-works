@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-26T17:13:31.562Z",
+  "updated": "2026-11-27T09:06:21.541Z",
   "_note": "curated:true = BRANDING.md first-12 list, never pruned, auto-pick order follows insertion. 'rendering' = already rendered, waiting in pending-renders.json (run 35585098737) — do not re-render.",
   "topics": [
     {
@@ -122,18 +122,6 @@
       "waveFrom": "news amplifier: \"ui-design\" 74 articles this week (2.2x prev week)"
     },
     {
-      "id": "VlEWp3w7G",
-      "title": "well this is bad",
-      "url": "https://www.youtube.com/watch?v=B3_Ftfhkzz0",
-      "source": "ThePrimeTime",
-      "tags": [
-        "ui-design"
-      ],
-      "score": 19,
-      "addedAt": "2026-11-07",
-      "status": "new"
-    },
-    {
       "id": "GIqM4P76d",
       "title": "Don't Write Markdown Files for Your Coding Agent. Write Scripts.",
       "url": "https://dev.to/dannwaneri/dont-write-markdown-files-for-your-coding-agent-write-scripts-j00",
@@ -146,6 +134,18 @@
         "productivity",
         "cicd",
         "claude-code"
+      ],
+      "score": 19,
+      "addedAt": "2026-11-07",
+      "status": "new"
+    },
+    {
+      "id": "VlEWp3w7G",
+      "title": "well this is bad",
+      "url": "https://www.youtube.com/watch?v=B3_Ftfhkzz0",
+      "source": "ThePrimeTime",
+      "tags": [
+        "ui-design"
       ],
       "score": 19,
       "addedAt": "2026-11-07",
